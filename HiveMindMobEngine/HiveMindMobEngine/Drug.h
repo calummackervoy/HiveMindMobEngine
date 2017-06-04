@@ -1,0 +1,13 @@
+#pragma once
+
+enum DrugType : byte {
+	DEF_DRUGTYPE = 0,
+	CAFFEINE_LOW = 1,
+	CAFFEINE_HIGH = 2,
+	ALCOHOL = 3,
+	PSYCHEDELIC_NATURAL = 4,
+	PSYCHEDELIC_CHEM = 5,
+	PARTY = 6,
+	HARD_CHEMICAL = 7,
+	NICOTINE = 8
+};
