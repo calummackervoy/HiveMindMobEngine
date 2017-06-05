@@ -1,7 +1,7 @@
 #pragma once
 #include "Region.h"
 
-//TODO: replace all const ints with byte where necessary
+//TODO: replace all const ints with uint8_t where necessary
 const int MAX_REGIONS = 32;
 
 class World {

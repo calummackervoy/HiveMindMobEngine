@@ -1,6 +1,6 @@
 #pragma once
 
-enum AutonomyLevel : byte {
+enum AutonomyLevel : uint8_t {
 	NO_AUTONOMY = 0,
 	DEPOTISM = 1,
 	HEIRARCHY = 2,
@@ -8,7 +8,7 @@ enum AutonomyLevel : byte {
 	ANARCHIST = 4
 };
 
-enum GroupType : byte {
+enum GroupType : uint8_t {
 	POLITICAL_GROUP = 0,
 	STATE = 1,
 	INSTITUTION = 2,
@@ -17,7 +17,7 @@ enum GroupType : byte {
 	CULTURAL_GROUP = 5
 };
 
-enum PowerClass : byte {
+enum PowerClass : uint8_t {
 	AUTHORITY_ALPHA = 0,
 	AUTHORITY_CHALLENGER = 1,
 	AUTHORTIY_RIGHTARM = 2,

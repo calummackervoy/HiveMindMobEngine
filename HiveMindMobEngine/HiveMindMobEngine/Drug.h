@@ -1,6 +1,6 @@
 #pragma once
 
-enum DrugType : byte {
+enum DrugType : uint8_t {
 	DEF_DRUGTYPE = 0,
 	CAFFEINE_LOW = 1,
 	CAFFEINE_HIGH = 2,

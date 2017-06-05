@@ -3,7 +3,7 @@
 
 using std::string;
 
-enum TechType : byte {
+enum TechType : uint8_t {
 	
 };
 

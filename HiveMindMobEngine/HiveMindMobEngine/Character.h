@@ -1,7 +1,7 @@
 #pragma once
 #include "Skill.h"
 
-enum TraitType : byte {
+enum TraitType : uint8_t {
 
 };
 

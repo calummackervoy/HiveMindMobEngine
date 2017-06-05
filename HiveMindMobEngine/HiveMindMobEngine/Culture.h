@@ -4,17 +4,17 @@
 
 using std::string;
 
-enum SpeciesType : byte {
+enum SpeciesType : uint8_t {
 	HUMAN = 0,
 	COMPUTER = 1,
 	MUTANT = 2
 };
 
-enum SkinTone : byte {
+enum SkinTone : uint8_t {
 
 };
 
-enum ToleranceLevel : byte {
+enum ToleranceLevel : uint8_t {
 	TOLERANCE_VERY_HIGH = 0,
 	TOLERANCE_HIGH = 1,
 	TOLERANCE_MEDIUM = 2,
@@ -23,7 +23,7 @@ enum ToleranceLevel : byte {
 	TOLERANCE_ZERO = 5
 };
 
-enum GenderBias : byte {
+enum GenderBias : uint8_t {
 	GENDERBIAS_NONE = 0,
 	PATRIACHAL = 1,
 	MATRIACHAL = 2,
@@ -31,7 +31,7 @@ enum GenderBias : byte {
 	SLIGHT_MATRIACHAL = 4
 };
 
-enum ReligionType : byte {
+enum ReligionType : uint8_t {
 	ATHEIST = 0,
 	AGNOSTIC = 1,
 	ANIMIST = 2,
@@ -39,7 +39,7 @@ enum ReligionType : byte {
 	DEITY = 4
 };
 
-enum Activity : byte {
+enum Activity : uint8_t {
 	NO_ACTIVITY = 0,
 	MUSIC_GENRE = 1,
 	PHILOSOPHY = 2,

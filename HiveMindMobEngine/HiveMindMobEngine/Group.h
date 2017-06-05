@@ -2,7 +2,7 @@
 #include "Organisation.h"
 #include "Culture.h"
 
-enum GenerationMode genMode : byte {
+enum GenerationMode : uint8_t {
 	STABLE_POWER = 0,
 	SEMISTABLE_POWER = 1,
 	UNSTABLE_POWER = 2,

@@ -3,7 +3,7 @@
 
 using std::string;
 
-enum SkillType : byte {
+enum SkillType : uint8_t {
 	MISC_SKILL = 0,
 	ACTIVE_COMBAT = 1,
 	PASSIVE_COMBAT = 2,
