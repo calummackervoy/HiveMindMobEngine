@@ -9,8 +9,8 @@ struct Trait {
 
 };
 
-const int MAX_TRAITS = 8;
-const int MAX_SKILLS = 8;
+const uint8_t MAX_TRAITS = 8;
+const uint8_t MAX_SKILLS = 8;
 
 class Character {
 public:
@@ -19,14 +19,15 @@ public:
 	Character(int seed);
 	~Character();
 
-	int getSeed() {return seed;};
-	inline int getLevel() {return level;};
-	inline int getHomeRegion() {return homeRegion;};
+	uint getSeed() {return seed;};
+	inline uint getHomeRegion() {return homeRegion;};
+	inline uint8_t getLevel() {return level;};
+	inline uint8_t getAge() {return age;};
 
 	void setLevel(int val) {level = val;};
 
-	inline int getTraitAt(int i);
-	inline int getSkillAt(int i);
+	inline Trait getTraitAt(int i);
+	inline Skill getSkillAt(int i);
 	inline int addTrait(Trait t);
 	inline int addSkill(Skill s);
 	inline void removeTrait(int i);
@@ -35,7 +36,8 @@ public:
 protected:
 	Trait traits[8];
 	Skill skills[8];
-	int seed;
-	int level;
-	int homeRegion;
+	uint seed;
+	uint homeRegion;
+	uint8_t level;
+	uint8_t age;
 };

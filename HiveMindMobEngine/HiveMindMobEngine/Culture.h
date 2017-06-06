@@ -14,6 +14,8 @@ enum SkinTone : uint8_t {
 
 };
 
+//high tolerance to dissidence will result in culture having chance to change alongside,
+//low tolerance result in increasing social isolation & zero they might attack you for it
 enum ToleranceLevel : uint8_t {
 	TOLERANCE_VERY_HIGH = 0,
 	TOLERANCE_HIGH = 1,
@@ -49,6 +51,19 @@ enum Activity : uint8_t {
 	TECHNOLOGY = 6
 };
 
+enum Caste : uint8_t {
+	NO_CLASS_DISTINCTION,
+	REFUGEE,
+	HOMELESS,
+	LOWER_CLASS,
+	WORKING_CLASS,
+	LOWER_MIDDLE_CLASS,
+	UPPER_MIDDLE_CLASS,
+	NEW_MONEY_CLASS,
+	OLD_MONEY_CLASS,
+	ACADEMIC_CLASS
+};
+
 struct Race {
 
 };
@@ -66,11 +81,13 @@ struct Culture {
 	DrugType drug = DEF_DRUGTYPE;
 	GenderBias genderBias = GENDERBIAS_NONE;
 	Activity activity = NO_ACTIVITY;
+	Caste caste = NO_CLASS_DISTINCTION;
 	ToleranceLevel siblingCulture = TOLERANCE_VERY_HIGH;
 	ToleranceLevel similarCulture = TOLERANCE_HIGH;
 	ToleranceLevel awareCulture = TOLERANCE_MEDIUM;
 	ToleranceLevel foreignCulture = TOLERANCE_MEDIUM;
 	ToleranceLevel contradictingCulture = TOLERANCE_LOW;
+	ToleranceLevel dissidence = TOLERANCE_MEDIUM;
 	bool isCommunal = false;
 	bool isFighter = false;
 	bool isChildhood = false;

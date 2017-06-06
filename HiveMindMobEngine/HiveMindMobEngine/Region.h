@@ -1,10 +1,9 @@
 #pragma once
-#include <string>
-
-using std::string;
+#include "Culture.h"
 
 const int MAX_GROUPS = 64;
 const int MAX_COUNTRY_SIZE = 16;
+const int MAX_CULTURES = MAX_GROUPS;
 
 struct Country {
 	string name = "DEFAULT_COUNTRY";
@@ -26,7 +25,7 @@ public:
 	void load();
 
 protected:
-	int id;
-	int regionAuthority;
+	uint id;
+	uint regionAuthority;
 	bool inStruggle;
 };

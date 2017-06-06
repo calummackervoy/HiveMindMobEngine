@@ -1,6 +1,7 @@
 #pragma once
 #include "Organisation.h"
 #include "Culture.h"
+#include "Typedef.h"
 
 enum GenerationMode : uint8_t {
 	STABLE_POWER = 0,
@@ -17,18 +18,19 @@ struct GroupOptions {
 };
 
 struct GroupTypeBias {
-	short stateBias;
-	short politicalGroupBias;
-	short institutionBias;
-	short businessBias;
-	short gangBias;
+	suint stateBias;
+	suint politicalGroupBias;
+	suint institutionBias;
+	suint businessBias;
+	suint gangBias;
+	suint miscBias;
 };
 
 struct MemberBias {
-	int limit;
-	short highBias;
-	short mediumBias;
-	short lowBias;
+	uint limit;
+	suint highBias;
+	suint mediumBias;
+	suint lowBias;
 };
 
 struct GroupDist {
@@ -42,14 +44,15 @@ class Group {
 public:
 	Group(GroupOptions options = {});
 	//procedurally generate a group
-	Group(int seed, GroupDist dist = {});
+	Group(uint seed, GroupDist dist = {});
 	~Group();
 
 protected:
-	int members;
-	int id;
+	uint members;
+	uint id;
 	Culture culture;
 	GroupType type;
 	PowerClass powerClass;
+	//groups should never be able to have no autonomy, only hives can have that
 	AutonomyLevel autonomy;
 };
