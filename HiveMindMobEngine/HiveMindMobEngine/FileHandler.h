@@ -1,5 +1,6 @@
 #pragma once
 #include "Config.h"
+#include "Terrain.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -19,6 +20,12 @@ public:
 
 	//main configuration file
 	static GameConfig readGameConfig(string fileLocation);
+	static Map readMap(string mapLocation);
+	static Tech** readTechConfig(string fileLocation);
+
+	//methods for saving game data
+
+	//methods for loading game data?
 
 private:
 };

@@ -8,6 +8,7 @@ struct Item {
 	string name = "DEFAULT_ITEM_NAME";
 	string desc = "DEFAULT_ITEM_DESC";
 	int val = 1;
+	suint id = -1;
 };
 
 struct Weapon : Item {

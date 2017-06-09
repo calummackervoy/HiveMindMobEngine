@@ -2,15 +2,15 @@
 #include "Skill.h"
 
 enum TraitType : uint8_t {
-
+	
 };
 
 struct Trait {
-
+	int id = -1;
 };
 
 const uint8_t MAX_TRAITS = 8;
-const uint8_t MAX_SKILLS = 8;
+const uint8_t MAX_SKILLS = 16;
 
 class Character {
 public:
@@ -34,8 +34,8 @@ public:
 	inline void removeSkill(int i);
 
 protected:
-	Trait traits[8];
-	Skill skills[8];
+	Trait traits[MAX_TRAITS];
+	Skill skills[MAX_SKILLS];
 	uint seed;
 	uint homeRegion;
 	uint8_t level;
