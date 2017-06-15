@@ -20,5 +20,5 @@ public:
 
 protected:
 	Region* regions[MAX_REGIONS];
-	Tech* techs[MAX_TECH];
+	Tech* techs[MAX_TECHS];
 };
