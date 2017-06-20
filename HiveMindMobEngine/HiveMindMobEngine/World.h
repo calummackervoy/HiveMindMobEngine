@@ -4,6 +4,7 @@
 #include "FileHandler.h"
 #include "Config.h"
 #include "TypeDef.h"
+#include "MapWorld.h"
 
 //TODO: replace all const ints with uint8_t where necessary
 const int MAX_REGIONS = 32;

@@ -3,14 +3,7 @@
 #include "Culture.h"
 #include "Typedef.h"
 
-enum GenerationMode : uint8_t {
-	STABLE_POWER = 0,
-	SEMISTABLE_POWER = 1,
-	UNSTABLE_POWER = 2,
-	CIVIL_WAR = 3,
-	STATELESS = 4,
-	ABSOLUTE_POWER = 5
-};
+const uint8_t MAX_GROUPSPP = 4;
 
 //holds options for distribution of a region
 struct GroupOptions {
@@ -36,7 +29,6 @@ struct MemberBias {
 struct GroupDist {
 	GroupTypeBias groupTypeBias;
 	MemberBias memberBias;
-	GenerationMode mode;
 	bool enableState = false;
 };
 

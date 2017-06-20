@@ -1,9 +1,9 @@
 "Genetic Mutation" "MUTATION_DESC" 1 8
-"Sensory Modding" "Brain interfaces for senses" 2 5
-"Insect Shamaning" "DEF_DESC" 2 4
-"Small-Animal Shamaning" "DEF_DESC" 2 5
-"Large-Animal Shamaning" "DEF_DESC" 2 8
 "Brain-Internet" "Accessing Internet with your mind" 2 2
 "Brain-Database" "Database of stored info for mind" 2 1
+"Insect Shamaning" "DEF_DESC" 2 4
+"Large-Animal Shamaning" "DEF_DESC" 2 8
+"Sensory Modding" "Brain interfaces for senses" 2 5
+"Small-Animal Shamaning" "DEF_DESC" 2 5
 "Multipurpose AI" "Able to serve and follow instruction" 3 99
 "Sentient Life" "AI that is truly alive" 3 100

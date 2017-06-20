@@ -1,3 +1,4 @@
+#include "TypeDef.h"
 
 enum Terrain : uint8_t {
 	OPEN,
@@ -5,11 +6,16 @@ enum Terrain : uint8_t {
 	FULL_COV
 };
 
-typedef struct Map {
-	uint8_t numColumns = 0;
-	uint8_t numRows = 0;
-	Terrain grid[MAX_COLUMNS][MAX_ROWS];
+//TODO: children with data for holding things useful to RegionMaps, BattleMaps and WorldMaps
+struct Tile {
+	Terrain terrain = OPEN;
 };
 
-const uint8_t MAX_COLUMNS = 32;
-const uint8_t MAX_ROWS = 32;
+typedef struct Grid {
+	suint width = 0;
+	suint height = 0;
+	Tile grid[MAX_WIDTH][MAX_HEIGHT];
+};
+
+const uint8_t MAX_WIDTH = 1000;
+const uint8_t MAX_HEIGHT = 1000;

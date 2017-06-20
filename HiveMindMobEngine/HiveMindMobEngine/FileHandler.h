@@ -20,6 +20,7 @@ public:
 
 	//main configuration file
 	static GameConfig readGameConfig(string fileLocation);
+	//TODO: reading in different kinds of map or generic map config file?
 	static Map readMap(string mapLocation);
 	static Tech** readTechConfig(string fileLocation);
 

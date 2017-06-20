@@ -1,18 +1,6 @@
 #pragma once
-#include <string>
 #include "Drug.h"
-
-using std::string;
-
-enum SpeciesType : uint8_t {
-	HUMAN = 0,
-	COMPUTER = 1,
-	MUTANT = 2
-};
-
-enum SkinTone : uint8_t {
-
-};
+#include "Ethnicity.h"
 
 //high tolerance to dissidence will result in culture having chance to change alongside,
 //low tolerance result in increasing social isolation & zero they might attack you for it
@@ -38,7 +26,8 @@ enum ReligionType : uint8_t {
 	AGNOSTIC = 1,
 	ANIMIST = 2,
 	FETISHIST = 3,
-	DEITY = 4
+	DEITY_SINGULAR = 4,
+	DEITY_MANY = 5
 };
 
 enum Activity : uint8_t {
@@ -64,10 +53,6 @@ enum Caste : uint8_t {
 	ACADEMIC_CLASS
 };
 
-struct Race {
-
-};
-
 struct Religion {
 	Religion* parent = NULL;
 	ReligionType type = ATHEIST;
@@ -78,6 +63,8 @@ struct Culture {
 	string desc = "DEFAULT_CULTURE_DESC";
 	Culture* parent = NULL;
 	Religion religion;
+	SpeciesType species = NO_EXCLUSIVITY;
+	uint8_t race = NO_EXCLUSIVITY;
 	DrugType drug = DEF_DRUGTYPE;
 	GenderBias genderBias = GENDERBIAS_NONE;
 	Activity activity = NO_ACTIVITY;
@@ -88,7 +75,11 @@ struct Culture {
 	ToleranceLevel foreignCulture = TOLERANCE_MEDIUM;
 	ToleranceLevel contradictingCulture = TOLERANCE_LOW;
 	ToleranceLevel dissidence = TOLERANCE_MEDIUM;
+	bool isSpeciesExclusive = false;
+	bool isRaceExclusive = false;
 	bool isCommunal = false;
 	bool isFighter = false;
 	bool isChildhood = false;
 };
+
+//TODO: function for analysing how similar two cultures are

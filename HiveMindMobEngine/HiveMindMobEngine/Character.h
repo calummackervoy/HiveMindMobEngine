@@ -1,5 +1,6 @@
 #pragma once
 #include "Skill.h"
+#include "Group.h"
 
 enum TraitType : uint8_t {
 	
@@ -36,6 +37,7 @@ public:
 protected:
 	Trait traits[MAX_TRAITS];
 	Skill skills[MAX_SKILLS];
+	Group groups[MAX_GROUPSPP];
 	uint seed;
 	uint homeRegion;
 	uint8_t level;

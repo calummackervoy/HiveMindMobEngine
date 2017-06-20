@@ -71,7 +71,6 @@ void World::addDay() {
         else dateTime.day++;
         break;
     }
-    
 }
 
 void World::addHour() {

@@ -14,7 +14,8 @@ enum GroupType : uint8_t {
 	INSTITUTION = 2,
 	BUSINESS = 3,
 	GANG = 4,
-	CULTURAL_GROUP = 5
+	CULTURAL_GROUP = 5,
+	DIRECT_ACTION = 6
 };
 
 enum PowerClass : uint8_t {

@@ -1,33 +1,38 @@
 #pragma once
 #include "RenderConfig.h"
 #include "FileHandler.h"
+#include "Terrain.h"
 #include <string>
 
 //Author: Calum Mackervoy
-//Purpose: Manages active map (both region and battle)
+//Purpose: Base class for all types of map-management
 
 using std::string;
 
-enum ActiveMap : uint8_t {
+//TODO: active map in game manager
+enum MapType : uint8_t {
 	MAP_WORLD,
 	MAP_REGION,
 	MAP_BATTLE
 };
 
+struct MapConfig {
+
+};
+
 class Map {
 public:
-	Map(string mapLocation);
+	Map();
 	~Map();
 
-	inline Terrain getTerrainAt(int x, int y) {
-		return map[x][y];
+	inline Tile getTerrainAt(int x, int y) {
+		return map.grid[x][y];
 	};
 
 	//setting a new map
 	void setMap(string mapLocation) { map = FileHandler::readMap(mapLocation); };
-	void setActiveMap(ActiveMap type) { activeMap = type; };
 
-private:
-	ActiveMap activeMap;
-	Map map;
+protected:
+	MapType mapType;
+	Grid map;
 };
