@@ -4,17 +4,6 @@ Region::Region(int id, RegionConfig config) {
     this->id = id;
 }
 
-struct RegionConfigRand {
-	GroupTypeBias groupTypeBias;
-	uint population = 1000;
-	suint targetNumGroups = 50;
-	AutonomyLevel autonomy = HIERARCHY;
-	GenderBias dominantGenderBias = GENDERBIAS_NONE;
-	ToleranceLevel cultureDiversity = TOLERANCE_VERY_LOW;
-	ToleranceLevel povertyLevel = TOLERANCE_MEDIUM;
-	GenerationMode generationMode = STABLE_POWER;
-};
-
 Region::Region(int id, int seed, RegionConfigRand config) {
     this->id = id;
 

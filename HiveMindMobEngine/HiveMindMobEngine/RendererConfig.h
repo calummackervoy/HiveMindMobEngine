@@ -10,7 +10,8 @@ const int WIN_WIDTH = 800;
 enum ElementType : uint8_t {
 	SPRITE,
 	CIRCLE_SHAPE,
-	SQUARE_SHAPE
+	SQUARE_SHAPE,
+	TEXT
 };
 
 struct Element {

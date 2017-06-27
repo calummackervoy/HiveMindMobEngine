@@ -1,4 +1,8 @@
-#include "TypeDef.h"
+#pragma once
+#include "Typedef.h"
+
+const uint8_t MAX_WIDTH = 1000;
+const uint8_t MAX_HEIGHT = 1000;
 
 enum Terrain : uint8_t {
 	OPEN,
@@ -16,6 +20,3 @@ typedef struct Grid {
 	suint height = 0;
 	Tile grid[MAX_WIDTH][MAX_HEIGHT];
 };
-
-const uint8_t MAX_WIDTH = 1000;
-const uint8_t MAX_HEIGHT = 1000;

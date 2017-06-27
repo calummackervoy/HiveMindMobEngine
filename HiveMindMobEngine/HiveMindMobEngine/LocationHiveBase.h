@@ -3,11 +3,11 @@
 #include "TypeDef.h"
 #include "Item.h"
 
+const suint MAX_STORAGE = 32;
+
 struct LocationHiveBaseSave : LocationSave {
 	Item inventory[MAX_STORAGE];
 };
-
-const suint MAX_STORAGE = 32;
 
 class LocationHiveBase : protected Location {
 public:

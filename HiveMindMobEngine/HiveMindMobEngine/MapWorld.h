@@ -6,9 +6,9 @@
 
 class MapWorld : Map {
 public:
-	MapWorld(string mapLocation) : Map();
+	MapWorld(string mapLocation);
 	//generate a map
-	MapWorld(MapConfig config = {}) : Map();
+	MapWorld(MapConfig config = {});
 	~MapWorld();
 
 private:

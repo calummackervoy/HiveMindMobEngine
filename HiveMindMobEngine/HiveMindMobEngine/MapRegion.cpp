@@ -1,10 +1,10 @@
 #include "MapRegion.h"
 
-MapRegion::MapRegion(string mapLocation) {
+MapRegion::MapRegion(string mapLocation) : Map() {
     
 }
 
-MapRegion::MapRegion(MapConfig config) {
+MapRegion::MapRegion(MapConfig config) : Map() {
 
 }
 

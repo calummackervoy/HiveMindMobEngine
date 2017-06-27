@@ -35,7 +35,7 @@ int Character::addTrait(Trait t) {
 
 int Character::addSkill(Skill s) {
     for(int i = 0; i < MAX_SKILLS; i++) {
-        if(skill[i].id == -1) {
+        if(skills[i].id == -1) {
             s.id = i;
             skills[i] = s;
             return i;

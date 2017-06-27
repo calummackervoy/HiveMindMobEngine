@@ -2,6 +2,7 @@
 #include "Group.h"
 #include "Rand.h"
 #include "MapRegion.h"
+#include "Organisation.h"
 
 const int MAX_GROUPS = 64;
 const int MAX_COUNTRY_SIZE = 16;
@@ -32,7 +33,7 @@ struct RegionConfigRand {
 	GroupTypeBias groupTypeBias;
 	uint population = 1000;
 	suint targetNumGroups = 50;
-	AutonomyLevel autonomy = HIERARCHY;
+	AutonomyLevel autonomy = HEIRARCHY;
 	GenderBias dominantGenderBias = GENDERBIAS_NONE;
 	ToleranceLevel cultureDiversity = TOLERANCE_VERY_LOW;
 	ToleranceLevel povertyLevel = TOLERANCE_MEDIUM;

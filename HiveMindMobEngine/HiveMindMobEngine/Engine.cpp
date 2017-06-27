@@ -12,9 +12,9 @@ Engine::~Engine() {
 void Engine::startup(string configFileLocation) {
 	rm = new ResourceManager();
 	anim = new Animation();
-	audio = new Audio();
+	audio = new Audio(rm);
 	p = new Physics();
-	r = new Renderer();
+	r = new Renderer(rm);
 	io = new InputHandler();
 
 	//read in the configuration options
@@ -22,7 +22,9 @@ void Engine::startup(string configFileLocation) {
 }
 
 EngineResponse Engine::run() {
+	r->drawScene();
 
+	return{};
 }
 
 void Engine::shutdown() {

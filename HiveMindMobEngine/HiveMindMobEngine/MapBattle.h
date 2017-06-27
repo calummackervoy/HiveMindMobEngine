@@ -6,9 +6,9 @@
 
 class MapBattle : Map {
 public:
-	MapBattle(string mapLocation) : Map();
+	MapBattle(string mapLocation);
 	//generate a map
-	MapBattle(MapConfig config = {}) : Map();
+	MapBattle(MapConfig config = {});
 	~MapBattle();
 
 private:

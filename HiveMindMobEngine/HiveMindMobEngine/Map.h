@@ -1,5 +1,5 @@
 #pragma once
-#include "RenderConfig.h"
+#include "RendererConfig.h"
 #include "FileHandler.h"
 #include "Terrain.h"
 #include <string>

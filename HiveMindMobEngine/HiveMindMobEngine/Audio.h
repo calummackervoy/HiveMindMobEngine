@@ -1,8 +1,12 @@
 #pragma once
+#include "AudioSource.h"
 #include "ResourceManager.h"
+#include <iostream>
 
 //Author: Calum Mackervoy
 //Purpose: Manages audio assets and playback responsibilities
+
+using std::cout;
 
 class Audio {
 public:
@@ -36,7 +40,7 @@ public:
 	//function to start playing the background music stored
 	inline void playBackgroundMusic() {
 		if (!backgroundMusicSet) {
-			std::cout << "attempt to play when background music not set" << std::endl;
+			cout << "attempt to play when background music not set" << std::endl;
 		}
 		bgMusic->play();
 	}

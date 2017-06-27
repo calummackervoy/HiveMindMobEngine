@@ -1,5 +1,6 @@
 #pragma once
 #include "Engine.h"
+#include "Menu.h"
 #include "World.h"
 
 //Author: Calum Mackervoy
@@ -23,5 +24,11 @@ public:
 protected:
     Engine* e;
     World* world;
+	Menu* activeMenu;
     GameMode mode;
+
+	//method for initialising a new world
+	void initWorld(GameConfig config = {});
+	//method for loading the world from a saved game
+	void loadWorld(string saveGame);
 };

@@ -1,10 +1,10 @@
 #include "MapBattle.h"
 
-MapBattle::MapBattle(string mapLocation) {
+MapBattle::MapBattle(string mapLocation) : Map() {
     
 }
 
-MapBattle::MapBattle(MapBattleConfig config) {
+MapBattle::MapBattle(MapConfig config) : Map() {
 
 }
 

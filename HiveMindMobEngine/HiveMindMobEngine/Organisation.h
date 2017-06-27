@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 
 enum AutonomyLevel : uint8_t {
 	NO_AUTONOMY = 0,

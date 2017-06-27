@@ -3,7 +3,7 @@
 
 class PlayerGroup : public Group {
 public:
-	PlayerGroup() : Group();
+	PlayerGroup();
 	~PlayerGroup();
 
 protected:

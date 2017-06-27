@@ -1,5 +1,6 @@
 #pragma once
-#include "RenderConfig.h"
+#include "Typedef.h"
+#include "RendererConfig.h"
 #include <string>
 
 using std::string;

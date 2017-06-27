@@ -3,7 +3,7 @@
 Group::Group(GroupOptions options) {
 }
 
-Group::Group(int seed, GroupDist dist) {
+Group::Group(uint seed, GroupDist dist) {
 }
 
 Group::~Group() {

@@ -9,13 +9,9 @@ FileHandler::~FileHandler() {
 }
 
 GameConfig FileHandler::readGameConfig(string fileLocation) {
-    
+	return{};
 }
 
-Map FileHandler::readMap(string mapLocation) {
-
-}
-
-Tech** FileHandler::readTechConfig(string fileLocation) {
-
+Grid FileHandler::readMap(string mapLocation) {
+	return{};
 }

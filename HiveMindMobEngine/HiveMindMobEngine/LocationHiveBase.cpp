@@ -1,6 +1,7 @@
 #include "LocationHiveBase.h"
 
-LocationHiveBase::LocationHiveBase(int id, LocationHiveBaseSave params) {
+LocationHiveBase::LocationHiveBase(int id, LocationHiveBaseSave params)
+	: Location(id, params) {
     this->id = id;
     this->name = params.name;
     this->ownerGroupId = params.ownerGroupId;
