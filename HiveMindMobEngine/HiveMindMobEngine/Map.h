@@ -17,7 +17,7 @@ enum MapType : uint8_t {
 };
 
 struct MapConfig {
-
+	
 };
 
 class Map {
