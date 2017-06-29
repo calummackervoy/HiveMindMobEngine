@@ -1,8 +1,35 @@
 #include "World.h"
 
 World::World(WorldParams params) {
+	//sanitise inputs
+	if (!sanitiseWorldParams(params)) {
+		throw std::exception("World Params were invalid! Check console for details");
+	}
+
+	//setup techs
 	//TODO: convert techs from generic config
-    //techs = FileHandler::readTechConfig(string params.techConfig);
+	//techs = FileHandler::readTechConfig(string params.techConfig);
+
+	//define which techs are present & which are future
+
+	//setup a general world picture
+	generalisedWorldGen(params);
+
+	//setup specific regions with this world context
+
+}
+
+void World::generalisedWorldGen(WorldParams params) {
+	//generate or load the world map
+	if (params.generateMap) map = new MapWorld(params.mapGen);
+	else map = new MapWorld(params.map);
+
+	//generate the central power(s)
+	
+}
+
+World::World(WorldSave save) {
+
 }
 
 /*World::World(int seed) {
@@ -80,4 +107,9 @@ void World::addHour() {
         dateTime.hour = 1;
     }
     else dateTime.hour++;
+}
+
+bool World::sanitiseWorldParams(WorldParams params) {
+	//TODO
+	return true;
 }

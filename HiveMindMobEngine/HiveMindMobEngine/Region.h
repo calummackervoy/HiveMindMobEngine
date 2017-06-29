@@ -8,15 +8,6 @@ const int MAX_GROUPS = 64;
 const int MAX_COUNTRY_SIZE = 16;
 const int MAX_CULTURES = MAX_GROUPS;
 
-enum GenerationMode : uint8_t {
-	STABLE_POWER = 0,
-	SEMISTABLE_POWER = 1,
-	UNSTABLE_POWER = 2,
-	CIVIL_WAR = 3,
-	STATELESS = 4,
-	ABSOLUTE_POWER = 5
-};
-
 struct Country {
 	string name = "DEFAULT_COUNTRY";
 	int numRegions = 2;

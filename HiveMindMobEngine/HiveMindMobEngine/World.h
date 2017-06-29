@@ -1,13 +1,10 @@
 #pragma once
+#include "Save.h"
 #include "Region.h"
 #include "Technology.h"
 #include "FileHandler.h"
 #include "Config.h"
-#include "TypeDef.h"
 #include "MapWorld.h"
-
-//TODO: replace all const ints with uint8_t where necessary
-const int MAX_REGIONS = 32;
 
 struct DateTime {
 	suint year;
@@ -19,6 +16,8 @@ struct DateTime {
 class World {
 public:
 	World(WorldParams params);
+	//loading a world from save file
+	World(WorldSave save);
 	//procedurally generate a World?
 	//World(int seed);
 	~World();
@@ -42,5 +41,9 @@ public:
 protected:
 	Region* regions[MAX_REGIONS];
 	Tech* techs[MAX_TECHS];
+	MapWorld* map;
 	DateTime dateTime;
+
+	bool sanitiseWorldParams(WorldParams params);
+	void generalisedWorldGen(WorldParams params);
 };
