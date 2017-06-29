@@ -43,6 +43,46 @@ sf::Text* Renderer::getText(string message, sf::Font* font,
 	return text;
 }
 
+sf::VertexArray* Renderer::getTriangleFan(int numPoints, sf::Vector2f pos, int distApart,
+	sf::Color colour, int slant = 1) {
+	// create an array of 3 vertices that define a triangle primitive
+	sf::VertexArray* triangle = new sf::VertexArray(sf::TriangleFan, numPoints);
+
+	// define the position of the triangle's points
+	(*triangle)[0].position = pos;
+	(*triangle)[0].color = colour;
+
+	float x = pos.x - distApart;
+	float y = pos.y;
+
+	// define the color of the triangle's points
+	for (int i = 1; i < numPoints; i++) {
+		if ((pos.x - distApart) <= x) {
+			x = x + (distApart / numPoints);
+		}
+		else {
+			x = x - (distApart / numPoints);
+		}
+
+		if ((pos.y - distApart) <= y) {
+			y = y + (distApart / numPoints);
+		}
+		else {
+			y = y - (distApart / numPoints);
+		}
+
+		(*triangle)[i].position = sf::Vector2f(x,y);
+		//TODO: make the points "slant" by slant factor
+		(*triangle)[i].color = colour;
+	}
+}
+
+void Renderer::changeFanColour(int numPoints, sf::Color colour, sf::VertexArray* fan) {
+	for (int i = 0; i < numPoints; i++) {
+		(*fan)[i].color = colour;
+	}
+}
+
 void Renderer::drawBasicScene(Element* e) {
 	window->clear(sf::Color::Black);
 	if (e == NULL || e->model == NULL) return;

@@ -21,6 +21,11 @@ public:
 	sf::Text* getText(string message, sf::Font* font,
 		int size = 24, sf::Color colour = sf::Color::Black);
 
+	//method for generating a triangle-fan shape
+	static sf::VertexArray* getTriangleFan(int numPoints, sf::Vector2f pos, int distApart, sf::Color colour, int slant = 1);
+	//method for changing the colour of a triangle fan
+	void changeFanColour(int numPoints, sf::Color colour, sf::VertexArray* fan);
+
 	inline sf::RenderWindow* getWindow() { return window; };
 	inline int getSelected() { return selected; };
 	inline void setSelected(int val) {

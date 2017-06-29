@@ -1,6 +1,17 @@
 #pragma once
 #include <cstdint>
 
+enum GenerationMode : uint8_t {
+	STABLE_POWER = 0,
+	SEMISTABLE_POWER = 1,
+	UNSTABLE_POWER = 2,
+	CIVIL_WAR = 3,
+	STATELESS = 4,
+	ABSOLUTE_POWER = 5,
+	DECLINING_POWER = 6,
+	BALANCED_POWERS = 7
+};
+
 enum AutonomyLevel : uint8_t {
 	NO_AUTONOMY = 0,
 	DEPOTISM = 1,

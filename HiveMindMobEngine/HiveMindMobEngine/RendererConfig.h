@@ -5,7 +5,7 @@
 
 const int MAX_ELEMS = 128; //max graphical elements in a scene
 const int WIN_HEIGHT = 800;
-const int WIN_WIDTH = 800;
+const int WIN_WIDTH = 1600;
 
 enum ElementType : uint8_t {
 	SPRITE,
