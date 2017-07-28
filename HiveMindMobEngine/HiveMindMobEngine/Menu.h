@@ -12,9 +12,17 @@ using std::string;
 
 const uint8_t MAX_MENU_OPTIONS = 8;
 
+//defines possible option actions
+enum MenuAction : uint8_t {
+	MENU_ACTION_NONE,
+	MENU_WORLD_NEW,
+	MENU_WORLD_LOAD
+};
+
 struct MenuSetup {
 	string title;
-	string options[MAX_MENU_OPTIONS];
+	string optionLabels[MAX_MENU_OPTIONS];
+	MenuAction optionActions[MAX_MENU_OPTIONS];
 	int numOptions;
 };
 
@@ -25,8 +33,8 @@ public:
 	Menu(Renderer* r, ResourceManager* rm, MenuSetup setup);
 	~Menu();
 
-	//@return the index of the option selected or -1 for none
-	int pollInput(sf::Vector2i clickpos);
+	//checks if an option has been selected and returns the selected action
+	MenuAction pollInput(sf::Vector2i clickpos);
 	void display();
 
 protected:

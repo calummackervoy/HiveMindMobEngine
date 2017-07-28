@@ -55,7 +55,7 @@ void Menu::display() {
 	int i = 0;
 	while (i < menu.numOptions) {
 		Element* opt = new Element;
-		sf::Text* text = r->getText(menu.options[i], rm->fonts[FONT_ABEL_REGULAR],
+		sf::Text* text = r->getText(menu.optionLabels[i], rm->fonts[FONT_ABEL_REGULAR],
 			24, sf::Color::Black);
 		text->setPosition((left + width * 0.5), top + (30 * (i + 3)));
 		opt->elemType = TEXT;
@@ -71,11 +71,12 @@ void Menu::display() {
 
 //TODO: optimisations in knowing whether it's top or bottom half (from window size)
 //TODO: this is currently a bit dodgy
-int Menu::pollInput(sf::Vector2i clickpos) {
-	if (startIndex == -1 || endIndex == -1) return -1;
+MenuAction Menu::pollInput(sf::Vector2i clickpos) {
+	if (startIndex == -1 || endIndex == -1) return MENU_ACTION_NONE;
 
 	//what is in the clickposition?
 	//loop from start index (+2 to avoid background & title) to end index
+	int count = 0;
 	for (int i = startIndex + 2; i < endIndex; i++) {
 		//check the position of this option vs position of click
 		Element* temp = rm->getHudElem(i);
@@ -92,12 +93,13 @@ int Menu::pollInput(sf::Vector2i clickpos) {
 			me.y = r.top - r.height;
 
 			if (Physics::interfaceBoundingBox(clickpos, me)) {
-				std::cout << i << " selected!" << std::endl;
-				return i;
+				std::cout << count << " selected!" << std::endl;
+				return menu.optionActions[count];
 			}
 		}
+		count++;
 	}
 
 	//flags no input found
-	return -1;
+	return MENU_ACTION_NONE;
 }

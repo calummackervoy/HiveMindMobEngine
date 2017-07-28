@@ -7,8 +7,10 @@ Game::Game(Engine* e, GameConfig config) {
 	//display the main menu screen
 	MenuSetup setup;
 	setup.title = "Hive Mind Mob Alpha";
-	setup.options[0] = "Start New World";
-	setup.options[1] = "Load World";
+	setup.optionLabels[0] = "Start New World";
+	setup.optionActions[0] = MENU_WORLD_NEW;
+	setup.optionLabels[1] = "Load World";
+	setup.optionActions[1] = MENU_WORLD_LOAD;
 	setup.numOptions = 2;
 	activeMenu = new Menu(e->getR(), e->getRm(), setup);
 }
@@ -27,11 +29,18 @@ void Game::run() {
 			break;
 		case DEVICE_SELECT:
 			if (mode == MENU) {
-				//find out which option was clicked (if any)
-				if(activeMenu->pollInput(r.clickPos) == -1) break;
-
-				//do what you were told to do
-
+				//find out which (if any) action selected and act accordingly
+				switch (activeMenu->pollInput(r.clickPos)) {
+				case MENU_ACTION_NONE:
+					break;
+				case MENU_WORLD_NEW:
+					//TODO: take to the world setup screen
+					cout << "new world being generated.." << std::endl;
+					break;
+				case MENU_WORLD_LOAD:
+					//TODO: take to the world load screen
+					break;
+				}
 			}
 			break;
 		case DEVICE_ACT:
