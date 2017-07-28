@@ -8,8 +8,8 @@ MapWorld::MapWorld(WorldParams config) : Map() {
 	params = config;
 
 	//figure out size big enough for the regions
-	map.width = params.numRegions * 100;
-	map.height = params.numRegions * 100;
+	map->width = params.numRegions * 100;
+	map->height = params.numRegions * 100;
 
 	//generate region structure
 	generateRegionStructure();

@@ -1,7 +1,7 @@
 #pragma once
 #include "Save.h"
 #include "Region.h"
-#include "Technology.h"
+#include "ProgressTracker.h"
 #include "FileHandler.h"
 #include "Config.h"
 #include "MapWorld.h"
@@ -21,10 +21,11 @@ public:
 	//procedurally generate a World?
 	//World(int seed);
 	~World();
-
-	inline Tech* getTechAt(int i);
+	
+	//TODO
+	/*inline Tech* getTechAt(int i);
 	inline int addTech(Tech* t);
-	inline void removeTech(int i);
+	inline void removeTech(int i);*/
 
 	//Date/Time getters and setters
 	inline DateTime getDateTime() {return dateTime;};
@@ -40,7 +41,7 @@ public:
 
 protected:
 	Region* regions[MAX_REGIONS];
-	Tech* techs[MAX_TECHS];
+	ProgressTracker* tech;
 	MapWorld* map;
 	DateTime dateTime;
 

@@ -6,12 +6,6 @@ World::World(WorldParams params) {
 		throw std::exception("World Params were invalid! Check console for details");
 	}
 
-	//setup techs
-	//TODO: convert techs from generic config
-	//techs = FileHandler::readTechConfig(string params.techConfig);
-
-	//define which techs are present & which are future
-
 	//setup a general world picture
 	generalisedWorldGen(params);
 
@@ -20,12 +14,16 @@ World::World(WorldParams params) {
 }
 
 void World::generalisedWorldGen(WorldParams params) {
-	//generate or load the world map
-	if (params.generateMap) map = new MapWorld(params.mapGen);
-	else map = new MapWorld(params.map);
+	//generate or load the world map (depending on WorldParam instructions)
+	map = new MapWorld(params);
 
-	//generate the central power(s)
-	
+	//setup each component of the world picture as a whole, bit by bit
+	//technology
+	//TODO: convert techs from generic config
+	//techs = FileHandler::readTechConfig(string params.techConfig);#
+
+	//initialise tech positions to 1
+
 }
 
 World::World(WorldSave save) {
@@ -39,7 +37,7 @@ World::~World() {
 
 }
 
-Tech* World::getTechAt(int i) {
+/*Tech* World::getTechAt(int i) {
     if(i < 0 || i >= MAX_TECHS) throw std::exception("Index out of bounds");
     return techs[i];
 }
@@ -58,7 +56,7 @@ int World::addTech(Tech* t) {
 void World::removeTech(int i) {
     if(i < 0 || i >= MAX_TECHS) return;
     techs[i]->id = -1;
-}
+}*/
 
 void World::addMonth() {
     if(dateTime.month == 12) {

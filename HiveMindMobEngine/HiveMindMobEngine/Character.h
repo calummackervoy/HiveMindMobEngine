@@ -6,8 +6,9 @@ enum TraitType : uint8_t {
 	
 };
 
+//TODO: Need Trait object? why not just uint8_t?
 struct Trait {
-	int id = -1;
+	suint id = -1;
 };
 
 const uint8_t MAX_TRAITS = 8;
