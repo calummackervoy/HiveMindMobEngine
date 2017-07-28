@@ -15,16 +15,16 @@ void Engine::startup(string configFileLocation) {
 	audio = new Audio(rm);
 	p = new Physics();
 	r = new Renderer(rm);
-	io = new InputHandler();
+	io = new InputHandler(r);
 
 	//read in the configuration options
 	//setup = FileHandler::readGameConfig(configFileLocation);
 }
 
-EngineResponse Engine::run() {
+DeviceResponse Engine::run() {
 	r->drawScene();
 
-	return{};
+	return io->respond();
 }
 
 void Engine::shutdown() {

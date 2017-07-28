@@ -1,4 +1,5 @@
 #pragma once
+#include "Grid.h"
 #include "Config.h"
 #include "Terrain.h"
 #include <string>
@@ -12,6 +13,7 @@ using std::string;
 using std::cout;
 using std::ifstream;
 using std::ios;
+using std::map;
 
 class FileHandler {
 public:
@@ -19,10 +21,13 @@ public:
 	~FileHandler();
 
 	//main configuration file
-	static GameConfig readGameConfig(string fileLocation);
+	//static GameConfig readGameConfig(string fileLocation);
 	//TODO: reading in different kinds of map or generic map config file?
-	static Grid readMap(string mapLocation);
-	//TODO: generic function for reading in a config file
+	static Grid* readMap(string mapLocation);
+
+	//method for reading in bindings
+	//reads config file for response codes & takes param for keys
+	static void readBindings(map<DeviceKeyBinding, int> &bindings, string configLocation);
 
 	//methods for saving game data
 

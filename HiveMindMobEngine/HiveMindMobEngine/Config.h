@@ -1,8 +1,11 @@
 #pragma once
+#include "Typedef.h"
 #include "Map.h"
 #include "Organisation.h"
 #include "Culture.h"
 #include <string>
+#include <map>
+#include <SFML\Graphics.hpp>
 
 using std::string;
 
@@ -14,6 +17,17 @@ enum WealthGrowth : uint8_t {
 	GROWTH_SMOOTH,
 	GROWTH_GRADUAL,
 	GROWTH_RAPID
+};
+
+//TODO: active map in game manager
+enum MapType : uint8_t {
+	MAP_WORLD,
+	MAP_REGION,
+	MAP_BATTLE
+};
+
+struct MapConfig {
+	
 };
 
 struct WorldParams {
@@ -33,10 +47,24 @@ struct GameConfig {
     WorldParams worldParams;
 };
 
-enum EngineResponseCode : uint8_t {
-
+//IO response from a Device
+//define the keys for mouse/keyboard
+enum MouseKeyboardKeys : DeviceKeyBinding {
+	CLICK_LEFT,
+	CLICK_RIGHT,
+	KEY_ESCAPE,
+	KEY_NULL //must be at the end -- for iterating over & assigning actions to keys
 };
 
-struct EngineResponse {
-    EngineResponseCode responseCode;
+//NOTE: always add responses to the end or you'll have to change the key bindings config file
+enum DeviceResponseCode {
+	DEVICE_RESPONSE_NONE,
+	DEVICE_SELECT,
+	DEVICE_ACT,
+	DEVICE_PAUSE
+};
+
+struct DeviceResponse {
+	DeviceResponseCode responseCode = DEVICE_RESPONSE_NONE;
+	sf::Vector2i clickPos;
 };

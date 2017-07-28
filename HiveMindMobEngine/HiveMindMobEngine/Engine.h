@@ -29,7 +29,7 @@ public:
 	GameConfig getConfig() { return setup; };
 
 	//run iteration of core game components' loop
-	EngineResponse run();
+	DeviceResponse run();
 	//shutdown routine
 	void shutdown();
 

@@ -20,10 +20,20 @@ Game::~Game() {
 void Game::run() {
     while(true) {
         //input response
-        EngineResponse r = e->run();
+        DeviceResponse r = e->run();
 
-        switch(r.responseCode) {
-
+		switch(r.responseCode) {
+		case DEVICE_RESPONSE_NONE:
+			break;
+		case DEVICE_SELECT:
+			cout << "LEFT CLICK MADE! DEVICE SELECT" << std::endl;
+			break;
+		case DEVICE_ACT:
+			cout << "RIGHT CLICK MADE! DEVICE ACT" << std::endl;
+			break;
+		case DEVICE_PAUSE:
+			cout << "ESCAPE PRESSED! DEVICE PAUSE" << std::endl;
+			break;
         }
     }
 }
