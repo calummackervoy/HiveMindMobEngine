@@ -1,17 +1,7 @@
 #pragma once
 #include "Drug.h"
 #include "Ethnicity.h"
-
-//high tolerance to dissidence will result in culture having chance to change alongside,
-//low tolerance result in increasing social isolation & zero they might attack you for it
-enum ToleranceLevel : uint8_t {
-	TOLERANCE_VERY_HIGH = 0,
-	TOLERANCE_HIGH = 1,
-	TOLERANCE_MEDIUM = 2,
-	TOLERANCE_LOW = 3,
-	TOLERANCE_VERY_LOW = 4,
-	TOLERANCE_ZERO = 5
-};
+#include "ToleranceLevel.h"
 
 enum GenderBias : uint8_t {
 	GENDERBIAS_NONE = 0,
@@ -74,6 +64,8 @@ struct Culture {
 	ToleranceLevel awareCulture = TOLERANCE_MEDIUM;
 	ToleranceLevel foreignCulture = TOLERANCE_MEDIUM;
 	ToleranceLevel contradictingCulture = TOLERANCE_LOW;
+	//high tolerance to dissidence will result in culture having chance to change alongside,
+	//low tolerance result in increasing social isolation & zero they might attack you for it
 	ToleranceLevel dissidence = TOLERANCE_MEDIUM;
 	bool isSpeciesExclusive = false;
 	bool isRaceExclusive = false;
