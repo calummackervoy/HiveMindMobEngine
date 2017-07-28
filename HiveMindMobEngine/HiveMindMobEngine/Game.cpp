@@ -26,13 +26,19 @@ void Game::run() {
 		case DEVICE_RESPONSE_NONE:
 			break;
 		case DEVICE_SELECT:
-			cout << "LEFT CLICK MADE! DEVICE SELECT" << std::endl;
+			if (mode == MENU) {
+				//find out which option was clicked (if any)
+				if(activeMenu->pollInput(r.clickPos) == -1) break;
+
+				//do what you were told to do
+
+			}
 			break;
 		case DEVICE_ACT:
-			cout << "RIGHT CLICK MADE! DEVICE ACT" << std::endl;
+			
 			break;
 		case DEVICE_PAUSE:
-			cout << "ESCAPE PRESSED! DEVICE PAUSE" << std::endl;
+			
 			break;
         }
     }

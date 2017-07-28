@@ -3,6 +3,7 @@
 #include <string>
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Physics.h"
 
 //Author: Calum Mackervoy
 //Purpose: Provides structure for a menu screen & functionality for displaying/responding to it
@@ -24,7 +25,8 @@ public:
 	Menu(Renderer* r, ResourceManager* rm, MenuSetup setup);
 	~Menu();
 
-	int pollInput(sf::Vector2f clickpos);
+	//@return the index of the option selected or -1 for none
+	int pollInput(sf::Vector2i clickpos);
 	void display();
 
 protected:
@@ -33,4 +35,5 @@ protected:
 	MenuSetup menu;
 	int startIndex;
 	int endIndex;
+	int optionHeight;
 };

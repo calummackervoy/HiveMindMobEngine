@@ -15,7 +15,7 @@ public:
 	~Physics();
 
 	//interface detection with any BoundingBox
-	bool interfaceBoundingBox(sf::Vector2i pos, BoundingBox area);
+	static bool interfaceBoundingBox(sf::Vector2i pos, BoundingBox area);
 
 	//TODO: ray casting
 

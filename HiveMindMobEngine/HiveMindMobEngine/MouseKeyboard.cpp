@@ -26,17 +26,10 @@ DeviceResponse MouseKeyboard::respond(sf::Event event) {
 	//lookup keypress in mapping to actions
 	DeviceResponseCode code = DEVICE_RESPONSE_NONE;
 	if (key < KEY_NULL) {
-		cout << "something got clicked/pressed" << std::endl;
 		code = (DeviceResponseCode)bindings[key];
-		cout << "code = " << code << ", " << "bindings[key] = " << (int)bindings[key] << std::endl;
 
 		std::map<DeviceKeyBinding, int>::iterator iter;
-
-		for (iter = bindings.begin(); iter != bindings.end(); ++iter) {
-			cout << "key " << (int)iter->first << " binds to " << (int)iter->second << std::endl;
-		}
 	}
-	if (code != DEVICE_RESPONSE_NONE) cout << "code was " << (int)code << std::endl;
 
 	//set this as response code
 	res.responseCode = code;
