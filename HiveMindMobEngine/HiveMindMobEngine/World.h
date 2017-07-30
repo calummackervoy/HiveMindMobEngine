@@ -22,10 +22,9 @@ public:
 	//World(int seed);
 	~World();
 	
-	//TODO
-	/*inline Tech* getTechAt(int i);
-	inline int addTech(Tech* t);
-	inline void removeTech(int i);*/
+	inline Progress getTechAt(int i) { return tech->getItem(i); };
+	//inline int addTech(Progress* t);
+	//inline void removeTech(int i);
 
 	//Date/Time getters and setters
 	inline DateTime getDateTime() {return dateTime;};

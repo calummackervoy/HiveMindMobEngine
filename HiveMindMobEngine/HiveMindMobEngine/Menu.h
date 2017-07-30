@@ -43,5 +43,4 @@ protected:
 	MenuSetup menu;
 	int startIndex;
 	int endIndex;
-	int optionHeight;
 };
