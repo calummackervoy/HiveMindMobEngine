@@ -1,9 +1,10 @@
 #include "SpriteManager.h"
 
-SpriteManager::SpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL) {
+SpriteManager::SpriteManager(sf::Sprite* model, sf::Texture* tex, managerType type) {
 	element = new Element;
 	element->model = model;
 	element->texture = tex;
+	this->type = type;
 	opaque = 100;
 	depth = 0;
 }

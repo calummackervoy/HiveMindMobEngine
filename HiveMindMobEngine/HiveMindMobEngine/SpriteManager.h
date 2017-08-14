@@ -7,9 +7,16 @@
 //Purpose: Base class for all SpriteManagers in the game
 //SpriteManagers will manage the displaying/layering of sprites & optimisations
 
+//enum for referencing different types of sprite manager
+enum managerType : uint8_t {
+	MANAGER_BASE,
+	MANAGER_CHARACTER,
+	MANAGER_GEOGRAPHY
+};
+
 class SpriteManager {
 public:
-	SpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL);
+	SpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_BASE);
 	~SpriteManager();
 
 	inline void setIndex(int index) {
@@ -31,8 +38,11 @@ public:
 	inline suint getOpaque() { return opaque; };
 	inline void setOpaque(suint val) { opaque = val; };
 
+	inline managerType getType() { return type; };
+
 private:
 	Element* element;
 	suint opaque;
 	suint depth; //higher is further forward
+	managerType type;
 };
