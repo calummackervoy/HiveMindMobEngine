@@ -11,6 +11,9 @@
 
 const int MAX_SCENE_ELEMS = 64;
 
+//TODO: init when map generated
+//TODO: checking, updating & tracking opacity
+
 class SceneManager {
 public:
 	SceneManager(ResourceManager* rm);

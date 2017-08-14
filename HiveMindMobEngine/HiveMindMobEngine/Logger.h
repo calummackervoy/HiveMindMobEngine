@@ -18,4 +18,8 @@ public:
 	inline static void logError(string source, string error) {
 		cout << "[ERR-" << source << "] " << error << endl;
 	}
+	//overload passing an int to the error
+	inline static void logError(string source, string error, string key, int val) {
+		cout << "[ERR-" << source << "] " << error << " " << key << ": " << val << endl;
+	}
 };
