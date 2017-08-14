@@ -25,13 +25,13 @@ public:
 		}
 		element->index = index;
 	}
+	inline sint getIndex() { return element->index; };
 
 	inline void setTexture(sf::Texture* tex) {
 		delete element->texture;
 		element->texture = tex;
 	};
 
-	//TODO: move depth management to renderer?
 	inline suint getDepth() { return depth; };
 	inline void setDepth(suint val) { depth = val; };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include "Renderer.h"
-#include "ResourceManager.h"
+#include "SceneManager.h"
 #include "Physics.h"
 #include "InputHandler.h"
 #include "Animation.h"
@@ -20,6 +20,7 @@ public:
 	~Engine();
 
 	//accessing components externally
+	inline SceneManager* getScene() { return scene; };
 	inline ResourceManager* getRm() { return rm; };
 	inline Physics* getP() { return p; };
 	inline InputHandler* getIo() { return io; };
@@ -38,6 +39,7 @@ private:
 	Physics* p;
 	InputHandler* io;
 	Renderer* r;
+	SceneManager* scene;
 	//GameState* state;
 	Audio* audio;
 	Animation* anim;

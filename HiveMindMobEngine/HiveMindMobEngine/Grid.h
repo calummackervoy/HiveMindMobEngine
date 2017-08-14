@@ -1,5 +1,8 @@
 #pragma once
+#include "Typedef.h"
 #include "Terrain.h"
+
+const suint TILE_SIZE = 20;
 
 enum TileType : uint8_t {
 	SPECIFIC_TILE,
@@ -10,6 +13,8 @@ enum TileType : uint8_t {
 
 struct Tile {
 	TileType type;
+	//NOTE: a tile's depth is the row/height index in the array
+	//suint depth = 0;
 };
 
 struct SpecificTile : Tile {
@@ -17,6 +22,7 @@ struct SpecificTile : Tile {
 	Terrain terrain = FLAT_GROUND;
 	uint8_t level = 0;
 	bool freeRunnable = false;
+	
 };
 
 struct RegionTile : Tile {
@@ -42,12 +48,11 @@ struct RegionSpaceTile : Tile {
 typedef struct Grid {
 	suint width = 0;
 	suint height = 0;
+	Tile* grid[MAX_WIDTH][MAX_HEIGHT];
 };
 
 typedef struct RegularGrid : Grid {
-	Tile grid[MAX_WIDTH][MAX_HEIGHT];
 };
 
 typedef struct WorldGrid : Grid {
-	RegionTile grid[MAX_WIDTH][MAX_HEIGHT];
 };

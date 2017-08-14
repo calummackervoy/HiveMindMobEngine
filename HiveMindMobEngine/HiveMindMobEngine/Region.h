@@ -4,6 +4,8 @@
 #include "MapRegion.h"
 #include "Organisation.h"
 
+using std::endl;
+
 const int MAX_GROUPS = 64;
 const int MAX_COUNTRY_SIZE = 16;
 const int MAX_CULTURES = MAX_GROUPS;
@@ -50,4 +52,10 @@ protected:
 	uint regionAuthority;
 	uint population;
 	bool inStruggle;
+
+	//TODO
+	//auxillary functions for generating
+	//generating geography
+
+	//generating population
 };

@@ -4,6 +4,7 @@ SpriteManager::SpriteManager(sf::Sprite* model, sf::Texture* tex, managerType ty
 	element = new Element;
 	element->model = model;
 	element->texture = tex;
+	element->index = -1;
 	this->type = type;
 	opaque = 100;
 	depth = 0;

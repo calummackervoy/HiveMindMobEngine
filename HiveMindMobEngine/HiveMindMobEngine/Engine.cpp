@@ -15,6 +15,7 @@ void Engine::startup(string configFileLocation) {
 	audio = new Audio(rm);
 	p = new Physics();
 	r = new Renderer(rm);
+	scene = new SceneManager(rm);
 	io = new InputHandler(r);
 
 	//read in the configuration options
@@ -31,6 +32,7 @@ void Engine::shutdown() {
 	delete p;
 	delete io;
 	delete r;
+	delete scene;
 	//delete state;
 	delete audio;
 	delete anim;
