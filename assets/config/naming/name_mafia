@@ -1,0 +1,15 @@
+//need quotes?
+//optimisation: just pick indecies at random & read those lines in
+FLAG_ADJECTIVE_PROFESSIONAL
+Bandit
+Gangster
+Goodfella
+Hardman
+Mobster
+Yardie
+
+FLAG_NOUN_PROFESSIONAL
+Firm
+Gang
+Mafia
+Mob
