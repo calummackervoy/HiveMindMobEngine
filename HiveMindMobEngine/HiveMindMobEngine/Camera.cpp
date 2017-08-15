@@ -19,12 +19,12 @@ void Camera::moveLeft() {
 }
 
 void Camera::moveRight() {
-	if ((x + SHIFT_AMOUNT) > ) return; //bounds check
+	if ((x + SHIFT_AMOUNT) > globalWidth) return; //bounds check
 	x += SHIFT_AMOUNT;
 }
 
 void Camera::moveUp() {
-	if ((y + SHIFT_AMOUNT) < 0) return; //bounds check
+	if ((y + SHIFT_AMOUNT) > globalHeight) return; //bounds check
 	y += SHIFT_AMOUNT;
 }
 
