@@ -2,6 +2,10 @@
 #include "Drug.h"
 #include "Ethnicity.h"
 #include "ToleranceLevel.h"
+#include "Typedef.h"
+
+const suint MAX_CULTURESPP = 4;
+const uint MAX_CULTURES = 64;
 
 enum GenderBias : uint8_t {
 	GENDERBIAS_NONE = 0,

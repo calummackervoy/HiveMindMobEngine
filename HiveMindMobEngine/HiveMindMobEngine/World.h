@@ -5,6 +5,7 @@
 #include "FileHandler.h"
 #include "Config.h"
 #include "MapWorld.h"
+#include "Culture.h"
 
 struct DateTime {
 	suint year;
@@ -25,6 +26,13 @@ public:
 	inline Progress getTechAt(int i) { return tech->getItem(i); };
 	//inline int addTech(Progress* t);
 	//inline void removeTech(int i);
+	inline Region* getRegionAt(suint i);
+	inline Culture* getCultureAt(suint i);
+
+	//add/remove region?
+	inline int addCulture(Culture* c);
+
+	inline void removeCultureAt(suint i);
 
 	//Date/Time getters and setters
 	inline DateTime getDateTime() {return dateTime;};
@@ -40,6 +48,7 @@ public:
 
 protected:
 	Region* regions[MAX_REGIONS];
+	Culture* cultures[MAX_CULTURES];
 	ProgressTracker* tech;
 	MapWorld* map;
 	DateTime dateTime;

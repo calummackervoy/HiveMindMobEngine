@@ -37,6 +37,32 @@ World::~World() {
 
 }
 
+Region* World::getRegionAt(suint i) {
+    if(i > MAX_REGIONS) throw std::exception("Index out of bounds");
+    return regions[i];
+}
+
+Culture* World::getCultureAt(suint i) {
+    if(i > MAX_CULTURES) throw std::exception("Index out of bounds");
+    return cultures[i];
+}
+
+int World::addCulture(Culture* c) {
+    for(int i = 0; i < MAX_CULTURES; i++) {
+        if(cultures[i] == NULL) {
+            cultures[i] = c;
+            return i;
+        }
+    }
+    return -1;
+}
+
+void World::removeCultureAt(suint i) {
+    if(i > MAX_CULTURES) return;
+    delete cultures[i];
+    cultures[i] = NULL;
+}
+
 void World::addMonth() {
     if(dateTime.month == 12) {
         addYear();

@@ -39,3 +39,7 @@ const suint MAX_STORAGE = 32;
 struct LocationHiveBaseSave : LocationSave {
 	Item inventory[MAX_STORAGE];
 };
+
+struct CharacterSave {
+	//TODO
+};
