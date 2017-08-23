@@ -6,7 +6,8 @@
 
 class GeographySpriteManager : SpriteManager {
 public:
-
+    //overrides
+    void override setPosition(sf::Vector2f pos);
 private:
 
 };

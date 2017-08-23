@@ -16,8 +16,12 @@ enum managerType : uint8_t {
 
 class SpriteManager {
 public:
-	SpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_BASE);
+	SpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_BASE,
+		suint opaque = 100, suint depth = 0);
 	~SpriteManager();
+
+	//functions to be overriden by sprite managers
+	void setPosition(sf::Vector2f pos) = 0;
 
 	inline void setIndex(int index) {
 		if (index < 0 || index > MAX_ELEMS) {

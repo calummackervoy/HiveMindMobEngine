@@ -5,6 +5,7 @@
 #include "Gender.h"
 #include "Culture.h"
 #include "Save.h"
+#include "Emotion.h"
 
 enum Trait : uint8_t {
 	TRAIT_TYPE_NULL = 0;
@@ -38,9 +39,11 @@ public:
 	inline uint8_t getAge() {return age;};
 	inline CharacterSpriteManager* getSpriteManager() {return spriteManager;};
 	inline Gender getGender() {return gender;};
+	inline Emotion getExpression() {return spriteManager->getExpression();};
 
 	//void setLevel(int val) {level = val;};
 	inline void setGender(Gender val) {gender = val;};
+	inline void setExpression(Emotion e) {spriteManager->setExpression(e);};
 
 	inline Trait getTraitAt(int i);
 	inline Skill getSkillAt(int i);
