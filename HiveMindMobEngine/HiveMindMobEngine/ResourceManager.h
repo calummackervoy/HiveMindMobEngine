@@ -1,6 +1,7 @@
 #pragma once
 #include "RendererConfig.h"
 #include "AudioSource.h"
+#include "Animator.h"
 #include <SFML\Audio.hpp>
 #include <iostream>
 
@@ -69,6 +70,16 @@ public:
 	int addAudioSource(string fileLocation);
 	void removeAudioSource(int id);
 
+	//accessing/adding/removing animators from animation's storage
+	inline Animator* getAnimator(uint i) {
+		//bounds checking
+		if (i > MAX_ANIMATORS) throw std::exception("Index out of bounds");
+		return animations[i];
+	};
+	int addAnimator(Animator* resource);
+	void removeAnimator(uint id);
+
+
 	sf::Font* fonts[NUM_FONTS];
 
 private:
@@ -82,4 +93,7 @@ private:
 
 	//Audio's storage of the different sound clips in use
 	AudioSource** sources;
+
+	//Animation's storage of the animators in the scene
+	Animator** animations;
 };

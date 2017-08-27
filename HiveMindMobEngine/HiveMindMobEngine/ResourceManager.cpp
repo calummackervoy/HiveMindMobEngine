@@ -10,11 +10,18 @@ ResourceManager::ResourceManager() {
 		scene[i] = NULL;
 		hud[i] = NULL;
 	}
+
+	//init animators to NULL
+	animations = new Animator*[MAX_ANIMATORS];
+	for (int i = 0; i < MAX_ANIMATORS; ++i) {
+		animations[i] = NULL;
+	}
 }
 
 ResourceManager::~ResourceManager() {
 	delete[] scene;
 	delete[] hud;
+	delete[] animations;
 
 	for (int i = 0; i < NUM_FONTS; i++) {
 		delete fonts[i];
@@ -123,4 +130,24 @@ void ResourceManager::loadFonts() {
 	}
 
 	fonts[FONT_ABEL_REGULAR] = font;
+}
+
+int ResourceManager::addAnimator(Animator* resource) {
+	//find an empty slot for the animator
+	for (int i = 0; i < MAX_ANIMATORS; i++) {
+		if (animations[i] == NULL) {
+			//put it in this slot and store the location
+			animations[i] = resource;
+			resource->id = i;
+			resource->startTime = clock();
+			return i;
+		}
+	}
+	return -1;
+}
+
+void ResourceManager::removeAnimator(int id) {
+	//delete the animator
+	delete[] animations[id];
+	animations[id] = NULL;
 }
