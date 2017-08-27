@@ -18,8 +18,9 @@ enum CharacterAnimations : uint8_t {
 
 class CharacterSpriteManager : SpriteManager {
 public:
+    //TODO: meaningful default value for headCentre
     CharacterSpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_CHARACTER,
-		suint opaque = 100, suint depth = 0);
+		suint opaque = 100, suint depth = 0, sf::Vector2f headCentre = sf::Vector2f(50,50));
     ~CharacterSpriteManager();
 
     //TODO: method to assign random clothing based on params
@@ -37,6 +38,10 @@ public:
     inline void setClothing(Element* clothing) {this->clothing = clothing;};
 
 protected:
+    //co-ordinates used in positioning attachments
+    sf::Vector2f bodyCentre;
+    sf::Vector2f headCentre;
+
     AnimationManager* am;
     Element* hat;
     Element* clothing;
