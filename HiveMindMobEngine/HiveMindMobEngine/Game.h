@@ -13,6 +13,12 @@ enum GameMode : uint8_t {
     BATTLE
 };
 
+//options for a Battle
+struct BattleOptions {
+    //TODO: other options
+    bool lethal = true;
+};
+
 class Game {
 public:
     Game(Engine* e, GameConfig config = {});
@@ -20,6 +26,11 @@ public:
 
 	//method for running the game loop
 	void run();
+
+    //function to switch to Battle mode (passing options)
+    void switchToBattle(BattleOptions options);
+    //function to switch back
+    void switchToRegion();
 
 protected:
     Engine* e;

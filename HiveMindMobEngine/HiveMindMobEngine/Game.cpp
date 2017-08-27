@@ -60,3 +60,17 @@ void Game::initWorld(GameConfig config) {
 void Game::loadWorld(string saveGame) {
 
 }
+
+void Game::switchToBattle(BattleOptions options) {
+	if(mode != REGION) return;
+	mode = BATTLE;
+
+	//TODO: clear non-combatants from screen, init the battle
+}
+
+void Game::switchToRegion() {
+	if(mode != BATTLE) return;
+	mode = REGION;
+	
+	//TODO: cleanup from the battle
+}
