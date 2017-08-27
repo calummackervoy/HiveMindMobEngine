@@ -7,7 +7,6 @@
 //Purpose: Sprite-management for character sprites
 
 //TODO: speech animation/indication
-//TODO: animation management
 
 //defines the different animations available to a character
 enum CharacterAnimations : uint8_t {
@@ -19,7 +18,7 @@ enum CharacterAnimations : uint8_t {
 class CharacterSpriteManager : SpriteManager {
 public:
     //TODO: meaningful default value for headCentre
-    CharacterSpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_CHARACTER,
+    CharacterSpriteManager(ResourceManager* rm, sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_CHARACTER,
 		suint opaque = 100, suint depth = 0, sf::Vector2f headCentre = sf::Vector2f(50,50));
     ~CharacterSpriteManager();
 

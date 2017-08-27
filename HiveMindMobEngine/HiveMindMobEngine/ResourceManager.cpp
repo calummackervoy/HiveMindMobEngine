@@ -146,8 +146,10 @@ int ResourceManager::addAnimator(Animator* resource) {
 	return -1;
 }
 
-void ResourceManager::removeAnimator(int id) {
-	//delete the animator
-	delete[] animations[id];
+void ResourceManager::removeAnimator(uint id) {
+	//bounds checking
+	if(id >= MAX_ANIMATORS) return;
+	
+	//NOTE: AnimationManager will delete the animators
 	animations[id] = NULL;
 }

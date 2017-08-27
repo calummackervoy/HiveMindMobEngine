@@ -1,8 +1,7 @@
 #include "CharacterSpriteManager.h"
 
-CharacterSpriteManager::CharacterSpriteManager(sf::Sprite* model, sf::Texture* tex, managerType type,
+CharacterSpriteManager::CharacterSpriteManager(ResourceManager* rm, sf::Sprite* model, sf::Texture* tex, managerType type,
     suint opaque, suint depth, sf::Vector2f headCentre) : SpriteManager(model, tex, type, opaque, depth) {
-        am = new AnimationManager();
         expression = EMOTION_NEUTRAL;
         hat = NULL;
         clothing = NULL;
@@ -11,6 +10,9 @@ CharacterSpriteManager::CharacterSpriteManager(sf::Sprite* model, sf::Texture* t
         //bodyCentre half of the model size
         bodyCentre.x = model->getHeight() * 0.5;
         bodyCentre.y = model->getWidth() * 0.5;
+
+        am = new AnimationManager(rm);
+        //TODO: read animations from config file & add each to AM.. read all of class from config maybs?
 }
 CharacterSpriteManager::~CharacterSpriteManager() {
     delete am;
