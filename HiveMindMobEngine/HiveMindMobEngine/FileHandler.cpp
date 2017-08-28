@@ -40,3 +40,7 @@ void FileHandler::readBindings(map<DeviceKeyBinding, int> &bindings,
 
 	fp_in.close();
 }
+
+HatClothing** FileHandler::readWardrobe(string configLocation) {
+	//TODO: read in all hats/clothing from config file
+}

@@ -2,14 +2,13 @@
 #include "Grid.h"
 #include "Config.h"
 #include "Terrain.h"
-#include <string>
+#include "Clothing.h"
 #include <iostream>
 #include <fstream>
 
 //Author: Calum Mackervoy
 //Purpose: provides functions for reading in various config files/savegames
 
-using std::string;
 using std::cout;
 using std::ifstream;
 using std::ios;
@@ -32,6 +31,9 @@ public:
 	//methods for saving game data
 
 	//methods for loading game data?
+
+	//method for reading in a Wardrobe config file
+	static HatClothing** readWardrobe(string configLocation);
 
 private:
 };

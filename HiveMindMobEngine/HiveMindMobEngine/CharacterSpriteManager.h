@@ -2,6 +2,7 @@
 #include "SpriteManager.h"
 #include "AnimationManager.h"
 #include "Emotion.h"
+#include "Wardrobe.h"
 
 //Author: Calum Mackervoy
 //Purpose: Sprite-management for character sprites
@@ -18,14 +19,12 @@ enum CharacterAnimations : uint8_t {
 class CharacterSpriteManager : SpriteManager {
 public:
     //TODO: meaningful default value for headCentre
-    CharacterSpriteManager(ResourceManager* rm, sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_CHARACTER,
-		suint opaque = 100, suint depth = 0, sf::Vector2f headCentre = sf::Vector2f(50,50));
+    CharacterSpriteManager(ResourceManager* rm, Wardrobe* w, sf::Sprite* model = NULL,
+        sf::Texture* tex = NULL, managerType type = MANAGER_CHARACTER, suint opaque = 100, suint depth = 0,
+        sf::Vector2f headCentre = sf::Vector2f(50,50));
     ~CharacterSpriteManager();
 
-    //TODO: method to assign random clothing based on params
-
     //overrides
-    //TODO: must move all clothing etc along in correct positions
     void override setPosition(sf::Vector2f pos);
 
     inline Emotion getExpression() {return expression;};
@@ -41,6 +40,7 @@ protected:
     sf::Vector2f bodyCentre;
     sf::Vector2f headCentre;
 
+    Wardrobe* w;
     AnimationManager* am;
     Element* hat;
     Element* clothing;
