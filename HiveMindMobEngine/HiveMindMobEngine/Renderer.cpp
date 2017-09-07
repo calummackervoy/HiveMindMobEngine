@@ -17,6 +17,18 @@ Renderer::~Renderer() {
 	delete window;
 }
 
+Element* Renderer::getSprite(string filepath, sf::Vector2f pos,
+	bool smooth = false) {
+	Element* e = new Element;
+	e->texture = getTexture(filepath, smooth);
+	e->model = new sf::Sprite(*(e->texture));
+	e->elemType = SPRITE;
+
+	//TODO: setOrigin
+	((Sprite*)e->model)->setPosition(pos);
+	return e;
+}
+
 sf::Texture* Renderer::getTexture(string filepath, bool smooth) {
 	//making a sprite
 	sf::Texture* texture = new sf::Texture();

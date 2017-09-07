@@ -14,6 +14,9 @@ public:
 	Renderer(ResourceManager* rm);
 	~Renderer();
 
+	//method for generating a sprite
+	Element* getSprite(string filepath, sf::Vector2f pos, bool smooth = false);
+
 	//method for retreiving a texture from file
 	sf::Texture* getTexture(string filepath, bool smooth = true);
 
