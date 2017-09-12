@@ -21,7 +21,7 @@ suint Inventory::addItem(Item &item) {
     for (int i = 0; i < MAX_INV_ITEMS; i++) {
 		if (inv[i] == NULL) {
 			inv[i] = new Item(item);
-			item->index = i;
+			item.id = i;
 			return i;
 		}
 	}

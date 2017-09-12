@@ -24,8 +24,8 @@ public:
         sf::Vector2f headCentre = sf::Vector2f(50,50));
     ~CharacterSpriteManager();
 
-    //overrides
-    void override setPosition(sf::Vector2f pos);
+    //overrides-- need override keyword here?
+    void setPosition(sf::Vector2f pos);
 
     inline Emotion getExpression() {return expression;};
     inline Element* getHat() {return hat;};

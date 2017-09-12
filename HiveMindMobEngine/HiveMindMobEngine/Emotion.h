@@ -1,3 +1,4 @@
+#pragma once
 #include "Typedef.h"
 
 enum Emotion : uint8_t {

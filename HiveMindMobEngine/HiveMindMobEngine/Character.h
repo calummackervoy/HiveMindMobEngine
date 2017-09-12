@@ -8,7 +8,7 @@
 #include "Emotion.h"
 
 enum Trait : uint8_t {
-	TRAIT_TYPE_NULL = 0;
+	TRAIT_TYPE_NULL = 0
 };
 
 const uint8_t MAX_TRAITS = 8;

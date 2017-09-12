@@ -2,8 +2,10 @@
 
 Wardrobe::Wardrobe(Renderer* r, string hatsLocation, string clothingLocation) {
     this->r = r;
-    hats = FileHandler::readWardrobe(hatsLocation);
-    clothes = FileHandler::readWardrobe(clothingLocation);
+	hats = new HatClothing*[MAX_CLOTHING];
+	clothes = new HatClothing*[MAX_CLOTHING];
+    FileHandler::readWardrobe(hats, hatsLocation);
+	FileHandler::readWardrobe(clothes, clothingLocation);
 }
 
 Wardrobe::~Wardrobe() {
@@ -37,9 +39,9 @@ HatClothingPair Wardrobe::getRandom(bool hat, CharacterClass charClass,
         //randomly choose a pair from the pools
         //recycling count as the selected from now
         if(hat) {
-            hatCount = Rand::randInt(0, hatCount);
+            hatCount = randInt(0, hatCount);
         }
-        clothingCount = Rand::randInt(0, clothingCount);
+        clothingCount = randInt(0, clothingCount);
 
         //construct Elements out of these and send
         HatClothingPair res;
@@ -48,11 +50,11 @@ HatClothingPair Wardrobe::getRandom(bool hat, CharacterClass charClass,
         return res;
 }
 
-Element* Wardrobe::convertToElement(HatClothing &hc) {
+Element* Wardrobe::convertToElement(HatClothing* hc) {
     Element* e = new Element;
     e->model = new sf::Sprite();
-    e->texture = r->getTexture(hc.textureLocation);
-    e->model->setTexture(*e->texture);
+    e->texture = r->getTexture(hc->textureLocation);
+    ((sf::Sprite*)e->model)->setTexture(*e->texture);
 
     return e;
 }

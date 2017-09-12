@@ -41,6 +41,6 @@ void FileHandler::readBindings(map<DeviceKeyBinding, int> &bindings,
 	fp_in.close();
 }
 
-HatClothing** FileHandler::readWardrobe(string configLocation) {
+void FileHandler::readWardrobe(HatClothing** arr, string configLocation) {
 	//TODO: read in all hats/clothing from config file
 }

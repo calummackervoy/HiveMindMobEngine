@@ -16,8 +16,9 @@ Character::~Character() {
     delete spriteManager;
 }
 
+//TODO
 CharacterSave Character::save() {
-    
+	return{};
 }
 
 Trait Character::getTraitAt(int i) {
@@ -37,8 +38,7 @@ suint Character::getCultureAt(int i) {
 
 int Character::addTrait(Trait t) {
     for(int i = 0; i < MAX_TRAITS; i++) {
-        if(traits[i].id == -1) {
-            t.id = i;
+        if(traits[i] == TRAIT_TYPE_NULL) {
             traits[i] = t;
             return i;
         }
@@ -69,7 +69,7 @@ int Character::addCulture(suint c) {
 
 void Character::removeTrait(int i){
     if(i < 0 || i > MAX_TRAITS) return;
-    traits[i].id = -1;
+	traits[i] = TRAIT_TYPE_NULL;
 }
 
 void Character::removeSkill(int i) {

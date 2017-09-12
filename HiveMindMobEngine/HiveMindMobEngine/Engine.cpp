@@ -11,7 +11,7 @@ Engine::~Engine() {
 
 void Engine::startup(string configFileLocation) {
 	rm = new ResourceManager();
-	anim = new Animation();
+	anim = new Animation(rm);
 	audio = new Audio(rm);
 	p = new Physics();
 	r = new Renderer(rm);

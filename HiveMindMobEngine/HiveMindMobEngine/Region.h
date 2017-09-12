@@ -6,9 +6,9 @@
 
 using std::endl;
 
-const int MAX_GROUPS = 64;
-const int MAX_COUNTRY_SIZE = 16;
-const int MAX_CULTURES = MAX_GROUPS;
+const suint MAX_GROUPS = 64;
+const suint MAX_COUNTRY_SIZE = 16;
+const suint MAX_REGIONAL_CULTURES = MAX_GROUPS;
 
 struct Country {
 	string name = "DEFAULT_COUNTRY";

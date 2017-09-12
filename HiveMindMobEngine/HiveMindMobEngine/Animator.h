@@ -1,4 +1,6 @@
 #pragma once
+#include <ctime>
+#include "RendererConfig.h"
 
 //max animations happening concurrently
 const int MAX_ANIMATORS = 8;
@@ -16,7 +18,7 @@ struct Animator {
 	double timeThreshold = 1.0; //seconds each frame lasts
 	sf::Sprite* target; //the sprite the animation is being carried out on
 						//each frame of animation pre-loaded as a texture
-	sf::Texture* frames[MAX_FRAMES] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
+	sf::Texture* frames[MAX_FRAMES] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 	//autoplay? if false animate on trigger
 	bool play = false;
 };

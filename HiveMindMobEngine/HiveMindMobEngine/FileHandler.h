@@ -33,7 +33,7 @@ public:
 	//methods for loading game data?
 
 	//method for reading in a Wardrobe config file
-	static HatClothing** readWardrobe(string configLocation);
+	static void readWardrobe(HatClothing** arr, string configLocation);
 
 private:
 };

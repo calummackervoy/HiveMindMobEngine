@@ -21,7 +21,7 @@ int AnimationManager::addAnimator(Animator &resource) {
 		if (animations[i] == NULL) {
 			//put it in this slot and store the location
 			animations[i] = new Animator(resource);
-			resource->id = i;
+			resource.id = i;
 			return i;
 		}
 	}

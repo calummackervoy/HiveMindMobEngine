@@ -5,6 +5,8 @@
 //Author: Calum Mackervoy
 //Purpose: Manages a suite of animators and calls the correct one of certain triggers
 
+const suint MAX_ANIMATIONS_MANAGER = 16;
+
 class AnimationManager {
 public:
     AnimationManager(ResourceManager* rm, sint capacity = 8);

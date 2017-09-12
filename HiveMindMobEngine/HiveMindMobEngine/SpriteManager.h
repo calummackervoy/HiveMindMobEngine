@@ -21,7 +21,7 @@ public:
 	~SpriteManager();
 
 	//functions to be overriden by sprite managers
-	void setPosition(sf::Vector2f pos) = 0;
+	virtual void setPosition(sf::Vector2f pos) = 0;
 
 	inline void setIndex(int index) {
 		if (index < 0 || index > MAX_ELEMS) {
@@ -44,7 +44,7 @@ public:
 
 	inline managerType getType() { return type; };
 
-private:
+protected:
 	Element* element;
 	suint opaque;
 	suint depth; //higher is further forward

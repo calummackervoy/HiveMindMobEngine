@@ -2,7 +2,7 @@
 #include "Renderer.h"
 #include "FileHandler.h"
 #include "Clothing.h"
-#include "Rand.h"
+#include "rand.h"
 
 //Author: Calum Mackervoy
 //Purpose: Manages clothing ranges & fetches em for other classes
@@ -26,9 +26,9 @@ public:
 
 private:
     Renderer* r;
-    HatClothing* hats[MAX_CLOTHING];
-    HatClothing* clothes[MAX_CLOTHING];
+    HatClothing** hats;
+    HatClothing** clothes;
 
     //turn a HatClothing struct into an Element
-    Element* convertToElement(HatClothing &hc);
+    Element* convertToElement(HatClothing* hc);
 };

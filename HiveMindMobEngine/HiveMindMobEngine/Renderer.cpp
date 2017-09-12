@@ -17,15 +17,14 @@ Renderer::~Renderer() {
 	delete window;
 }
 
-Element* Renderer::getSprite(string filepath, sf::Vector2f pos,
-	bool smooth = false) {
+Element* Renderer::getSprite(string filepath, sf::Vector2f pos, bool smooth) {
 	Element* e = new Element;
 	e->texture = getTexture(filepath, smooth);
 	e->model = new sf::Sprite(*(e->texture));
 	e->elemType = SPRITE;
 
 	//TODO: setOrigin
-	((Sprite*)e->model)->setPosition(pos);
+	((sf::Sprite*)e->model)->setPosition(pos);
 	return e;
 }
 

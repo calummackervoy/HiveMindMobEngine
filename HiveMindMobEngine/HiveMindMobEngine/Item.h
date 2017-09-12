@@ -1,4 +1,5 @@
 #pragma once
+#include "Typedef.h"
 #include <string>
 #include "Drug.h"
 
@@ -16,7 +17,7 @@ struct Item {
 	string name = "DEFAULT_ITEM_NAME";
 	string desc = "DEFAULT_ITEM_DESC";
 	int val = 1;
-	suint id = -1;
+	sint id = -1;
 	ItemType type = ITEM_NULL;
 };
 
@@ -50,7 +51,8 @@ enum VulnerabilityType : uint8_t {
 	VULN_REPLAY,
 	VULN_CRYPTO,
 	VULN_VIRUS
-}
+};
+
 enum VulnerabilityMethod : uint8_t {
 	METHOD_PHYSICAL_FORCE,
 	METHOD_BRUTE_FORCE,
@@ -63,7 +65,8 @@ enum VulnerabilityMethod : uint8_t {
 	METHOD_KEY_LOGGER,
 	METHOD_BIOS_ATTACK,
 	METHOD_MANUAL_INSTALL
-}
+};
+
 struct Vulnerability {
 	VulnerabilityType type = VULN_OTHER;
 	VulnerabilityMethod method = METHOD_PHYSICAL_FORCE;
@@ -78,7 +81,8 @@ enum Privilege : uint8_t {
 	PRIVILEGE_MEDIUM,
 	PRIVILEGE_LOW,
 	PRIVILEGE_OUTSIDER
-}
+};
+
 //access attempts will have a target action being attempted by the hacker
 //TODO: changing & stealing specific data?
 enum AccessAction : uint8_t {
@@ -91,4 +95,4 @@ enum AccessAction : uint8_t {
 	ACCESS_STEAL_DATA,
 	ACCESS_STEAL_PASS,
 	ACCESS_TAKEOVER
-}
+};
