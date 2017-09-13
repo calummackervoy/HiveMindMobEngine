@@ -126,6 +126,14 @@ void Renderer::drawScene() {
 			i++;
 			line = gridOver->getNextX(i);
 		}
+
+		i = 0;
+		line = gridOver->getNextY(i);
+		while (line != NULL) {
+			window->draw(*line);
+			i++;
+			line = gridOver->getNextY(i);
+		}
 	}
 
 	//draw the hud over the top of everything else
