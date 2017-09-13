@@ -42,6 +42,7 @@ public:
 	//main scene drawing
 	void drawScene();
 	void clearScene() { rm->clearScene(); };
+	void clearAll() { clearScene(); rm->clearHud(); }
 
 private:
 	//accesses the resource manager to access its elements

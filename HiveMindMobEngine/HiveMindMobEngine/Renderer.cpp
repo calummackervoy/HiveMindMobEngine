@@ -125,7 +125,6 @@ void Renderer::drawScene() {
 			window->draw(*line);
 			i++;
 			line = gridOver->getNextX(i);
-			
 		}
 	}
 

@@ -36,6 +36,8 @@ void Game::run() {
 				case MENU_WORLD_NEW:
 					//TODO: take to the world setup screen
 					cout << "new world being generated.." << std::endl;
+					e->getR()->clearAll();
+					mode = WORLD;
 					break;
 				case MENU_WORLD_LOAD:
 					//TODO: take to the world load screen
@@ -54,7 +56,8 @@ void Game::run() {
 }
 
 void Game::initWorld(GameConfig config) {
-	world = new World(config.worldParams);
+	//TODO: init a world & load that map into renderer
+	//world = new World(config.worldParams);
 }
 
 void Game::loadWorld(string saveGame) {

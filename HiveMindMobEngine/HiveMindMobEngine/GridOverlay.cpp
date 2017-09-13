@@ -36,21 +36,22 @@ GridOverlay::~GridOverlay() {
 void GridOverlay::drawLine(bool xAxis, int index) {
 	//draw the rectangle
 	sf::RectangleShape* line;
-	if (xAxis) line = new sf::RectangleShape(sf::Vector2f(WIN_HEIGHT, 3));
-	else line = new sf::RectangleShape(sf::Vector2f(WIN_WIDTH, 3));
+	if (xAxis) line = new sf::RectangleShape(sf::Vector2f(5000, 3));
+	else line = new sf::RectangleShape(sf::Vector2f(5000, 3));
 
 	//rotate
-	if(xAxis) line->rotate(-70);
-	else line->rotate(70);
+	if(xAxis) line->rotate(60);
+	else line->rotate(160);
 
 	//change position based on increment
-	if(xAxis) line->setPosition(sf::Vector2f((TILE_SIZE * (index+1)),0.0f));
-	else line->setPosition(sf::Vector2f(0.0f, (TILE_SIZE * (index + 1))));
+	if(xAxis) line->setPosition(sf::Vector2f((TILE_SIZE * (index)),0.0f));
+	else line->setPosition(sf::Vector2f(0.0f, (TILE_SIZE * (index))));
 
 	//change colour
 	sf::Color colour = colours[COLOUR_BLUE_GREY];
 	colour.a = 60;
 	line->setFillColor(colour);
+	//line->setFillColor(sf::Color::White);
 
 	//add it to the array of lines
 	if (xAxis) xLines[index] = line;
