@@ -1,5 +1,5 @@
 #pragma once
-#include "Item.h"
+#include "Hack.h"
 
 //Author: Calum Mackervoy
 //Purpose: (part of hacking system) obtained with vulnerabilties --> must have sequence overcoming all guards
