@@ -6,20 +6,53 @@
 #include "Culture.h"
 #include "Save.h"
 #include "Emotion.h"
+#include "Hack.h"
 
+//TODO: disabilities?
 enum Trait : uint8_t {
-	TRAIT_TYPE_NULL = 0
+	TRAIT_NULL,
+
+	//mental conditions
+	//TRAIT_MENTAL_PSYCOPATHIC,
+	TRAIT_MENTAL_DEPRESSION,
+	TRAIT_MENTAL_ANXIETY,
+	TRAIT_MENTAL_AUTISM,
+	TRAIT_MENTAL_PTSD,
+	//TRAIT_MENTAL_NAPOLEON,
+	//TRAIT_MENTAL_ANGER,
+	//TRAIT_MENTAL_ADDICTION, //TODO: how to specify what?
+	//TRAIT_MENTAL_MESSIAH,
+	//TRAIT_MENTAL_NARCASSIST,
+
+	//injury / imparement
+	TRAIT_INJURY_MEMORY,
+	//TRAIT_INJURY_MOVEMENT,
+	//TRAIT_INJURY_JUDGEMENT,
+	//TRAIT_INJURY_WEAKNESS,
+	//TRAIT_INJURY_DISTRACTION,
+
+	//personality
+	TRAIT_PERSON_AGGRESSIVE,
+	//TRAIT_PERSON_SYMPATHETIC,
+	//TRAIT_PERSON_RUDE,
+	//TRAIT_PERSON_JUDGEMENTAL,
+	//TRAIT_PERSON_GOAT
+
+	//vulnerabilities
+	TRAIT_VULN_BLACKMAIL,
+	TRAIT_VULN_COERCE,
+	TRAIT_VULN_BRIBE
+};
+enum TraitType : uint8_t {
+	TRAIT_TYPE_NULL,
+	TRAIT_TYPE_MENTAL,
+	TRAIT_TYPE_INJURY,
+	TRAIT_TYPE_PERSONALITY,
+	TRAIT_TYPE_VULNERABILITY
 };
 
 const uint8_t MAX_TRAITS = 8;
 const uint8_t MAX_SKILLS = 16;
-
-//TODO: addictions?
-//TODO: how to handle inventory on the cheap
-//TODO: needs to remember locations etc
-//TODO: personality?
-//TODO: AI agent (FSM)
-//TODO: race?
 
 class Character {
 public:
@@ -45,18 +78,29 @@ public:
 	inline void setGender(Gender val) {gender = val;};
 	inline void setExpression(Emotion e) {spriteManager->setExpression(e);};
 
-	inline Trait getTraitAt(int i);
+	inline Trait getTraitAt(TraitType type, int i);
 	inline Skill getSkillAt(int i);
 	inline suint getCultureAt(int i);
-	inline int addTrait(Trait t);
+	inline int addTrait(TraitType type, Trait t);
 	inline int addSkill(Skill s);
 	inline int addCulture(suint c);
-	inline void removeTrait(int i);
+	inline void removeTrait(TraitType type, int i);
 	inline void removeSkill(int i);
 	inline void removeCulture(int i);
 
+	//hacking.. (high level part)
+	ExploitResponse exploit(SocialEngineeringAction action,
+		SocialEngineeringMethod method,
+		ToleranceLevel demand,
+		ToleranceLevel strengthLevel);
+
 protected:
-	Trait traits[MAX_TRAITS];
+	//trait categories
+	Trait mentalTraits[MAX_TRAITS];
+	Trait injuryTraits[MAX_TRAITS];
+	Trait personTraits[MAX_TRAITS]; //personality
+	Trait vulnTraits[MAX_TRAITS]; //vulnerabilities (social engineering)
+
 	//TODO: pointers for below?
 	Skill skills[MAX_SKILLS];
 	Group groups[MAX_GROUPSPP];
