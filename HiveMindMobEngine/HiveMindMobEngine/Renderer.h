@@ -1,5 +1,6 @@
 #pragma once
 #include "ResourceManager.h"
+#include "GridOverlay.h"
 #include <string.h>
 #include <iostream>
 
@@ -46,8 +47,10 @@ private:
 	//accesses the resource manager to access its elements
 	ResourceManager* rm;
 	sf::RenderWindow* window;
+	GridOverlay* gridOver;
 
 	int selected; //index of selected element
+	bool overlayActive; //whether a grid overlay is to be drawn or not
 
 	inline Element* getSceneElem(int i) { return rm->getSceneElem(i); };
 	inline Element* getHudElem(int i) { return rm->getHudElem(i); };

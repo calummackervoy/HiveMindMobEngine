@@ -10,6 +10,8 @@ Renderer::Renderer(ResourceManager* rm) {
 
 	this->rm = rm;
 	selected = -1;
+	overlayActive = true;
+	gridOver = new GridOverlay();
 }
 
 Renderer::~Renderer() {
@@ -113,6 +115,18 @@ void Renderer::drawScene() {
 
 		//draw em
 		window->draw(*temp->model);
+	}
+
+	//draw the overlay if necessary
+	if (overlayActive) {
+		int i = 0;
+		sf::RectangleShape* line = gridOver->getNextX(i);
+		while (line != NULL) {
+			window->draw(*line);
+			i++;
+			line = gridOver->getNextX(i);
+			
+		}
 	}
 
 	//draw the hud over the top of everything else
