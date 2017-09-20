@@ -75,6 +75,11 @@ int Character::addTrait(TraitType type, Trait t) {
 		case TRAIT_TYPE_PERSONALITY:
 			if (personTraits[i] == TRAIT_NULL) {
 				personTraits[i] = t;
+
+				//if brave/coward generate new resolve
+				if (t == TRAIT_PERSON_BRAVE || t == TRAIT_PERSON_COWARD) {
+					generateResolve();
+				}
 				return i;
 			}
 			break;
