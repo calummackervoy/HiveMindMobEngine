@@ -2,10 +2,14 @@
 
 Character::Character() {
     //TODO: initialise cultures to NULL (in a general-purpose auxillary function?)
+
+	generateResolve(); //generate the resolve value
 }
 
 Character::Character(int seed) {
     this->seed = seed;
+
+	generateResolve(seed); //generate the resolve value using seed
 }
 
 Character::Character(CharacterSave save) {
@@ -138,6 +142,15 @@ void Character::removeCulture(int i) {
     cultures[i] = 0;
 }
 
+bool Character::hasTrait(Trait t, TraitType type) {
+	Trait check;
+	for (int i = 0; i < MAX_TRAITS; i++) {
+		check = getTraitAt(type, i);
+		if (check == t) return true;
+	}
+	return false;
+}
+
 //TODO
 ExploitResponse Character::exploit(SocialEngineeringAction action,
 		SocialEngineeringMethod method, ToleranceLevel demand, ToleranceLevel strengthLevel) {
@@ -164,4 +177,31 @@ ExploitResponse Character::exploit(SocialEngineeringAction action,
 	//calculate final success/failure
 
 	return{};
+}
+
+void Character::generateResolve(int seed) {
+	//start resolve at a base value
+	suint r = 200;
+
+	//factor in traits which affect this
+	//brave/coward
+	if (hasTrait(TRAIT_PERSON_BRAVE, TRAIT_TYPE_PERSONALITY)) {
+		r += randSuint(50, 150, seed);
+	}
+	else if (hasTrait(TRAIT_PERSON_COWARD, TRAIT_TYPE_PERSONALITY)) {
+		r -= randSuint(50, 150, seed);
+	}
+
+	//generate random number for remaining courage for normal range
+	else {
+		switch (randInt(0, 1, seed)) {
+		case 0:
+			r -= randSuint(1, 50, seed);
+		case 1:
+			r += randSuint(1, 50, seed);
+		}
+	}
+
+	//set this as the resolve
+	resolve = r;
 }

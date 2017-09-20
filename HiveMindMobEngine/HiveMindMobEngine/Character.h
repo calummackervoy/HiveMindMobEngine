@@ -1,4 +1,6 @@
 #pragma once
+#include "Tools.h"
+#include "rand.h"
 #include "Skill.h"
 #include "Group.h"
 #include "CharacterSpriteManager.h"
@@ -36,7 +38,9 @@ enum Trait : uint8_t {
 	//TRAIT_PERSON_SYMPATHETIC,
 	//TRAIT_PERSON_RUDE,
 	//TRAIT_PERSON_JUDGEMENTAL,
-	//TRAIT_PERSON_GOAT
+	//TRAIT_PERSON_GOAT,
+	TRAIT_PERSON_BRAVE,
+	TRAIT_PERSON_COWARD,
 
 	//vulnerabilities
 	TRAIT_VULN_BLACKMAIL,
@@ -88,6 +92,9 @@ public:
 	inline void removeSkill(int i);
 	inline void removeCulture(int i);
 
+	//function to check whether has a certain trait
+	bool hasTrait(Trait t, TraitType type);
+
 	//hacking.. (high level part)
 	ExploitResponse exploit(SocialEngineeringAction action,
 		SocialEngineeringMethod method,
@@ -100,6 +107,7 @@ protected:
 	Trait injuryTraits[MAX_TRAITS];
 	Trait personTraits[MAX_TRAITS]; //personality
 	Trait vulnTraits[MAX_TRAITS]; //vulnerabilities (social engineering)
+	suint resolve;
 
 	//TODO: pointers for below?
 	Skill skills[MAX_SKILLS];
@@ -111,4 +119,7 @@ protected:
 	//uint8_t level;
 	Gender gender;
 	uint8_t age;
+
+	//internal function to generate a resolve
+	void generateResolve(int seed = -1);
 };
