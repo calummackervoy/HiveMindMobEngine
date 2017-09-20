@@ -1,0 +1,2 @@
+../../assets/sprites/characters/individual/1forwardwhite.png
+../../assets/sprites/characters/clothing/1forwardredjumper.png
