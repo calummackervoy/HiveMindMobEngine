@@ -6,7 +6,7 @@
 
 class MouseKeyboard : public Device {
 public:
-	MouseKeyboard();
+	MouseKeyboard(FileHandler* f);
 	~MouseKeyboard();
 
 	DeviceResponse respond(sf::Event event) override;

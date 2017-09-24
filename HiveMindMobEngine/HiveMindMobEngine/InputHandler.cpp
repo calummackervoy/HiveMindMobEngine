@@ -1,11 +1,11 @@
 #include "InputHandler.h"
 
-InputHandler::InputHandler(Renderer* r, DeviceType type) {
+InputHandler::InputHandler(Renderer* r, FileHandler* f, DeviceType type) {
 	this->r = r;
 
 	switch (type) {
 	case MOUSE_KEYBOARD:
-		device = new MouseKeyboard();
+		device = new MouseKeyboard(f);
 		break;
 	}
 }

@@ -7,7 +7,7 @@
 #include <fstream>
 
 //Author: Calum Mackervoy
-//Purpose: provides functions for reading in various config files/savegames
+//Purpose: wrapper class for reading and writing operations
 
 using std::cout;
 using std::ifstream;
@@ -16,17 +16,12 @@ using std::map;
 
 class FileHandler {
 public:
-	FileHandler();
+	//read defaults to true and source to empty
+	FileHandler(string source = "", bool read = true);
 	~FileHandler();
 
-	//main configuration file
+	//TODO: main configuration file?
 	//static GameConfig readGameConfig(string fileLocation);
-	//TODO: reading in different kinds of map or generic map config file?
-	static Grid* readMap(string mapLocation);
-
-	//method for reading in bindings
-	//reads config file for response codes & takes param for keys
-	static void readBindings(map<DeviceKeyBinding, int> &bindings, string configLocation);
 
 	//methods for saving game data
 
@@ -35,5 +30,17 @@ public:
 	//method for reading in a Wardrobe config file
 	static void readWardrobe(HatClothing** arr, string configLocation);
 
-private:
+	//opens a stream for reading (if true) & writing if false
+	void openStream(string source, bool read = true);
+	//closes active stream
+	void closeStream();
+
+	//functions for reading specific values
+	int getNextInt();
+	string getNextString();
+
+	//TODO: functions for writing specific values
+
+protected:
+	ifstream* file;
 };

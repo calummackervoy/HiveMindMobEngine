@@ -1,46 +1,52 @@
 #include "FileHandler.h"
 
-FileHandler::FileHandler() {
-
+FileHandler::FileHandler(string source, bool read) {
+	//set the stream to NULL for now
+	file = NULL;
+	
+	//initialise the source if necessary
+	if (source != "") openStream(source, read);
 }
 
 FileHandler::~FileHandler() {
-
+	closeStream();
 }
 
 /*GameConfig FileHandler::readGameConfig(string fileLocation) {
 	return{};
 }*/
 
-Grid* FileHandler::readMap(string mapLocation) {
-	return{};
+void FileHandler::readWardrobe(HatClothing** arr, string configLocation) {
+	//TODO: read in all hats/clothing from config file
 }
 
-void FileHandler::readBindings(map<DeviceKeyBinding, int> &bindings,
-	string configLocation) {
-
-	if (configLocation == "") {
+void FileHandler::openStream(string source, bool read) {
+	if (source == "") {
 		cout << "READING KEY BINDINGS: configlocation was empty" << std::endl;
 		return;
 	}
 
-	//declare & open file in specified location
-	ifstream fp_in(configLocation, ios::in);
+	//close the stream to make sure it's free
+	if (file != NULL) closeStream();
 
-	int temp;
-	for (int i = 0; i <= (int)KEY_NULL; i++) {
-		std::pair<DeviceKeyBinding, int> p;
-		p.first = (MouseKeyboardKeys)i;
-		fp_in >> temp;
-		//being read in correctly then always converted to 0
-		p.second = temp;
-		cout << "BOUND " << (int)p.first << " TO " << p.second << std::endl;
-		bindings.insert(p);
-	}
-
-	fp_in.close();
+	//declare & open file in specified location with specified permissions
+	if (read) file = new ifstream(source, ios::in);
+	else file = new ifstream(source, ios::out);
 }
 
-void FileHandler::readWardrobe(HatClothing** arr, string configLocation) {
-	//TODO: read in all hats/clothing from config file
+void FileHandler::closeStream() {
+	delete file;
+	file = NULL;
+}
+
+int FileHandler::getNextInt() {
+	int temp;
+	(*file) >> temp;
+	return temp;
+}
+
+string FileHandler::getNextString() {
+	string temp;
+	(*file) >> temp;
+	return temp;
 }

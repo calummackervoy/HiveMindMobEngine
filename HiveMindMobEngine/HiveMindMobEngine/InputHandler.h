@@ -7,7 +7,7 @@
 
 class InputHandler {
 public:
-	InputHandler(Renderer* r, DeviceType type = MOUSE_KEYBOARD);
+	InputHandler(Renderer* r, FileHandler* f, DeviceType type = MOUSE_KEYBOARD);
 	~InputHandler();
 
 	//input detection

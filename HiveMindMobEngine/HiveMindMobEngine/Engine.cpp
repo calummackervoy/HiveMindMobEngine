@@ -11,12 +11,13 @@ Engine::~Engine() {
 
 void Engine::startup(string configFileLocation) {
 	rm = new ResourceManager();
+	file = new FileHandler();
 	anim = new Animation(rm);
 	audio = new Audio(rm);
 	p = new Physics();
 	r = new Renderer(rm);
 	scene = new SceneManager(rm);
-	io = new InputHandler(r);
+	io = new InputHandler(r, file);
 
 	//read in the configuration options
 	//setup = FileHandler::readGameConfig(configFileLocation);

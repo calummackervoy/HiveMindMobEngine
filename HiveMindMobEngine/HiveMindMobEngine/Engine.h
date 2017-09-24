@@ -36,6 +36,7 @@ public:
 
 private:
 	ResourceManager* rm;
+	FileHandler* file;
 	Physics* p;
 	InputHandler* io;
 	Renderer* r;

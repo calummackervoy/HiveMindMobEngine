@@ -1,11 +1,11 @@
 #include "MouseKeyboard.h"
 
-MouseKeyboard::MouseKeyboard() : Device() {
+MouseKeyboard::MouseKeyboard(FileHandler* f) : Device(f) {
 	type = MOUSE_KEYBOARD;
 
 	//read the key bindings from config file
 	//TODO: pass the below via the main config file
-	FileHandler::readBindings(bindings, "../../assets/config/keybindings.txt");
+	readBindings("../../assets/config/keybindings.txt");
 }
 
 MouseKeyboard::~MouseKeyboard() {

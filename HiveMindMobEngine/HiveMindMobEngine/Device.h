@@ -3,6 +3,7 @@
 #include <SFML\Graphics.hpp>
 #include "Typedef.h"
 #include "Config.h"
+#include "FileHandler.h"
 
 //Author: Calum Mackervoy
 //Purpose: Base class for an input device/controller
@@ -17,7 +18,7 @@ enum DeviceType : uint8_t {
 
 class Device {
 public:
-	Device() { };//bindings = NULL; };
+	Device(FileHandler* f) { file = f; };//bindings = NULL; };
 	~Device() { };//delete bindings; };
 
 	inline DeviceType getType() { return type; };
@@ -30,7 +31,11 @@ public:
 	virtual DeviceResponse respond(sf::Event event) = 0;
 
 protected:
+	FileHandler* file;
 	DeviceType type;
 
 	map<DeviceKeyBinding, int> bindings;
+
+	//method for reading in the bindings
+	virtual void readBindings(string configLocation);
 };
