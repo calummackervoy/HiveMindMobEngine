@@ -20,16 +20,6 @@ public:
 	FileHandler(string source = "", bool read = true);
 	~FileHandler();
 
-	//TODO: main configuration file?
-	//static GameConfig readGameConfig(string fileLocation);
-
-	//methods for saving game data
-
-	//methods for loading game data?
-
-	//method for reading in a Wardrobe config file
-	static void readWardrobe(HatClothing** arr, string configLocation);
-
 	//opens a stream for reading (if true) & writing if false
 	void openStream(string source, bool read = true);
 	//closes active stream

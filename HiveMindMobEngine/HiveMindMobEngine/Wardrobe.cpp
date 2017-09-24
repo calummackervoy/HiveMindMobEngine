@@ -4,8 +4,9 @@ Wardrobe::Wardrobe(Renderer* r, string hatsLocation, string clothingLocation) {
     this->r = r;
 	hats = new HatClothing*[MAX_CLOTHING];
 	clothes = new HatClothing*[MAX_CLOTHING];
-    FileHandler::readWardrobe(hats, hatsLocation);
-	FileHandler::readWardrobe(clothes, clothingLocation);
+
+    readWardrobe(hats, hatsLocation);
+	readWardrobe(clothes, clothingLocation);
 }
 
 Wardrobe::~Wardrobe() {
@@ -57,4 +58,8 @@ Element* Wardrobe::convertToElement(HatClothing* hc) {
     ((sf::Sprite*)e->model)->setTexture(*e->texture);
 
     return e;
+}
+
+void Wardrobe::readWardrobe(HatClothing** arr, string configLocation) {
+	//TODO: read in all hats/clothing from config file
 }

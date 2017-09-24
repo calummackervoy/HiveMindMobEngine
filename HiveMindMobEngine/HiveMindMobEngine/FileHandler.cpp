@@ -12,14 +12,6 @@ FileHandler::~FileHandler() {
 	closeStream();
 }
 
-/*GameConfig FileHandler::readGameConfig(string fileLocation) {
-	return{};
-}*/
-
-void FileHandler::readWardrobe(HatClothing** arr, string configLocation) {
-	//TODO: read in all hats/clothing from config file
-}
-
 void FileHandler::openStream(string source, bool read) {
 	if (source == "") {
 		cout << "READING KEY BINDINGS: configlocation was empty" << std::endl;

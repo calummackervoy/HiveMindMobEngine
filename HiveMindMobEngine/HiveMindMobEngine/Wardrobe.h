@@ -31,4 +31,7 @@ private:
 
     //turn a HatClothing struct into an Element
     Element* convertToElement(HatClothing* hc);
+
+	//method for reading in a Wardrobe config file
+	static void readWardrobe(HatClothing** arr, string configLocation);
 };
