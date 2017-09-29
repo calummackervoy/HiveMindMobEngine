@@ -1,0 +1,9 @@
+35 0
+0
+0
+1 7
+1 9
+../../assets/sprites/characters/individual/1forwardwhite.png
+-1
+0
+1

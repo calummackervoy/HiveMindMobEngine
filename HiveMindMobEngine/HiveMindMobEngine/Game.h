@@ -2,6 +2,7 @@
 #include "Engine.h"
 #include "Menu.h"
 #include "World.h"
+#include "Character.h"
 
 //Author: Calum Mackervoy
 //Purpose: Manages the game as it runs
@@ -24,6 +25,10 @@ public:
     Game(Engine* e, GameConfig config = {});
 	~Game();
 
+	//TODO: static GameConfig readGameConfig(string fileLocation);
+	//TODO: methods for saving game data
+	//TODO: methods for loading game data
+
 	//method for running the game loop
 	void run();
 
@@ -42,4 +47,7 @@ protected:
 	void initWorld(GameConfig config = {});
 	//method for loading the world from a saved game
 	void loadWorld(string saveGame);
+
+	//NOTE: temporary testing environment before worlds are being generated
+	void setupTester();
 };

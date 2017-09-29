@@ -34,10 +34,11 @@ void Game::run() {
 				case MENU_ACTION_NONE:
 					break;
 				case MENU_WORLD_NEW:
-					//TODO: take to the world setup screen
+					//TODO: navigate to the world setup screen instead
 					cout << "new world being generated.." << std::endl;
 					e->getR()->clearAll();
 					mode = WORLD;
+					setupTester();
 					break;
 				case MENU_WORLD_LOAD:
 					//TODO: take to the world load screen
@@ -49,15 +50,40 @@ void Game::run() {
 			
 			break;
 		case DEVICE_PAUSE:
-			
 			break;
         }
     }
 }
 
+void Game::setupTester() {
+	//setup the map
+	//TODO: world map sits between Region
+	//TODO: not use default values for config
+	//Region* region = new Region(e->getRm(), 0);
+
+	//read test character from config file
+	Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
+
+	//set character tile position & place sprite here
+	//TODO: set this position according to a tile position in the map
+	c->getSpriteManager()->setPosition(sf::Vector2f(500,500));
+
+	//add the CSM to scene
+	e->getScene()->addSpriteManager(c->getSpriteManager());
+
+	//TODO: add a randomly generated character to the scene
+
+	//TODO: moving the char move to clickpos
+	//TODO: char switch between sprites depending on direction moving
+	//TODO: randomly generate another character alongside
+}
+
 void Game::initWorld(GameConfig config) {
 	//TODO: init a world & load that map into renderer
 	//world = new World(config.worldParams);
+
+	//NOTE: temporary world initialisation for testing
+
 }
 
 void Game::loadWorld(string saveGame) {
