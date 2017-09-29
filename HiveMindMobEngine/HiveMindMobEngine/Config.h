@@ -1,6 +1,6 @@
 #pragma once
 #include "Typedef.h"
-#include "Map.h"
+#include "Grid.h"
 #include "Organisation.h"
 #include "Culture.h"
 #include <string>
@@ -8,6 +8,12 @@
 #include <SFML\Graphics.hpp>
 
 using std::string;
+
+//parameters for the engine
+struct EngineConfig {
+	string hatsLocation;
+	string clothingLocation;
+};
 
 enum WealthGrowth : uint8_t {
 	DECLINE_RAPID,
@@ -27,7 +33,7 @@ enum MapType : uint8_t {
 };
 
 struct MapConfig {
-	
+	suint size = MAX_MAP_SIZE;
 };
 
 struct WorldParams {

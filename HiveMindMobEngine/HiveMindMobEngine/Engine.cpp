@@ -6,7 +6,7 @@ Engine::Engine(string configFileLocation) {
 }
 
 Engine::~Engine() {
-
+	shutdown();
 }
 
 void Engine::startup(string configFileLocation) {
@@ -16,11 +16,12 @@ void Engine::startup(string configFileLocation) {
 	audio = new Audio(rm);
 	p = new Physics();
 	r = new Renderer(rm);
-	scene = new SceneManager(rm);
 	io = new InputHandler(r, file);
 
 	//read in the configuration options
-	//setup = FileHandler::readGameConfig(configFileLocation);
+	readEngineConfig(configFileLocation);
+
+	scene = new SceneManager(rm, r, file, setup.hatsLocation, setup.clothingLocation);
 }
 
 DeviceResponse Engine::run() {
@@ -39,4 +40,16 @@ void Engine::shutdown() {
 	delete anim;
 	delete rm;
 	delete this;
+}
+
+void Engine::readEngineConfig(string configFileLocation) {
+	setup = {};
+
+	file->openStream(configFileLocation);
+
+	//config files that define hat & clothing list locations
+	setup.hatsLocation = file->getNextString();
+	setup.clothingLocation = file->getNextString();
+
+	file->closeStream();
 }

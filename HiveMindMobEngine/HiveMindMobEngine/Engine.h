@@ -22,12 +22,13 @@ public:
 	//accessing components externally
 	inline SceneManager* getScene() { return scene; };
 	inline ResourceManager* getRm() { return rm; };
+	inline FileHandler* getFile() { return file; };
 	inline Physics* getP() { return p; };
 	inline InputHandler* getIo() { return io; };
 	inline Renderer* getR() { return r; };
 	//inline GameState* getState() { return state; };
 	inline Animation* getAnim() { return anim; };
-	GameConfig getConfig() { return setup; };
+	EngineConfig getConfig() { return setup; };
 
 	//run iteration of core game components' loop
 	DeviceResponse run();
@@ -45,8 +46,11 @@ private:
 	Audio* audio;
 	Animation* anim;
 	Profiling profiler;
-	GameConfig setup;
+	EngineConfig setup;
 
 	//startup routine
 	void startup(string configFileLocation);
+
+	//reading engine config options
+	void readEngineConfig(string configFileLocation);
 };
