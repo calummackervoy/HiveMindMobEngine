@@ -28,17 +28,6 @@ ResourceManager::~ResourceManager() {
 	}
 }
 
-int ResourceManager::addSceneElem(Element* e) {
-	for (int i = 0; i < MAX_ELEMS; i++) {
-		if (scene[i] == NULL) {
-			scene[i] = e;
-			e->index = i;
-			return i;
-		}
-	}
-	return -1;
-}
-
 /*int ResourceManager::addHudElem(Element* e) {
 	for (int i = 0; i < MAX_ELEMS; i++) {
 		if (hud[i] == NULL) {
@@ -49,20 +38,6 @@ int ResourceManager::addSceneElem(Element* e) {
 	}
 	return -1;
 }*/
-
-void ResourceManager::removeSceneElem(int i) {
-	//bounds checking
-	if (i < 0 || i >= MAX_ELEMS) return;
-	if (!scene[i]) return;
-
-	delete scene[i]->model;
-	scene[i]->model = NULL;
-	delete scene[i]->texture;
-	scene[i]->texture = NULL;
-	delete scene[i];
-	scene[i] = NULL;
-
-}
 
 /*void ResourceManager::removeHudElem(int i) {
 	//bounds checking

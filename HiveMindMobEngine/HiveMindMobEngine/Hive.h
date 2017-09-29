@@ -12,6 +12,6 @@ public:
 	~Hive();
 
 private:
-	Character members[MAX_CHARACTERS];
+	Character* members[MAX_CHARACTERS];
 	AutonomyLevel level;
 };

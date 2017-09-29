@@ -8,7 +8,7 @@
 int main() {
 	//set up the engine
 	//passing the game's configuration file location
-	Engine* e = new Engine("../../assets/config/gameConfig.txt");
+	Engine* e = new Engine("../../assets/config/engineConfig.txt");
 
 	//set up the game
 	Game g(e);

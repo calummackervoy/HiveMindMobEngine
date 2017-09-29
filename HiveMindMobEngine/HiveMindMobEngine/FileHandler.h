@@ -5,6 +5,7 @@
 #include "Clothing.h"
 #include <iostream>
 #include <fstream>
+#include "Logger.h"
 
 //Author: Calum Mackervoy
 //Purpose: wrapper class for reading and writing operations

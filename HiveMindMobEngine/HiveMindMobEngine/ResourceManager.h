@@ -27,8 +27,28 @@ public:
 		if (i < 0 || i > MAX_ELEMS) throw std::exception("Index out of bounds");
 		return scene[i];
 	};
-	inline int addSceneElem(Element* e);
-	inline void removeSceneElem(int i);
+	inline int addSceneElem(Element* e) {
+		for (int i = 0; i < MAX_ELEMS; i++) {
+			if (scene[i] == NULL) {
+				scene[i] = e;
+				e->index = i;
+				return i;
+			}
+		}
+		return -1;
+	};
+	inline void removeSceneElem(int i) {
+		//bounds checking
+		if (i < 0 || i >= MAX_ELEMS) return;
+		if (!scene[i]) return;
+
+		delete scene[i]->model;
+		scene[i]->model = NULL;
+		delete scene[i]->texture;
+		scene[i]->texture = NULL;
+		delete scene[i];
+		scene[i] = NULL;
+	};
 
 	inline Element* getHudElem(int i) {
 		//bounds checking

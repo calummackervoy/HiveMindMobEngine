@@ -32,12 +32,20 @@ void FileHandler::closeStream() {
 }
 
 int FileHandler::getNextInt() {
+	if (file == NULL) {
+		Logger::logError("FileHandler", "asked for int without opening stream.. 0 returned");
+		return 0;
+	}
 	int temp;
 	(*file) >> temp;
 	return temp;
 }
 
 string FileHandler::getNextString() {
+	if (file == NULL) {
+		Logger::logError("FileHandler", "asked for string without opening stream.. '' returned");
+		return "";
+	}
 	string temp;
 	(*file) >> temp;
 	return temp;
