@@ -1,8 +1,8 @@
 #include "CharacterSpriteManager.h"
 
-CharacterSpriteManager::CharacterSpriteManager(ResourceManager* rm, Wardrobe* w, sf::Sprite* model,
-    sf::Texture* tex, managerType type, suint opaque, suint depth,
-    sf::Vector2f headCentre) : SpriteManager(model, tex, type, opaque, depth) {
+CharacterSpriteManager::CharacterSpriteManager(ResourceManager* rm, Wardrobe* w, sf::Texture* tex,
+	managerType type, suint opaque, suint depth,
+    sf::Vector2f headCentre) : SpriteManager(tex, type, opaque, depth) {
         expression = EMOTION_NEUTRAL;
         this->headCentre = headCentre;
         this->w = w;
@@ -15,8 +15,8 @@ CharacterSpriteManager::CharacterSpriteManager(ResourceManager* rm, Wardrobe* w,
         clothing = temp.clothing;
 
         //bodyCentre half of the model size
-        bodyCentre.x = ((sf::Sprite*)model)->getGlobalBounds().height * 0.5;
-        bodyCentre.y = ((sf::Sprite*)model)->getGlobalBounds().width * 0.5;
+        bodyCentre.x = ((sf::Sprite*)element->model)->getGlobalBounds().height * 0.5;
+        bodyCentre.y = ((sf::Sprite*)element->model)->getGlobalBounds().width * 0.5;
 
         am = new AnimationManager(rm);
         //TODO: read animations from config file & add each to AM.. read all of class from config maybs?

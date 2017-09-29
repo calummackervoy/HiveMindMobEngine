@@ -16,11 +16,11 @@ enum CharacterAnimations : uint8_t {
     RUN
 };
 
-class CharacterSpriteManager : SpriteManager {
+class CharacterSpriteManager : public SpriteManager {
 public:
     //TODO: meaningful default value for headCentre
-    CharacterSpriteManager(ResourceManager* rm, Wardrobe* w, sf::Sprite* model = NULL,
-        sf::Texture* tex = NULL, managerType type = MANAGER_CHARACTER, suint opaque = 100, suint depth = 0,
+    CharacterSpriteManager(ResourceManager* rm, Wardrobe* w, sf::Texture* tex,
+		managerType type = MANAGER_CHARACTER, suint opaque = 100, suint depth = 0,
         sf::Vector2f headCentre = sf::Vector2f(50,50));
     ~CharacterSpriteManager();
 

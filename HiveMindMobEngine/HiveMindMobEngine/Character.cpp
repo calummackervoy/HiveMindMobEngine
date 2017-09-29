@@ -1,58 +1,143 @@
 #include "Character.h"
 
-Character::Character() {
-    //TODO: initialise cultures to NULL (in a general-purpose auxillary function?)
-
-	generateResolve(); //generate the resolve value
-}
-
-Character::Character(int seed) {
+Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed) {
+	this->file = file;
     this->seed = seed;
 
-	generateResolve(seed); //generate the resolve value using seed
+	bodyTex = NULL;
+	spriteManager = NULL;
+
+	generateCharacter(r, rm, w);
 }
 
-Character::Character(CharacterSave save) {
+Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, string fileLocation) {
+	this->file = file;
 
+	spriteManager = NULL;
+	bodyTex = NULL;
+
+	readCharacterSave(r, rm, w, fileLocation);
 }
 
 Character::~Character() {
-    delete spriteManager;
+	clear();
 }
 
-//TODO
-CharacterSave Character::save() {
-	return{};
+void Character::clear() {
+	delete spriteManager;
+	delete bodyTex;
+}
+
+void Character::generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w) {
+	//make sure no memory will be leaked
+	clear();
+
+	//initialise sprite manager & give random clothing
+	spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(DEF_CHAR_SKIN));
+
+	//TODO: initialise cultures to NULL (in a general-purpose auxillary function?)
+
+	generateResolve(seed); //generate the resolve value using seed
+
+	//TODO: FINISH ME
+}
+
+void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, string fileLocation) {
+	//make sure no memory will be leaked
+	clear();
+
+	file->openStream(fileLocation);
+
+	age = (uint8_t)file->getNextInt();
+	gender = (Gender)file->getNextInt();
+
+	//stores how many of a trait type a character has
+	int count;
+
+	//one loop for each storage of traits
+	//mental
+	count = file->getNextInt();
+	for (int i = 0; i < std::min(count, (int)MAX_TRAITS); i++) {
+		mentalTraits[i] = (Trait)file->getNextInt();
+	}
+	//injury
+	count = file->getNextInt();
+	for (int i = 0; i < std::min(count, (int)MAX_TRAITS); i++) {
+		injuryTraits[i] = (Trait)file->getNextInt();
+	}
+	//personality
+	count = file->getNextInt();
+	for (int i = 0; i < std::max(count, (int)MAX_TRAITS); i++) {
+		personTraits[i] = (Trait)file->getNextInt();
+	}
+	//vulnerability
+	count = file->getNextInt();
+	for (int i = 0; i < std::max(count, (int)MAX_TRAITS); i++) {
+		vulnTraits[i] = (Trait)file->getNextInt();
+	}
+
+	//TODO: copy skills, groups and cultures across
+
+	//initialise a SpriteManager from the save
+	string nextString = file->getNextString();
+	if (nextString != "") {
+		spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(nextString));
+		bodyTex = new string(nextString);
+	}
+	else {
+		spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(DEF_CHAR_SKIN));
+		bodyTex = NULL;
+	}
+
+	//initialise a hat too if instructed
+	count = file->getNextInt();
+	if (count >= 0) {
+		spriteManager->setHat(w->getHatAt(count));
+		hatIndex = count;
+	}
+	else hatIndex = -1;
+
+	//..and clothing
+	count = file->getNextInt();
+	if (count >= 0) {
+		spriteManager->setClothing(w->getClothingAt(count));
+		clothingIndex = count;
+	}
+	else clothingIndex = -1;
+
+	//finally read the seed value
+	seed = file->getNextInt();
+
+	file->closeStream();
+
+	//generate resolve
+	generateResolve(seed);
+}
+
+void Character::save() {
+	//TODO
 }
 
 Trait Character::getTraitAt(TraitType type, int i) {
-    if(i < 0 || i > MAX_TRAITS) throw std::exception("Index out of bounds");
+	//bounds checking
+	if (i < 0 || i > MAX_TRAITS) {
+		Logger::logError("Character", "i param to getTraitAt was out of bounds");
+		return TRAIT_NULL;
+	}
+
 	switch (type) {
 	case TRAIT_TYPE_MENTAL:
 		return mentalTraits[i];
-
 	case TRAIT_TYPE_INJURY:
 		return injuryTraits[i];
-
 	case TRAIT_TYPE_PERSONALITY:
 		return personTraits[i];
-
 	case TRAIT_TYPE_VULNERABILITY:
 		return vulnTraits[i];
-
-	default:
-		return TRAIT_NULL;
 	}
-}
 
-Skill Character::getSkillAt(int i) {
-    if(i < 0 || i > MAX_SKILLS) throw std::exception("Index out of bounds");
-    return skills[i];
-}
-
-suint Character::getCultureAt(int i) {
-    if(i < 0 || i > MAX_CULTURESPP) throw std::exception("Index out of bounds");
-    return cultures[i] - 1;
+	Logger::logError("Character", "TraitType passed to getTraitAt which was not handled");
+	return TRAIT_NULL;
 }
 
 int Character::addTrait(TraitType type, Trait t) {

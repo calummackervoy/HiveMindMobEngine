@@ -1,4 +1,6 @@
 #pragma once
+#include <algorithm>
+#include "FileHandler.h"
 #include "Tools.h"
 #include "rand.h"
 #include "Skill.h"
@@ -6,72 +8,33 @@
 #include "CharacterSpriteManager.h"
 #include "Gender.h"
 #include "Culture.h"
-#include "Save.h"
 #include "Emotion.h"
 #include "Hack.h"
-
-//TODO: disabilities?
-enum Trait : uint8_t {
-	TRAIT_NULL,
-
-	//mental conditions
-	//TRAIT_MENTAL_PSYCOPATHIC,
-	TRAIT_MENTAL_DEPRESSION,
-	TRAIT_MENTAL_ANXIETY,
-	TRAIT_MENTAL_AUTISM,
-	TRAIT_MENTAL_PTSD,
-	//TRAIT_MENTAL_NAPOLEON,
-	//TRAIT_MENTAL_ANGER,
-	//TRAIT_MENTAL_ADDICTION, //TODO: how to specify what?
-	//TRAIT_MENTAL_MESSIAH,
-	//TRAIT_MENTAL_NARCASSIST,
-
-	//injury / imparement
-	TRAIT_INJURY_MEMORY,
-	//TRAIT_INJURY_MOVEMENT,
-	//TRAIT_INJURY_JUDGEMENT,
-	//TRAIT_INJURY_WEAKNESS,
-	//TRAIT_INJURY_DISTRACTION,
-
-	//personality
-	TRAIT_PERSON_AGGRESSIVE,
-	//TRAIT_PERSON_SYMPATHETIC,
-	//TRAIT_PERSON_RUDE,
-	//TRAIT_PERSON_JUDGEMENTAL,
-	//TRAIT_PERSON_GOAT,
-	TRAIT_PERSON_BRAVE,
-	TRAIT_PERSON_COWARD,
-
-	//vulnerabilities
-	TRAIT_VULN_BLACKMAIL,
-	TRAIT_VULN_COERCE,
-	TRAIT_VULN_BRIBE
-};
-enum TraitType : uint8_t {
-	TRAIT_TYPE_NULL,
-	TRAIT_TYPE_MENTAL,
-	TRAIT_TYPE_INJURY,
-	TRAIT_TYPE_PERSONALITY,
-	TRAIT_TYPE_VULNERABILITY
-};
+#include "Trait.h"
 
 const uint8_t MAX_TRAITS = 8;
 const uint8_t MAX_SKILLS = 16;
+const string DEF_CHAR_SKIN = "../../assets/sprites/characters/individual/1forwardwhite.png";
 
+//TODO: store config location
 class Character {
 public:
-	Character();
 	//procedurally generate a character
-	Character(int seed);
+	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed = -1);
 	//load a saved character
-	Character(CharacterSave save);
+	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, string fileLocation);
 	~Character();
 
+	//TODO: reset a character (or initialise) by a generated seed
+	void generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w);
+	//reset a character (or initialise) according to a saved one
+	void readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, string fileLocation);
+
 	//save a character
-	CharacterSave save();
+	void save();
 
 	uint getSeed() {return seed;};
-	inline uint getHomeRegion() {return homeRegion;};
+	//inline uint getHomeRegion() {return homeRegion;};
 	//inline uint8_t getLevel() {return level;};
 	inline uint8_t getAge() {return age;};
 	inline CharacterSpriteManager* getSpriteManager() {return spriteManager;};
@@ -82,18 +45,29 @@ public:
 	inline void setGender(Gender val) {gender = val;};
 	inline void setExpression(Emotion e) {spriteManager->setExpression(e);};
 
-	inline Trait getTraitAt(TraitType type, int i);
-	inline Skill getSkillAt(int i);
-	inline suint getCultureAt(int i);
-	inline int addTrait(TraitType type, Trait t);
-	inline int addSkill(Skill s);
-	inline int addCulture(suint c);
-	inline void removeTrait(TraitType type, int i);
-	inline void removeSkill(int i);
-	inline void removeCulture(int i);
+	Trait getTraitAt(TraitType type, int i);
+	inline Skill getSkillAt(int i) {
+		if (i < 0 || i > MAX_SKILLS) throw std::exception("Index out of bounds");
+		return skills[i];
+	}
+	inline suint getCultureAt(int i) {
+		if (i < 0 || i > MAX_CULTURESPP) throw std::exception("Index out of bounds");
+		return cultures[i] - 1;
+	}
+	int addTrait(TraitType type, Trait t);
+	int addSkill(Skill s);
+	int addCulture(suint c);
+	void removeTrait(TraitType type, int i);
+	void removeSkill(int i);
+	void removeCulture(int i);
 
 	//function to check whether has a certain trait
 	bool hasTrait(Trait t, TraitType type);
+	//TODO: hasSkill?
+	//TODO: hasCulture?
+
+	//function to generate a new resolve value
+	void generateResolve(int seed = -1);
 
 	//hacking.. (high level part)
 	ExploitResponse exploit(SocialEngineeringAction action,
@@ -107,19 +81,27 @@ protected:
 	Trait injuryTraits[MAX_TRAITS];
 	Trait personTraits[MAX_TRAITS]; //personality
 	Trait vulnTraits[MAX_TRAITS]; //vulnerabilities (social engineering)
+	FileHandler* file;
 	suint resolve;
 
 	//TODO: pointers for below?
 	Skill skills[MAX_SKILLS];
 	Group groups[MAX_GROUPSPP];
 	suint cultures[MAX_CULTURESPP]; //points to index in world state array
+
+	//TODO
+	//string* saveLocation; //location on disk the character is to be saved in
+	//storage of body, hat & clothing textures
+	string* bodyTex;
+	int hatIndex;
+	int clothingIndex;
 	CharacterSpriteManager* spriteManager;
 	uint seed; //TODO: maintaining consistent state?
-	uint homeRegion;
+	//uint homeRegion;
 	//uint8_t level;
 	Gender gender;
 	uint8_t age;
 
-	//internal function to generate a resolve
-	void generateResolve(int seed = -1);
+	//utility function to clear a character's memory
+	void clear();
 };
