@@ -1,12 +1,19 @@
 #include "Wardrobe.h"
 
-Wardrobe::Wardrobe(Renderer* r, string hatsLocation, string clothingLocation) {
+Wardrobe::Wardrobe(Renderer* r, FileHandler* file, string hatsLocation, string clothingLocation) {
     this->r = r;
+	this->file = file;
 	hats = new HatClothing*[MAX_CLOTHING];
 	clothes = new HatClothing*[MAX_CLOTHING];
+	
+	//initialise both to null
+	for (int i = 0; i < MAX_CLOTHING; i++) {
+		hats[i] = NULL;
+		clothes[i] = NULL;
+	}
 
-    readWardrobe(hats, hatsLocation);
-	readWardrobe(clothes, clothingLocation);
+    readWardrobe(true, hatsLocation);
+	readWardrobe(false, clothingLocation);
 }
 
 Wardrobe::~Wardrobe() {
@@ -24,18 +31,24 @@ HatClothingPair Wardrobe::getRandom(bool hat, CharacterClass charClass,
 
         for(int i = 0; i < MAX_CLOTHING; i++) {
             if(hat) {
-                if(hats[i]->charClass == charClass &&
-                    hats[i]->style == style) {
-                        hatPool[hatCount] = i;
-                        hatCount++;
+                if(hats[i] != NULL &&
+					hats[i]->charClass == charClass &&
+					hats[i]->style == style) {
+                       hatPool[hatCount] = i;
+                       hatCount++;
                 }
             }
-            if(clothes[i]->charClass == charClass &&
+            if(clothes[i] != NULL &&
+				clothes[i]->charClass == charClass &&
                     clothes[i]->style == style) {
-                        clothingPool[clothingCount] = i;
-                        clothingCount++;
+                       clothingPool[clothingCount] = i;
+                       clothingCount++;
             }
         }
+
+		//check for empty hat/clothing
+		if (hat && hatCount == 0) return {};
+		if (clothingCount == 0) return {};
 
         //randomly choose a pair from the pools
         //recycling count as the selected from now
@@ -60,6 +73,29 @@ Element* Wardrobe::convertToElement(HatClothing* hc) {
     return e;
 }
 
-void Wardrobe::readWardrobe(HatClothing** arr, string configLocation) {
-	//TODO: read in all hats/clothing from config file
+void Wardrobe::readWardrobe(bool hats, string configLocation) {
+	file->openStream(configLocation);
+
+	//obtain how many hats/clothes there are to read (& bounds check)
+	int count = std::min(file->getNextInt(), (int)MAX_CLOTHING);
+
+	string textureLocation = "";
+	suint id = 0; //TODO: this is as-yet unused
+	CharacterClass charClass = MALE_AVERAGE;
+	ClothingStyle style = CLOTHING_EVERYDAY;
+
+	for (int i = 0; i < count; i++) {
+		//start building a new HatClothing object for the item
+		HatClothing* hc = new HatClothing;
+
+		//read in the details
+		hc->textureLocation = file->getNextString();
+		//TODO: hc->charClass = (CharacterClass)file->getNextInt();
+		//TODO: hc->style = (ClothingStyle)file->getNextInt();
+
+		if (hats) this->hats[i] = hc;
+		else clothes[i] = hc;
+	}
+
+	file->closeStream();
 }

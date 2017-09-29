@@ -16,7 +16,8 @@ const int MAX_SCENE_ELEMS = 64;
 
 class SceneManager {
 public:
-	SceneManager(ResourceManager* rm);
+	SceneManager(ResourceManager* rm, Renderer* r, FileHandler* file,
+		string hatsLocation, string clothingLocation);
 	~SceneManager();
 
 	inline SpriteManager* getSpriteManager(int i) {
@@ -24,13 +25,32 @@ public:
 		if (i < 0 || i > MAX_SCENE_ELEMS) Logger::logError("SceneManager", "Index out of bounds getSpriteManager");
 		return scene[i];
 	};
-	inline int addSpriteManager(SpriteManager* e);
-	inline void removeSpriteManager(int i);
+	inline int addSpriteManager(SpriteManager* e) {
+		for (int i = 0; i < MAX_SCENE_ELEMS; i++) {
+			if (scene[i] == NULL) {
+				scene[i] = e;
+				e->setIndex(i);
+				return i;
+			}
+		}
+		return -1;
+	}
+	inline void removeSpriteManager(int i) {
+		//bounds checking
+		if (i < 0 || i >= MAX_SCENE_ELEMS) return;
+		if (!scene[i]) return;
+
+		delete scene[i];
+		scene[i] = NULL;
+	}
+
+	Wardrobe* getWardrobe() { return wardrobe; };
 
 protected:
 	SpriteManager* scene[MAX_SCENE_ELEMS];
 	ResourceManager* rm;
-	Camera* camera;
+	Camera* camera; //TODO: for moving view of the map around
+	Wardrobe* wardrobe;
 	suint focusIndex;
 	suint size;
 };

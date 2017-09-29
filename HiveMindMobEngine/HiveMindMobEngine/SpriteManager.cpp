@@ -1,9 +1,9 @@
 #include "SpriteManager.h"
 
-SpriteManager::SpriteManager(sf::Sprite* model, sf::Texture* tex, managerType type,
+SpriteManager::SpriteManager(sf::Texture* tex, managerType type,
 	suint opaque, suint depth) {
 	element = new Element;
-	element->model = model;
+	element->model = new sf::Sprite(*tex);
 	element->texture = tex;
 	element->index = -1;
 	this->type = type;

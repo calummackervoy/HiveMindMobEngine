@@ -16,7 +16,7 @@ enum managerType : uint8_t {
 
 class SpriteManager {
 public:
-	SpriteManager(sf::Sprite* model = NULL, sf::Texture* tex = NULL, managerType type = MANAGER_BASE,
+	SpriteManager(sf::Texture* tex = NULL, managerType type = MANAGER_BASE,
 		suint opaque = 100, suint depth = 0);
 	~SpriteManager();
 

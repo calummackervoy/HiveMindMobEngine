@@ -1,4 +1,5 @@
 #pragma once
+#include <algorithm>
 #include "Renderer.h"
 #include "FileHandler.h"
 #include "Clothing.h"
@@ -17,15 +18,26 @@ struct HatClothingPair {
 
 class Wardrobe {
 public:
-    Wardrobe(Renderer* r, string hatsLocation, string clothingLocation);
+    Wardrobe(Renderer* r, FileHandler* file, string hatsLocation, string clothingLocation);
     ~Wardrobe();
 
     //select a random hat/clothing from params
     HatClothingPair getRandom(bool hat = true, CharacterClass charClass = MALE_AVERAGE,
         ClothingStyle style = CLOTHING_EVERYDAY);
 
+	inline Element* getHatAt(int i) {
+		if (i < 0 || i > MAX_CLOTHING) return NULL;
+		return convertToElement(hats[i]);
+	}
+
+	inline Element* getClothingAt(int i) {
+		if (i < 0 || i > MAX_CLOTHING) return NULL;
+		return convertToElement(clothes[i]);
+	}
+
 private:
     Renderer* r;
+	FileHandler* file;
     HatClothing** hats;
     HatClothing** clothes;
 
@@ -33,5 +45,5 @@ private:
     Element* convertToElement(HatClothing* hc);
 
 	//method for reading in a Wardrobe config file
-	static void readWardrobe(HatClothing** arr, string configLocation);
+	void readWardrobe(bool hats, string configLocation);
 };
