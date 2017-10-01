@@ -3,6 +3,10 @@
 #include "Terrain.h"
 
 const suint TILE_SIZE = 20;
+//magic number- gets around 20 pixels being less on the x axis than the y for some reason
+const suint X_FACTOR = 5;
+const suint MAX_MAP_SIZE = 20;
+const float MAP_ROTATION = 20.0f;
 
 enum TileType : uint8_t {
 	SPECIFIC_TILE,
@@ -18,11 +22,12 @@ struct Tile {
 };
 
 struct SpecificTile : Tile {
+	suint x = TILE_SIZE * 0.5;
+	suint y = TILE_SIZE * 0.5;
 	TerrainGraphic terrainGraphic = DEFAULT;
 	Terrain terrain = FLAT_GROUND;
 	uint8_t level = 0;
 	bool freeRunnable = false;
-	
 };
 
 struct RegionTile : Tile {
@@ -48,7 +53,7 @@ struct RegionSpaceTile : Tile {
 typedef struct Grid {
 	suint width = 0;
 	suint height = 0;
-	Tile* grid[MAX_WIDTH][MAX_HEIGHT];
+	Tile* grid[MAX_MAP_SIZE][MAX_MAP_SIZE];
 };
 
 typedef struct RegularGrid : Grid {

@@ -1,10 +1,10 @@
 #include "MapWorld.h"
 
-MapWorld::MapWorld(string mapLocation) : Map() {
+MapWorld::MapWorld(string mapLocation, suint size) : Map(size) {
     
 }
 
-MapWorld::MapWorld(WorldParams config) : Map() {
+MapWorld::MapWorld(WorldParams config, suint size) : Map(size) {
 	params = config;
 
 	//figure out size big enough for the regions
@@ -105,4 +105,8 @@ void MapWorld::generateRegionGeography() {
 
 		//choices
 	}
+}
+
+Grid* MapWorld::readMap(string mapLocation) {
+	return {};
 }

@@ -11,9 +11,9 @@ const suint MAX_REGIONS = 32;
 
 class MapWorld : Map {
 public:
-	MapWorld(string mapLocation);
+	MapWorld(string mapLocation, suint size = TILE_SIZE);
 	//generate a map
-	MapWorld(WorldParams config = {});
+	MapWorld(WorldParams config = {}, suint size = TILE_SIZE);
 	~MapWorld();
 
 	//returns the actual region pointer
@@ -39,4 +39,7 @@ private:
 	//TODO: replace with planet generation
 	void generateRegionStructure();
 	void generateRegionGeography();
+
+	static Grid* readMap(string mapLocation);
+
 };

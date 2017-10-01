@@ -35,9 +35,9 @@ struct RegionConfigRand {
 
 class Region {
 public:
-	Region(int id, RegionConfig config = {});
+	Region(ResourceManager* rm, int id, RegionConfig config = {});
 	//procedurally generate a region from spec
-	Region(int id, int seed, RegionConfigRand config = {});
+	Region(ResourceManager* rm, int id, int seed, RegionConfigRand config = {});
 	~Region();
 
 	inline uint getId() {return id;};

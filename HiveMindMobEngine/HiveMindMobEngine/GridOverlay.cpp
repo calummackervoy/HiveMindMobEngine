@@ -45,14 +45,14 @@ void GridOverlay::drawLine(bool xAxis, int index) {
 	}
 
 	//rotate
-	if(xAxis) linea->rotate(160);
+	if(xAxis) linea->rotate(180.0f - MAP_ROTATION);
 	else {
-		linea->rotate(20);
-		lineb->rotate(20);
+		linea->rotate(MAP_ROTATION);
+		lineb->rotate(MAP_ROTATION);
 	}
 
 	//change position based on increment
-	if(xAxis) linea->setPosition(sf::Vector2f(((TILE_SIZE * 5) * index), 0.0f)); //extra movement to counter weird error
+	if(xAxis) linea->setPosition(sf::Vector2f(((TILE_SIZE * X_FACTOR) * index), 0.0f)); //X_FACTOR to counter weird error
 	else {
 		linea->setPosition(sf::Vector2f(0.0f, (TILE_SIZE * index)));
 		lineb->setPosition(sf::Vector2f(0.0f, -(TILE_SIZE * index)));

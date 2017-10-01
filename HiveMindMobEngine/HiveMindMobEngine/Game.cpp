@@ -59,17 +59,17 @@ void Game::setupTester() {
 	//setup the map
 	//TODO: world map sits between Region
 	//TODO: not use default values for config
-	//Region* region = new Region(e->getRm(), 0);
+	Region* region = new Region(e->getRm(), 0);
 
 	//read test character from config file
-	Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
+	//Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
 
 	//set character tile position & place sprite here
 	//TODO: set this position according to a tile position in the map
-	c->getSpriteManager()->setPosition(sf::Vector2f(500,500));
+	//c->getSpriteManager()->setPosition(sf::Vector2f(500,500));
 
 	//add the CSM to scene
-	e->getScene()->addSpriteManager(c->getSpriteManager());
+	//e->getScene()->addSpriteManager(c->getSpriteManager());
 
 	//TODO: add a randomly generated character to the scene
 

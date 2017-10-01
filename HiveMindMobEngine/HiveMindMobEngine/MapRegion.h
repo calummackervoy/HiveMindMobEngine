@@ -6,10 +6,14 @@
 
 class MapRegion : Map {
 public:
-	MapRegion(string mapLocation);
+	MapRegion(ResourceManager* rm, string mapLocation, suint size = MAX_MAP_SIZE);
 	//generate a map
-	MapRegion(MapConfig config = {});
+	MapRegion(ResourceManager* rm, MapConfig config = {});
 	~MapRegion();
 
 private:
+	ResourceManager* rm;
+	bool DEBUG_MODE;
+
+	static Grid* readMap(string mapLocation);
 };

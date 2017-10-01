@@ -1,9 +1,8 @@
 #pragma once
-#include "Config.h"
+#include "ResourceManager.h"
 #include "RendererConfig.h"
 #include "FileHandler.h"
 #include "Terrain.h"
-#include "Grid.h"
 #include <string>
 
 //Author: Calum Mackervoy
@@ -13,7 +12,7 @@ using std::string;
 
 class Map {
 public:
-	Map();
+	Map(suint size);
 	~Map();
 
 	/*inline Tile getTerrainAt(int x, int y) {
@@ -31,4 +30,5 @@ public:
 protected:
 	//MapType mapType;
 	Grid* map;
+	suint size;
 };
