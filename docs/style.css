@@ -1,0 +1,106 @@
+
+/*fonts*/
+
+body {
+  /*background-color: #6E6D70;*/
+  padding-top:20px;
+}
+
+#container {
+  min-width: 450px; /*ensure the width of the container isn't smaller than 450px*/
+  max-width: 960px; /*ensure the width of the container isn't greater than 960px*/
+  margin: auto;
+  font-size: 26px;
+}
+
+.bloc {
+  border-radius: 20px;
+  background-color: #93C178;
+}
+
+.mini-bloc {
+  width: 80%;
+  margin-left: 10%;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  padding: 20px;
+  padding-right: 40px;
+  background-color: #93C178;
+  float: left;
+}
+
+.mini-bloc p {
+  padding-left: 10%;
+}
+
+p {
+  /*TODO: fonts*/
+}
+
+/*ruling for links in the navigation bar*/
+a {
+  text-decoration: none;
+  color: #523e7c;
+}
+/*change the colour of the navbar options when hovered over*/
+a:hover{
+  color: #8773B3;
+}
+
+.display-block {
+  display: block;
+}
+
+.right-align {
+  text-align: right;
+}
+
+#navbar {
+  background-color: #93C178;
+  text-align: center;
+}
+
+#navbar ul {
+  list-style: none;
+  padding-top: 10px;
+}
+
+#navbar ul li {
+  display: inline; /*display the elements on one line*/
+  margin-right: 40px; /*ensure the elements are clearly separate*/
+  padding: 5px;
+  border-radius: 3px;
+}
+
+.subsection {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.subsection p {
+  padding-left: 10%;
+}
+
+/*Projects.html only*/
+.proj-type {
+  color: #53584c;
+}
+
+/*Headers and ting*/
+
+.main-header {
+  font-family: 'Exo', sans-serif;
+  font-size: 72px;
+}
+
+h2 {
+  font-family: 'Exo', sans-serif;
+  font-size: 36px;
+  padding-left: 10%;
+}
+
+h3 {
+  font-family: 'Exo', sans-serif;
+  font-size: 24px;
+  padding-left: 10%;
+}
