@@ -1,9 +1,15 @@
 
 /*fonts*/
+/*font-family: 'Abel', sans-serif;*/
+
+header {
+  font-family: 'Abel', sans-serif;
+}
 
 body {
   /*background-color: #6E6D70;*/
   padding-top:20px;
+  font-family: 'Abel', sans-serif;
 }
 
 #container {
@@ -33,10 +39,6 @@ body {
   padding-left: 10%;
 }
 
-p {
-  /*TODO: fonts*/
-}
-
 /*ruling for links in the navigation bar*/
 a {
   text-decoration: none;
@@ -49,6 +51,10 @@ a:hover{
 
 .display-block {
   display: block;
+}
+
+.centre-align {
+  text-align: center;
 }
 
 .right-align {
@@ -112,18 +118,15 @@ a:hover{
 /*Headers and ting*/
 
 .main-header {
-  font-family: 'Exo', sans-serif;
   font-size: 72px;
 }
 
 h2 {
-  font-family: 'Exo', sans-serif;
   font-size: 36px;
   padding-left: 10%;
 }
 
 h3 {
-  font-family: 'Exo', sans-serif;
   font-size: 24px;
   padding-left: 10%;
 }
