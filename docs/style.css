@@ -76,6 +76,23 @@ a:hover{
   border-radius: 3px;
 }
 
+.contents {
+  margin-left: 10%;
+}
+
+.contents ul {
+  list-style: none;
+}
+
+.contents ul li {
+  font-size: 24px;
+  margin-top: 10px;
+}
+
+.subcontents {
+  margin-left: 1%;
+}
+
 .subsection {
   margin-top: 20px;
   margin-bottom: 20px;
