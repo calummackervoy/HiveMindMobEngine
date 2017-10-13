@@ -4,25 +4,23 @@
 class TileSprite : public sf::Sprite
 {
 public:
-	TileSprite();
-	TileSprite(const sf::Image &image, const sf::Vector2f &position = sf::Vector2f(0, 0),
-		const sf::Vector2f &scale = sf::Vector2f(1, 1), float rotation = 0.f, const sf::Color &color = sf::Color(255, 255, 255, 255));
+	TileSprite(bool useLighting = true, sf::Vector2i worldPos = sf::Vector2i(0,0), int z = 0);
 	~TileSprite();
 
-	void SetWorldPosition(float x, float y);
-	void SetWorldPosition(const sf::Vector2f &position);
-	sf::Vector2f GetWorldPosition() const;
+	void setWorldPosition(int x, int y);
+	void setWorldPosition(const sf::Vector2i &position);
+	sf::Vector2i getWorldPosition() const;
 
-	void SetWorldZ(float z);
-	float GetWorldZ() { return m_z; }
+	void setWorldZ(int z);
+	int getWorldZ() { return z; }
 
-	void setUseLighting(bool use) { m_uselighting = use; }
-	bool getUseLighting() { return m_uselighting; }
+	void setUseLighting(bool use) { lighting = use; }
+	bool getUseLighting() { return lighting; }
 	
 protected:
-	sf::Vector2f m_worldpos;
-	float m_z;
-	bool m_uselighting;
+	sf::Vector2i worldpos;
+	int z;
+	bool lighting;
 
 	//functions for converting between world space co-ords and view space co-ords
 	// ScreenX = 2*WorldX - 2*WorldY
