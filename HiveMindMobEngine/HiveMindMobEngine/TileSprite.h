@@ -18,9 +18,22 @@ public:
 
 	void setUseLighting(bool use) { m_uselighting = use; }
 	bool getUseLighting() { return m_uselighting; }
-
+	
 protected:
 	sf::Vector2f m_worldpos;
 	float m_z;
 	bool m_uselighting;
+
+	//functions for converting between world space co-ords and view space co-ords
+	// ScreenX = 2*WorldX - 2*WorldY
+	// ScreenY = WorldX + WorldY
+	inline sf::Vector2f worldToScreen(sf::Vector2f v) {
+		return sf::Vector2f(2.0f*v.x - 2.0f*v.y, v.x + v.y);
+	}
+
+	// WorldX = (ScreenX + 2*ScreenY)/4
+	// WorldY = (2*ScreenY - ScreenX)/4
+	inline sf::Vector2f screenToWorld(sf::Vector2f v) {
+		return sf::Vector2f((v.x + 2.0f*v.y) / 4.0f, (2.0f*v.y - v.x) / 4.0f);
+	}
 };
