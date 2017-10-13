@@ -4,12 +4,12 @@
 class TileSprite : public sf::Sprite
 {
 public:
-	TileSprite(bool useLighting = true, sf::Vector2i worldPos = sf::Vector2i(0,0), int z = 0);
+	TileSprite(bool useLighting = true, sf::Vector2f worldPos = sf::Vector2f(0.0f,0.0f), int z = 0);
 	~TileSprite();
 
-	void setWorldPosition(int x, int y);
-	void setWorldPosition(const sf::Vector2i &position);
-	sf::Vector2i getWorldPosition() const;
+	void setWorldPosition(float x, float y);
+	void setWorldPosition(const sf::Vector2f &position);
+	sf::Vector2f getWorldPosition() const;
 
 	void setWorldZ(int z);
 	int getWorldZ() { return z; }
@@ -18,7 +18,7 @@ public:
 	bool getUseLighting() { return lighting; }
 	
 protected:
-	sf::Vector2i worldpos;
+	sf::Vector2f worldpos;
 	int z;
 	bool lighting;
 
