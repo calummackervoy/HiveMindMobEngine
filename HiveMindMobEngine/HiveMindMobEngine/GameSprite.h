@@ -1,22 +1,22 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 
-class TileSprite : public sf::Sprite
+class GameSprite : public sf::Sprite
 {
 public:
-	TileSprite(bool useLighting = true, sf::Vector2f worldPos = sf::Vector2f(0.0f,0.0f), int z = 0);
-	~TileSprite();
+	GameSprite(bool useLighting = true, sf::Vector2f worldPos = sf::Vector2f(0.0f, 0.0f), int z = 0);
+	~GameSprite();
 
 	void setWorldPosition(float x, float y);
 	void setWorldPosition(const sf::Vector2f &position);
-	sf::Vector2f getWorldPosition() const;
+	inline sf::Vector2f getWorldPosition() const { return worldpos; };
 
 	void setWorldZ(int z);
 	int getWorldZ() { return z; }
 
 	void setUseLighting(bool use) { lighting = use; }
 	bool getUseLighting() { return lighting; }
-	
+
 protected:
 	sf::Vector2f worldpos;
 	int z;
