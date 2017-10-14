@@ -10,12 +10,24 @@ const suint MAX_TILE_OCCUPANTS = 4;
 class Tile
 {
 public:
-	Tile();
+	Tile(Terrain ter= FLAT_GROUND, TerrainGraphic floorTex = FLOOR_DEFAULT);
 	~Tile();
 
 	//sprite occupancy of the tile
-	bool insertSprite(GameSprite* s);
-	void removeSprite(GameSprite* s);
+	inline bool insertSprite(GameSprite* s) {
+		for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+			if (occupants[i] == NULL) {
+				occupants[i] = s;
+				return true;
+			}
+		}
+		return false;
+	};
+	inline void removeSprite(int i) {
+		//bounds checking
+		if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+		occupants[i] = NULL;
+	};
 	void clear();
 
 	//getters
