@@ -4,7 +4,7 @@
 #include "GameSprite.h"
 #include "Logger.h"
 
-const suint TILE_SIZE = 20;
+const suint TILE_SIZE = 64;
 const suint MAX_TILE_OCCUPANTS = 4;
 
 class Tile

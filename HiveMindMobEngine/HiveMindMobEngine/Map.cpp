@@ -9,3 +9,7 @@ Map::Map(suint size) {
 Map::~Map() {
 	delete map;
 }
+
+sf::Vector2i Map::convertToTile(sf::Vector2f pos) {
+	return sf::Vector2i(floor(pos.x / TILE_SIZE), floor(pos.y / TILE_SIZE));
+}
