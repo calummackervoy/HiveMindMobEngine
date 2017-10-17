@@ -1,5 +1,6 @@
 #pragma once
 #include "Renderer.h"
+#include "ResourceManager.h"
 #include "Typedef.h"
 #include "Terrain.h"
 #include "GameSprite.h"
@@ -8,59 +9,69 @@
 const suint TILE_SIZE = 64;
 const suint MAX_TILE_OCCUPANTS = 4;
 
+enum SpriteType {
+	SPRITETYPE_OCCUPANT,
+	SPRITETYPE_DECOR,
+	SPRITETYPE_INTERACTABLE
+};
+
 class Tile
 {
 public:
-	Tile(Terrain ter= FLAT_GROUND, TerrainGraphic floorTex = FLOOR_DEFAULT);
+	Tile(Terrain ter= FLAT_GROUND, TerrainGraphic floorTex = FLOOR_GRASS);
 	~Tile();
 
 	//function for drawing a tile(rendering)
-	void draw(sf::RenderWindow* win);
-
-	//sprite occupancy of the tile
-	inline bool insertOccupant(GameSprite* s) {
-		for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
-			if (occupants[i] == NULL) {
-				occupants[i] = s;
-				return true;
-			}
-		}
-		return false;
-	};
-	inline bool insertDecor(GameSprite* s) {
-		for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
-			if (decor[i] == NULL) {
-				decor[i] = s;
-				return true;
-			}
-		}
-		return false;
-	};
-	inline bool insertInteractable(GameSprite* s) {
-		for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
-			if (interactables[i] == NULL) {
-				interactables[i] = s;
-				return true;
-			}
-		}
-		return false;
-	};
-	inline void removeOccupant(int i) {
-		//bounds checking
-		if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
-		occupants[i] = NULL;
-	};
-	inline void removeDecor(int i) {
-		//bounds checking
-		if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
-		decor[i] = NULL;
-	};
-	inline void removeInteractable(int i) {
-		//bounds checking
-		if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
-		interactables[i] = NULL;
-	};
+	void draw(sf::RenderWindow* win, ResourceManager* rm);
 	void clear();
+
+	inline bool insertSprite(GameSprite* s, SpriteType type) {
+		switch (type) {
+		case SPRITETYPE_OCCUPANT:
+			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+				if (occupants[i] == NULL) {
+					occupants[i] = s;
+					return true;
+				}
+			}
+			return false;
+		case SPRITETYPE_DECOR:
+			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+				if (decor[i] == NULL) {
+					decor[i] = s;
+					return true;
+				}
+			}
+			return false;
+		case SPRITETYPE_INTERACTABLE:
+			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+				if (interactables[i] == NULL) {
+					interactables[i] = s;
+					return true;
+				}
+			}
+			return false;
+		}
+	};
+	inline void removeSprite(suint i, SpriteType type) {
+		switch (type) {
+		case SPRITETYPE_OCCUPANT:
+			//bounds checking
+			if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+			occupants[i] = NULL;
+			break;
+		case SPRITETYPE_DECOR:
+			//bounds checking
+			if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+			decor[i] = NULL;
+			break;
+		case SPRITETYPE_INTERACTABLE:
+			//bounds checking
+			if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+			interactables[i] = NULL;
+			break;
+		}
+	};
 
 	//getters
 	inline GameSprite* getOccupantAt(int i) {

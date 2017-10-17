@@ -46,7 +46,7 @@ public:
 	sf::Vector2i convertToTile(const sf::Vector2f pos);
 
 	//function to draw the map and it's contents
-	void draw(sf::RenderWindow* win);
+	void draw(sf::RenderWindow* win, ResourceManager* rm);
 
 protected:
 	//MapType mapType;

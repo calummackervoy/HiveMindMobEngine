@@ -16,8 +16,11 @@ Tile::~Tile() {
 	clear();
 }
 
-void Tile::draw(sf::RenderWindow* win) {
+void Tile::draw(sf::RenderWindow* win, ResourceManager* rm) {
+	//draw the terrain graphic
+	win->draw(sf::Sprite(*rm->terrain[floorTex]));
 
+	//TODO: draw everything else
 }
 
 void Tile::clear() {

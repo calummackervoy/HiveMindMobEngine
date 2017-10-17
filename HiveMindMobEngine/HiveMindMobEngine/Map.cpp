@@ -36,7 +36,7 @@ sf::Vector2i Map::convertToTile(const sf::Vector2f pos) {
 	return sf::Vector2i(pos.x / TILE_SIZE, pos.y / TILE_SIZE);
 }
 
-void Map::draw(sf::RenderWindow* win) {
+void Map::draw(sf::RenderWindow* win, ResourceManager* rm) {
 	//set view
 	sf::View view = win->getView();
 	//reverse project center
@@ -94,7 +94,7 @@ void Map::draw(sf::RenderWindow* win) {
 			int celly = nodey - node;
 			if (cellx >= 0 && cellx < size
 				&& celly >= 0 && celly < size) {
-				map[celly * size + cellx]->draw(win);
+				map[celly * size + cellx]->draw(win, rm);
 			}
 		}
 
