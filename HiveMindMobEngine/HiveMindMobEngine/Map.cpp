@@ -1,20 +1,35 @@
 #include "Map.h"
 
-Map::Map(const suint size) {
+Map::Map(suint size) {
 	//mapType = MAP_WORLD;
 	//enforce maximum map size
-	this->size = std::max((uint)size, MAX_MAP_SIZE);
+	size = std::max((uint)size, MAX_MAP_SIZE);
+	this->size = size * size;
 
 	//initialise map to array of NULLs
-	for (int i = 0; i < this->size; i++) {
-		for (int j = 0; j < this->size; j++) {
-			map[i][j] = NULL;
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			map[j * size + i] = NULL;
 		}
 	}
 }
 
 Map::~Map() {
-	delete map;
+	delete[] map;
+}
+
+void Map::resize(suint size) {
+	clear();
+	this->size = size * size;
+}
+
+void Map::clear() {
+	for (int i = 0; i < MAX_MAP_SIZE; i++) {
+		for (int j = 0; j < MAX_MAP_SIZE; j++) {
+			delete map[j * size + i];
+			map[j * size + i] = NULL;
+		}
+	}
 }
 
 sf::Vector2i Map::convertToTile(const sf::Vector2f pos) {

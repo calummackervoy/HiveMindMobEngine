@@ -13,8 +13,13 @@ using std::string;
 //NOTE: map tiles are organised in 2D array like so: map[x][y]
 class Map {
 public:
-	Map(const suint size);
+	Map(suint size);
 	~Map();
+
+	void resize(suint size); //resize the map
+	void clear();
+
+	//sf::Vector2f projectMouseCoords(int mx, int my, sf::RenderWindow *win);
 
 	inline Tile* getTerrainAt(int x, int y) {
 		//bounds checking
