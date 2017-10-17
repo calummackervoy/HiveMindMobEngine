@@ -1,4 +1,5 @@
 #pragma once
+#include "Renderer.h"
 #include "Typedef.h"
 #include "Terrain.h"
 #include "GameSprite.h"
@@ -12,6 +13,9 @@ class Tile
 public:
 	Tile(Terrain ter= FLAT_GROUND, TerrainGraphic floorTex = FLOOR_DEFAULT);
 	~Tile();
+
+	//function for drawing a tile(rendering)
+	void draw(sf::RenderWindow* win);
 
 	//sprite occupancy of the tile
 	inline bool insertOccupant(GameSprite* s) {

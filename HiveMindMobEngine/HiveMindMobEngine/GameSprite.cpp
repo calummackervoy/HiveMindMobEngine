@@ -1,9 +1,8 @@
 #include "GameSprite.h"
 
-GameSprite::GameSprite(bool useLighting, sf::Vector2f worldPos, int z) {
+GameSprite::GameSprite(sf::Vector2f worldPos, int z) {
 	this->worldpos = worldpos;;
 	this->z = z;
-	this->lighting = useLighting;
 }
 
 GameSprite::~GameSprite() {

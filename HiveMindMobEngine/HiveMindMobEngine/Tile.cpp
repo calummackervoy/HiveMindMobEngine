@@ -16,6 +16,10 @@ Tile::~Tile() {
 	clear();
 }
 
+void Tile::draw(sf::RenderWindow* win) {
+
+}
+
 void Tile::clear() {
 	//set all occupants etc to NULL
 	for (suint i = 0; i < MAX_TILE_OCCUPANTS; i++) {
