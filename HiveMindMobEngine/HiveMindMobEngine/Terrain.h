@@ -18,6 +18,7 @@ enum Terrain : uint8_t {
 	WATER
 };
 
+const suint MAX_ACTIVE_TERRAINS = 16;
 enum TerrainGraphic : uint8_t {
 	FLOOR_DEFAULT = 0,
 	FLOOR_CARPET = 1,

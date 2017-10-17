@@ -2,6 +2,7 @@
 
 ResourceManager::ResourceManager() {
 	loadFonts();
+	loadTerrain();
 
 	//initialise renderer's shiznaz to NULL to indicate free space
 	scene = new Element*[MAX_ELEMS];
@@ -105,6 +106,30 @@ void ResourceManager::loadFonts() {
 	}
 
 	fonts[FONT_ABEL_REGULAR] = font;
+}
+
+//TODO: read this all from config
+void ResourceManager::loadTerrain() {
+	terrain[FLOOR_CARPET] = new sf::Texture();
+	terrain[FLOOR_CARPET]->loadFromFile("../../assets/sprites/geography/carpet.png");
+	terrain[FLOOR_CONCRETE] = new sf::Texture();
+	terrain[FLOOR_CONCRETE]->loadFromFile("../../assets/sprites/geography/concrete.png");
+	terrain[FLOOR_DIRT] = new sf::Texture();
+	terrain[FLOOR_DIRT]->loadFromFile("../../assets/sprites/geography/dirt.png");
+	terrain[FLOOR_FRESHWATER] = new sf::Texture();
+	terrain[FLOOR_FRESHWATER]->loadFromFile("../../assets/sprites/geography/freshwater.png");
+	terrain[FLOOR_GRASS] = new sf::Texture();
+	terrain[FLOOR_GRASS]->loadFromFile("../../assets/sprites/geography/grass.png");
+	terrain[FLOOR_ROOFING_FLAT] = new sf::Texture();
+	terrain[FLOOR_ROOFING_FLAT]->loadFromFile("../../assets/sprites/geography/roofing_flat.png");
+	terrain[FLOOR_ROOFING_PRECARIOUS] = new sf::Texture();
+	terrain[FLOOR_ROOFING_PRECARIOUS]->loadFromFile("../../assets/sprites/geography/roofing_precarious.png");
+	terrain[FLOOR_SALTWATER] = new sf::Texture();
+	terrain[FLOOR_SALTWATER]->loadFromFile("../../assets/sprites/geography/saltwater.png");
+	terrain[FLOOR_SAND] = new sf::Texture();
+	terrain[FLOOR_SAND]->loadFromFile("../../assets/sprites/geography/sand.png");
+	terrain[FLOOR_WOOD] = new sf::Texture();
+	terrain[FLOOR_WOOD]->loadFromFile("../../assets/sprites/geography/wood.png");
 }
 
 int ResourceManager::addAnimator(Animator* resource) {

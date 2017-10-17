@@ -1,4 +1,5 @@
 #pragma once
+#include "Terrain.h"
 #include "Typedef.h"
 #include "RendererConfig.h"
 #include "AudioSource.h"
@@ -14,8 +15,8 @@ enum fontEnum : uint8_t {
 	FONT_ABEL_REGULAR = 0
 };
 
-const int NUM_FONTS = 1;
-const int MAX_SOURCES = 16;
+const suint NUM_FONTS = 1;
+const suint MAX_SOURCES = 16;
 
 class ResourceManager {
 public:
@@ -100,12 +101,14 @@ public:
 	int addAnimator(Animator* resource);
 	void removeAnimator(uint id);
 
-
-	sf::Font* fonts[NUM_FONTS];
+	//special storages
+	sf::Font* fonts[NUM_FONTS]; //fonts
+	sf::Texture* terrain[MAX_ACTIVE_TERRAINS];//terrain textures
 
 private:
 	//initialisation: load all the fonts used in the game beforehand
 	void loadFonts();
+	void loadTerrain();
 
 	//renderer's array of scene entities
 	Element** scene;
