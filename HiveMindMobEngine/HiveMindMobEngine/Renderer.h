@@ -40,7 +40,10 @@ public:
 	//function for drawing a very simple temporary scene with single element e.g. intro or game over animation
 	void drawBasicScene(Element* e);
 	//main scene drawing
+	//TODO: this call may be unecessary and may need to be redesigned
 	void drawScene();
+	//hud & overlay drawing
+	void drawHud();
 	void clearScene() { rm->clearScene(); };
 	void clearAll() { clearScene(); rm->clearHud(); }
 
@@ -48,7 +51,7 @@ private:
 	//accesses the resource manager to access its elements
 	ResourceManager* rm;
 	sf::RenderWindow* window;
-	GridOverlay* gridOver;
+	//GridOverlay* gridOver;
 
 	int selected; //index of selected element
 	bool overlayActive; //whether a grid overlay is to be drawn or not
