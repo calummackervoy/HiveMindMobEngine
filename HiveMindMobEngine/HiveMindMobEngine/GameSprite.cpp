@@ -1,8 +1,9 @@
 #include "GameSprite.h"
 
-GameSprite::GameSprite(sf::Vector2f worldPos, int z) {
+GameSprite::GameSprite(sf::Vector2f worldPos, suint z) {
 	this->worldpos = worldpos;;
 	this->z = z;
+	this->id = MAX_ELEMS + 1; //default until ResourceManager accepts it
 }
 
 GameSprite::~GameSprite() {

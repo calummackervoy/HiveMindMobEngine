@@ -1,7 +1,6 @@
 #pragma once
 #include "Terrain.h"
-#include "Typedef.h"
-#include "RendererConfig.h"
+#include "GameSprite.h"
 #include "AudioSource.h"
 #include "Animator.h"
 #include <SFML\Audio.hpp>
@@ -79,8 +78,34 @@ public:
 		hud[i] = NULL;
 	};
 
+	inline GameSprite* getSprite(int i) {
+		//bounds checking
+		if (i < 0 || i > MAX_ELEMS) throw std::exception("Index out of bounds");
+		return sprites[i];
+	};
+	inline int addSprite(GameSprite* e) {
+		for (int i = 0; i < MAX_ELEMS; i++) {
+			if (sprites[i] == NULL) {
+				sprites[i] = e;
+				e->setIndex(i);
+				return i;
+			}
+		}
+		return -1;
+	};
+	inline void removeSprite(int i) {
+		//bounds checking
+		if (i < 0 || i >= MAX_ELEMS) return;
+		if (!sprites[i]) return;
+
+		delete sprites[i];
+		sprites[i] = NULL;
+	};
+
+	void clearAll();
 	void clearScene();
 	void clearHud();
+	void clearSprites();
 
 	//accessing/adding/removing audio sources from Audio's storage
 	inline AudioSource* getAudioSource(int i) {
@@ -114,6 +139,8 @@ private:
 	Element** scene;
 	//renderer's array of HUD entities (the overlay)
 	Element** hud;
+
+	GameSprite** sprites;
 
 	//Audio's storage of the different sound clips in use
 	AudioSource** sources;

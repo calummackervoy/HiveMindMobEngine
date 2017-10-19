@@ -1,6 +1,5 @@
 #pragma once
 #include "Typedef.h"
-#include "Grid.h"
 #include "Organisation.h"
 #include "Culture.h"
 #include <string>
@@ -8,6 +7,9 @@
 #include <SFML\Graphics.hpp>
 
 using std::string;
+
+//the maximum size of each axis (always square maps)
+const uint MAX_MAP_SIZE = 20;
 
 //parameters for the engine
 struct EngineConfig {
