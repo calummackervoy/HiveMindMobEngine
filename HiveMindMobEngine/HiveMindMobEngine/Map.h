@@ -13,8 +13,12 @@ using std::string;
 //NOTE: map tiles are organised in 2D array like so: map[x][y]
 class Map {
 public:
-	Map(suint size);
+	Map(ResourceManager* rm, suint size = 2);
 	~Map();
+
+	//reading in a map
+	//files should have 1 int for size, then 2 ints per tile- one for terrain type and one for terrain graphic
+	void readMap(FileHandler* file, string mapLocation);
 
 	void resize(suint size); //resize the map
 	void clear();
@@ -46,9 +50,10 @@ public:
 	sf::Vector2i convertToTile(const sf::Vector2f pos);
 
 	//function to draw the map and it's contents
-	void draw(sf::RenderWindow* win, ResourceManager* rm);
+	void draw(sf::RenderWindow* win);
 
 protected:
+	ResourceManager* rm;
 	//MapType mapType;
 	Tile* map[MAX_MAP_SIZE * MAX_MAP_SIZE];
 	//track the centre position of the current view on the map

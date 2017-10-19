@@ -1,7 +1,8 @@
 #include "Map.h"
 
-Map::Map(suint size) {
+Map::Map(ResourceManager* rm, suint size) {
 	//mapType = MAP_WORLD;
+	this->rm = rm;
 	//enforce maximum map size
 	size = std::max((uint)size, MAX_MAP_SIZE);
 	this->size = size * size;
@@ -17,9 +18,33 @@ Map::Map(suint size) {
 Map::~Map() {
 	delete[] map;
 }
+void Map::readMap(FileHandler* file, string mapLocation) {
+	//open stream
+	file->openStream(mapLocation, true);
+
+	//read in the map size
+	suint size = (suint)file->getNextInt();
+	//resize if need be
+	size = std::max((uint)size, MAX_MAP_SIZE);
+	if (size != this->size) resize(size);
+
+	Terrain terType;
+	TerrainGraphic graphic;
+	//read in each tile until map is complete
+	for (int i = 0; i < size * size; i++) {
+		terType = (Terrain)file->getNextInt();
+		graphic = (TerrainGraphic)file->getNextInt();
+		Tile* t = new Tile(terType, graphic);
+	}
+
+	//close stream
+	file->closeStream();
+}
+
 
 void Map::resize(suint size) {
 	clear();
+	if (size == 0) size = 2; //bounds checking
 	this->size = size * size;
 }
 
@@ -36,7 +61,7 @@ sf::Vector2i Map::convertToTile(const sf::Vector2f pos) {
 	return sf::Vector2i(pos.x / TILE_SIZE, pos.y / TILE_SIZE);
 }
 
-void Map::draw(sf::RenderWindow* win, ResourceManager* rm) {
+void Map::draw(sf::RenderWindow* win) {
 	//set view
 	sf::View view = win->getView();
 	//reverse project center

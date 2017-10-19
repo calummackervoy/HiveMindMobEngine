@@ -57,9 +57,10 @@ void Game::run() {
 
 void Game::setupTester() {
 	//setup the map
-	//TODO: world map sits between Region
-	//TODO: not use default values for config
-	Region* region = new Region(e->getRm(), 0);
+	Map* m = new Map(e->getRm(), 20);
+	//TODO: read from a config or setup menu
+	m->readMap(e->getFile(), "../../assets/config/map1.txt");
+	//Region* region = new Region(e->getRm(), 0);
 
 	//read test character from config file
 	//Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");

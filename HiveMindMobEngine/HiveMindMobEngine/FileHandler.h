@@ -1,5 +1,4 @@
 #pragma once
-#include "Grid.h"
 #include "Config.h"
 #include "Terrain.h"
 #include "Clothing.h"
