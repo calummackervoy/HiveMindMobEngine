@@ -4,7 +4,7 @@
 //Author: Calum Mackervoy
 //Purpose: Map manager variation for region map
 
-class MapRegion : Map {
+/*class MapRegion : Map {
 public:
 	MapRegion(ResourceManager* rm, string mapLocation, suint size = MAX_MAP_SIZE);
 	//generate a map
@@ -15,5 +15,5 @@ private:
 	ResourceManager* rm;
 	bool DEBUG_MODE;
 
-	static Grid* readMap(string mapLocation);
-};
+	//static Grid* readMap(string mapLocation);
+};*/

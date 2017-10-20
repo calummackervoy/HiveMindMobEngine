@@ -50,7 +50,7 @@ protected:
 	Region* regions[MAX_REGIONS];
 	Culture* cultures[MAX_CULTURES];
 	ProgressTracker* tech;
-	MapWorld* map;
+	//MapWorld* map;
 	DateTime dateTime;
 
 	bool sanitiseWorldParams(WorldParams params);

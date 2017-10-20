@@ -14,7 +14,7 @@ FileHandler::~FileHandler() {
 
 void FileHandler::openStream(string source, bool read) {
 	if (source == "") {
-		cout << "READING KEY BINDINGS: configlocation was empty" << std::endl;
+		Logger::logError("FileHandler", "READING KEY BINDINGS: configlocation was empty");
 		return;
 	}
 

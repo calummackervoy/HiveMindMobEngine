@@ -1,8 +1,7 @@
 #pragma once
-#include "Typedef.h"
+/*#include "Typedef.h"
 #include "RendererConfig.h"
 #include "Colour.h"
-#include "Grid.h"
 #include "Logger.h"
 
 class GridOverlay {
@@ -27,4 +26,4 @@ protected:
 
 	//method for drawing a line
 	void drawLine(bool xAxis, int index);
-};
+};*/

@@ -1,6 +1,6 @@
 #include "MapWorld.h"
 
-MapWorld::MapWorld(string mapLocation, suint size) : Map(size) {
+/*MapWorld::MapWorld(string mapLocation, suint size) : Map(size) {
     
 }
 
@@ -109,4 +109,4 @@ void MapWorld::generateRegionGeography() {
 
 Grid* MapWorld::readMap(string mapLocation) {
 	return {};
-}
+}*/

@@ -1,6 +1,6 @@
 #include "GridOverlay.h"
 
-GridOverlay::GridOverlay() {
+/*GridOverlay::GridOverlay() {
 	//setup the grid
 	int count = 0;
 	for (int i = 0; (i * TILE_SIZE) < WIN_WIDTH; i++) {
@@ -70,4 +70,4 @@ void GridOverlay::drawLine(bool xAxis, int index) {
 		yLines[index] = linea;
 		yLines[index + 1] = lineb;
 	}
-}
+}*/

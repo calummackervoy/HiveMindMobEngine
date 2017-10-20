@@ -2,12 +2,12 @@
 
 Region::Region(ResourceManager* rm, int id, RegionConfig config) {
     this->id = id;
-	this->map = new MapRegion(rm,"");
+	//this->map = new MapRegion(rm,"");
 }
 
 //TODO: finish semantic generation
 Region::Region(ResourceManager* rm, int id, int seed, RegionConfigRand config) {
-	this->map = new MapRegion(rm, "");
+	//this->map = new MapRegion(rm, "");
     this->id = id;
 	cout << "Generating a region..." << endl;
 	cout << "  Generating the graphics.." << endl;

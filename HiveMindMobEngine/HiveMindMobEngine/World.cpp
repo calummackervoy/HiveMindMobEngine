@@ -15,7 +15,7 @@ World::World(WorldParams params) {
 
 void World::generalisedWorldGen(WorldParams params) {
 	//generate or load the world map (depending on WorldParam instructions)
-	map = new MapWorld(params);
+	//map = new MapWorld(params);
 
 	//setup each component of the world picture as a whole, bit by bit
 	//technology

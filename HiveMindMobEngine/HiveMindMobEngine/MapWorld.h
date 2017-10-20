@@ -9,7 +9,7 @@
 //TODO: replace all const ints with uint8_t where necessary
 const suint MAX_REGIONS = 32;
 
-class MapWorld : Map {
+/*class MapWorld : Map {
 public:
 	MapWorld(string mapLocation, suint size = TILE_SIZE);
 	//generate a map
@@ -33,13 +33,13 @@ private:
 	sf::VertexArray* regions[MAX_REGIONS];
 	sf::Vector2f positions[MAX_REGIONS];
 	sf::Vector2i tilePositions[MAX_REGIONS];
-	RegionTile regionTiles[MAX_REGIONS];
+	//RegionTile regionTiles[MAX_REGIONS];
 	suint tileSize;
 
 	//TODO: replace with planet generation
 	void generateRegionStructure();
 	void generateRegionGeography();
 
-	static Grid* readMap(string mapLocation);
+	//static Grid* readMap(string mapLocation);
 
-};
+};*/

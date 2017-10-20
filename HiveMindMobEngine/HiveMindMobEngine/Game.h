@@ -41,6 +41,7 @@ protected:
     Engine* e;
     World* world;
 	Menu* activeMenu;
+	Map* map;
     GameMode mode;
 
 	//method for initialising a new world

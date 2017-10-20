@@ -13,6 +13,9 @@ Map::Map(ResourceManager* rm, suint size) {
 			map[j * size + i] = NULL;
 		}
 	}
+
+	//mapCentre by default the middle of the map
+	mapCentre = sf::Vector2f((float)size * 0.5, (float)size* 0.5);
 }
 
 Map::~Map() {
@@ -20,6 +23,7 @@ Map::~Map() {
 }
 void Map::readMap(FileHandler* file, string mapLocation) {
 	//open stream
+	cout << "flag map" << std::endl;
 	file->openStream(mapLocation, true);
 
 	//read in the map size
@@ -34,7 +38,7 @@ void Map::readMap(FileHandler* file, string mapLocation) {
 	for (int i = 0; i < size * size; i++) {
 		terType = (Terrain)file->getNextInt();
 		graphic = (TerrainGraphic)file->getNextInt();
-		Tile* t = new Tile(terType, graphic);
+		Tile* t = new Tile(rm, terType, graphic);
 	}
 
 	//close stream
@@ -46,13 +50,20 @@ void Map::resize(suint size) {
 	clear();
 	if (size == 0) size = 2; //bounds checking
 	this->size = size * size;
+	
+	//update mapCentre to middle of the new map
+	mapCentre = sf::Vector2f((float)size * 0.5, (float)size* 0.5);
 }
 
 void Map::clear() {
+	int sizeRt = sqrt(size);
+
 	for (int i = 0; i < MAX_MAP_SIZE; i++) {
 		for (int j = 0; j < MAX_MAP_SIZE; j++) {
-			delete map[j * size + i];
-			map[j * size + i] = NULL;
+			if (map[j * sizeRt + i] != NULL) {
+				delete map[j * sizeRt + i];
+				map[j * sizeRt + i] = NULL;
+			}
 		}
 	}
 }
@@ -119,7 +130,9 @@ void Map::draw(sf::RenderWindow* win) {
 			int celly = nodey - node;
 			if (cellx >= 0 && cellx < size
 				&& celly >= 0 && celly < size) {
-				map[celly * size + cellx]->draw(win, rm);
+
+				//draw the tile
+				map[celly * size + cellx]->draw(win);
 			}
 		}
 

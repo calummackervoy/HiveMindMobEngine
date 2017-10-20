@@ -47,7 +47,7 @@ public:
 	void load();
 
 protected:
-	MapRegion* map;
+	//MapRegion* map;
 	uint id;
 	uint regionAuthority;
 	uint population;

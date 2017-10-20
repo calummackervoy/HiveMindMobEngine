@@ -16,6 +16,7 @@ public:
 	int getWorldZ() { return z; };
 
 	inline void setIndex(suint i) { id = i; };
+	inline suint getIndex() { return id; };
 
 protected:
 	sf::Vector2f worldpos;

@@ -7,7 +7,8 @@ SceneManager::SceneManager(ResourceManager* rm, Renderer* r, FileHandler* file,
 	size = 0;
 
 	//initialise a wardrobe
-	wardrobe = new Wardrobe(r, file, hatsLocation, clothingLocation);
+	//wardrobe = new Wardrobe(r, file, hatsLocation, clothingLocation);
+	wardrobe = NULL;
 
 	for (int i = 0; i < MAX_SCENE_ELEMS; i++) {
 		scene[i] = NULL;

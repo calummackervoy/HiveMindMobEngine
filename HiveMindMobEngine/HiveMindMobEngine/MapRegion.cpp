@@ -1,6 +1,6 @@
 ﻿#include "MapRegion.h"
 
-MapRegion::MapRegion(ResourceManager* rm, string mapLocation, suint size) : Map(size) {
+/*MapRegion::MapRegion(ResourceManager* rm, string mapLocation, suint size) : Map(size) {
 	this->rm = rm;
 	DEBUG_MODE = true;
 	map = new Grid;
@@ -85,4 +85,4 @@ MapRegion::~MapRegion() {
 
 Grid* MapRegion::readMap(string mapLocation) {
 	return{};
-}
+}*/

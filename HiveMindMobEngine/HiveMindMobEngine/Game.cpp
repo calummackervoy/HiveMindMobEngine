@@ -13,16 +13,26 @@ Game::Game(Engine* e, GameConfig config) {
 	setup.optionActions[1] = MENU_WORLD_LOAD;
 	setup.numOptions = 2;
 	activeMenu = new Menu(e->getR(), e->getRm(), setup);
+	map = NULL;
 }
 
 Game::~Game() {
     delete world;
+	delete map;
 }
 
 void Game::run() {
     while(true) {
         //input response
         DeviceResponse r = e->run();
+
+		if (mode == WORLD && map != NULL) {
+			//draw map, then objects
+			//map->draw(e->getR()->getWindow());
+		}
+
+		//draw HUD over the top
+		e->getR()->drawHud();
 
 		switch(r.responseCode) {
 		case DEVICE_RESPONSE_NONE:
@@ -57,9 +67,9 @@ void Game::run() {
 
 void Game::setupTester() {
 	//setup the map
-	Map* m = new Map(e->getRm(), 20);
+	map = new Map(e->getRm(), 20);
 	//TODO: read from a config or setup menu
-	m->readMap(e->getFile(), "../../assets/config/map1.txt");
+	map->readMap(e->getFile(), "../../assets/config/map1.txt");
 	//Region* region = new Region(e->getRm(), 0);
 
 	//read test character from config file

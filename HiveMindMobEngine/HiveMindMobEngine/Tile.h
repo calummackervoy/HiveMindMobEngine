@@ -18,14 +18,15 @@ enum SpriteType {
 class Tile
 {
 public:
-	Tile(Terrain ter= FLAT_GROUND, TerrainGraphic floorTex = FLOOR_GRASS);
+	Tile(ResourceManager* rm, Terrain ter= FLAT_GROUND, TerrainGraphic floorTex = FLOOR_GRASS);
 	~Tile();
 
 	//function for drawing a tile(rendering)
-	void draw(sf::RenderWindow* win, ResourceManager* rm);
+	void draw(sf::RenderWindow* win);
 	void clear();
 
-	inline bool insertSprite(GameSprite* s, SpriteType type) {
+	//insert/remove a sprite pointer in local pointage & get the resource manager to manage
+	inline bool insertSprite(ResourceManager* rm, GameSprite* s, SpriteType type) {
 		switch (type) {
 		case SPRITETYPE_OCCUPANT:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
@@ -53,7 +54,7 @@ public:
 			return false;
 		}
 	};
-	inline void removeSprite(suint i, SpriteType type) {
+	inline void removeSprite(ResourceManager* rm, suint i, SpriteType type) {
 		switch (type) {
 		case SPRITETYPE_OCCUPANT:
 			//bounds checking
@@ -105,6 +106,7 @@ public:
 	inline void setFloorTex(TerrainGraphic val) { floorTex = val; };
 
 protected:
+	ResourceManager* rm;
 	//list of decoration sprites/objects on the tile
 	GameSprite* decor[MAX_TILE_OCCUPANTS];
 	//list of interactive/item sprites/objects on the tile
