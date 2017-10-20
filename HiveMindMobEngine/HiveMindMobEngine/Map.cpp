@@ -5,6 +5,7 @@ Map::Map(ResourceManager* rm, suint size) {
 	this->rm = rm;
 	//enforce maximum map size
 	size = std::max((uint)size, MAX_MAP_SIZE);
+	sizeAxis = size;
 	this->size = size * size;
 
 	//initialise map to array of NULLs
@@ -23,7 +24,6 @@ Map::~Map() {
 }
 void Map::readMap(FileHandler* file, string mapLocation) {
 	//open stream
-	cout << "flag map" << std::endl;
 	file->openStream(mapLocation, true);
 
 	//read in the map size
@@ -38,7 +38,7 @@ void Map::readMap(FileHandler* file, string mapLocation) {
 	for (int i = 0; i < size * size; i++) {
 		terType = (Terrain)file->getNextInt();
 		graphic = (TerrainGraphic)file->getNextInt();
-		Tile* t = new Tile(rm, terType, graphic);
+		map[i] = new Tile(rm, terType, graphic);
 	}
 
 	//close stream
@@ -48,7 +48,8 @@ void Map::readMap(FileHandler* file, string mapLocation) {
 
 void Map::resize(suint size) {
 	clear();
-	if (size == 0) size = 2; //bounds checking
+	if (size < 2) size = 2; //bounds checking
+	sizeAxis = size;
 	this->size = size * size;
 	
 	//update mapCentre to middle of the new map
@@ -56,13 +57,11 @@ void Map::resize(suint size) {
 }
 
 void Map::clear() {
-	int sizeRt = sqrt(size);
-
 	for (int i = 0; i < MAX_MAP_SIZE; i++) {
 		for (int j = 0; j < MAX_MAP_SIZE; j++) {
-			if (map[j * sizeRt + i] != NULL) {
-				delete map[j * sizeRt + i];
-				map[j * sizeRt + i] = NULL;
+			if (map[j * sizeAxis + i] != NULL) {
+				delete map[j * sizeAxis + i];
+				map[j * sizeAxis + i] = NULL;
 			}
 		}
 	}
@@ -109,16 +108,15 @@ void Map::draw(sf::RenderWindow* win) {
 	int drawnodes = numCols + 1;
 
 	int nodex = sx, nodey = sy;
+	int index; //will store the index to be drawn next
 	for (int row = 0; row < numRows; row++) {
-		if (row & 1)
-		{
+		if (row & 1) {
 			//Odd row
 			rowincx = 0;
 			rowincy = 1;
 			drawnodes = numCols;
 		}
-		else
-		{
+		else {
 			rowincx = 1;
 			rowincy = 0;
 			drawnodes = numCols + 1;
@@ -132,7 +130,8 @@ void Map::draw(sf::RenderWindow* win) {
 				&& celly >= 0 && celly < size) {
 
 				//draw the tile
-				map[celly * size + cellx]->draw(win);
+				index = celly * sizeAxis + cellx;
+				if(map[index] != NULL) map[index]->draw(win);
 			}
 		}
 

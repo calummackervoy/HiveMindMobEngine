@@ -58,6 +58,7 @@ protected:
 	Tile* map[MAX_MAP_SIZE * MAX_MAP_SIZE];
 	//track the centre position of the current view on the map
 	sf::Vector2f mapCentre;
-	suint size;
+	suint size; //storage of the total number of tiles in the map
+	suint sizeAxis; //storage of the number of tiles on each axis
 	//bool lighting;
 };

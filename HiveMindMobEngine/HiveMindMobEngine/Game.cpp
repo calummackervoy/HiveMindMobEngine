@@ -28,7 +28,7 @@ void Game::run() {
 
 		if (mode == WORLD && map != NULL) {
 			//draw map, then objects
-			//map->draw(e->getR()->getWindow());
+			map->draw(e->getR()->getWindow());
 		}
 
 		//draw HUD over the top
