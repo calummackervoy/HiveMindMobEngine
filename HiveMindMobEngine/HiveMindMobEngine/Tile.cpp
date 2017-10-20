@@ -4,6 +4,7 @@ Tile::Tile(ResourceManager* rm, Terrain ter, TerrainGraphic floorTex) {
 	this->rm = rm;
 	terrain = ter;
 	this->floorTex = floorTex;
+	this->worldpos = sf::Vector2f(0.0f, 0.0f);
 
 	for (suint i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 		occupants[i] = NULL;
@@ -19,7 +20,9 @@ Tile::~Tile() {
 
 void Tile::draw(sf::RenderWindow* win) {
 	//draw the terrain graphic
-	win->draw(sf::Sprite(*rm->terrain[floorTex]));
+	sf::Sprite drawme = sf::Sprite(*rm->terrain[floorTex]);
+	drawme.setPosition(worldToScreen(worldpos));
+	win->draw(drawme);
 
 	//TODO: draw everything else
 }

@@ -30,15 +30,35 @@ void Map::readMap(FileHandler* file, string mapLocation) {
 	suint size = (suint)file->getNextInt();
 	//resize if need be
 	size = std::max((uint)size, MAX_MAP_SIZE);
-	if (size != this->size) resize(size);
+	if (size != this->sizeAxis) resize(size);
 
 	Terrain terType;
 	TerrainGraphic graphic;
+
+	//x and y positions of tile (starting from 0)
+	float x = 0.0f;
+	float y = 0.0f;
+	int rowCount = 0;
+	int colCount = 0;
+
 	//read in each tile until map is complete
 	for (int i = 0; i < size * size; i++) {
 		terType = (Terrain)file->getNextInt();
 		graphic = (TerrainGraphic)file->getNextInt();
 		map[i] = new Tile(rm, terType, graphic);
+		
+		//set the world position of the new tile
+		colCount++;
+		if (colCount > size) {
+			colCount = 0;
+			x = 0.0f;
+			rowCount++;
+			y += (float)TILE_SIZE;
+		}
+		else {
+			x += (float)TILE_SIZE;
+		}
+		map[i]->setWorldPos(sf::Vector2f(x, y));
 	}
 
 	//close stream

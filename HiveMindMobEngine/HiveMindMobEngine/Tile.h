@@ -75,6 +75,7 @@ public:
 	};
 
 	//getters
+	inline sf::Vector2f getWorldPos() { return worldpos; };
 	inline GameSprite* getOccupantAt(int i) {
 		if (i < 0 || i > MAX_TILE_OCCUPANTS) {
 			Logger::logError("Tile", "getSpriteAt out of bounds");
@@ -101,11 +102,14 @@ public:
 	inline Terrain getTerrain() { return terrain; };
 	inline TerrainGraphic getFloorTex() { return floorTex; };
 	//setters
+	inline void setWorldPos(sf::Vector2f val) { worldpos = val; };
 	inline void setRoof(Tile* val) { delete roof; roof = val; };
 	inline void setTerrain(Terrain val) { terrain = val; };
 	inline void setFloorTex(TerrainGraphic val) { floorTex = val; };
 
 protected:
+	//position in the world
+	sf::Vector2f worldpos;
 	ResourceManager* rm;
 	//list of decoration sprites/objects on the tile
 	GameSprite* decor[MAX_TILE_OCCUPANTS];
