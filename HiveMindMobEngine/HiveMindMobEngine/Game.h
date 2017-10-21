@@ -7,6 +7,8 @@
 //Author: Calum Mackervoy
 //Purpose: Manages the game as it runs
 
+const float CAMERA_SPEED = 3.0f;
+
 enum GameMode : uint8_t {
     MENU,
     WORLD,

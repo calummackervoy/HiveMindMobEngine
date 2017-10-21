@@ -37,13 +37,9 @@ public:
 
 	//moving the screen view around
 	void setMapCentre(sf::Vector2f centre) { mapCentre = centre; };
-	void incremementMapCentre(bool x, bool y) {
-		if (x) mapCentre.x++;
-		if (y) mapCentre.y++;
-	};
-	void deccremementMapCentre(bool x, bool y) {
-		if (x) mapCentre.x--;
-		if (y) mapCentre.y--;
+	void moveMapCentre(float x, float y) {
+		mapCentre.x += x;
+		mapCentre.y += y;
 	};
 
 	//method to get which tile a given x,y co-ordinate is in

@@ -61,6 +61,10 @@ enum MouseKeyboardKeys : DeviceKeyBinding {
 	CLICK_LEFT,
 	CLICK_RIGHT,
 	KEY_ESCAPE,
+	KEY_UP,
+	KEY_DOWN,
+	KEY_LEFT,
+	KEY_RIGHT,
 	KEY_NULL //must be at the end -- for iterating over & assigning actions to keys
 };
 
@@ -69,7 +73,11 @@ enum DeviceResponseCode {
 	DEVICE_RESPONSE_NONE,
 	DEVICE_SELECT,
 	DEVICE_ACT,
-	DEVICE_PAUSE
+	DEVICE_PAUSE,
+	DEVICE_CAMERA_UP,
+	DEVICE_CAMERA_DOWN,
+	DEVICE_CAMERA_LEFT,
+	DEVICE_CAMERA_RIGHT
 };
 
 struct DeviceResponse {

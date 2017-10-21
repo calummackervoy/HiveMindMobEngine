@@ -27,8 +27,6 @@ DeviceResponse MouseKeyboard::respond(sf::Event event) {
 	DeviceResponseCode code = DEVICE_RESPONSE_NONE;
 	if (key < KEY_NULL) {
 		code = (DeviceResponseCode)bindings[key];
-
-		std::map<DeviceKeyBinding, int>::iterator iter;
 	}
 
 	//set this as response code
@@ -50,6 +48,14 @@ MouseKeyboardKeys MouseKeyboard::translateEvent(sf::Event &event) {
 		switch (event.key.code) {
 		case sf::Keyboard::Escape:
 			return KEY_ESCAPE;
+		case sf::Keyboard::Up:
+			return KEY_UP;
+		case sf::Keyboard::Down:
+			return KEY_DOWN;
+		case sf::Keyboard::Left:
+			return KEY_LEFT;
+		case sf::Keyboard::Right:
+			return KEY_RIGHT;
 		}
 	}
 	else return KEY_NULL;

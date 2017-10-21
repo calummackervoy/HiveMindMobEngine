@@ -61,6 +61,22 @@ void Game::run() {
 			break;
 		case DEVICE_PAUSE:
 			break;
+		case DEVICE_CAMERA_UP:
+			//subtract on the X axis to head north-west
+			map->moveMapCentre(-CAMERA_SPEED, 0.0f);
+			break;
+		case DEVICE_CAMERA_DOWN:
+			//add on the X axis to head south-east
+			map->moveMapCentre(CAMERA_SPEED, 0.0f);
+			break;
+		case DEVICE_CAMERA_LEFT:
+			//add on the Y axis to head south-west
+			map->moveMapCentre(0.0f, CAMERA_SPEED);
+			break;
+		case DEVICE_CAMERA_RIGHT:
+			//subtract on the Y axis to head north-east
+			map->moveMapCentre(0.0f, -CAMERA_SPEED);
+			break;
         }
     }
 }
