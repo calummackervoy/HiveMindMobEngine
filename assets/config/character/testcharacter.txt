@@ -1,9 +1,10 @@
+Rudolf Rocker
 35 0
 0
 0
 1 7
 1 9
-../../assets/sprites/characters/individual/1forwardwhite.png
+../../assets/sprites/characters/individual/testchar_sw.png
 -1
 0
 1

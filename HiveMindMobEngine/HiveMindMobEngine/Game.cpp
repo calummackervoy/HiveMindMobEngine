@@ -6,7 +6,7 @@ Game::Game(Engine* e, GameConfig config) {
 
 	//display the main menu screen
 	MenuSetup setup;
-	setup.title = "Hive Mind Mob Alpha";
+	setup.title = "Hive Mind Mob Pre-Alpha";
 	setup.optionLabels[0] = "Start New World";
 	setup.optionActions[0] = MENU_WORLD_NEW;
 	setup.optionLabels[1] = "Load World";
@@ -89,7 +89,7 @@ void Game::setupTester() {
 	//Region* region = new Region(e->getRm(), 0);
 
 	//read test character from config file
-	//Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
+	Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
 
 	//set character tile position & place sprite here
 	//TODO: set this position according to a tile position in the map

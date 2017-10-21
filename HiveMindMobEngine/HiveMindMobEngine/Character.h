@@ -14,7 +14,7 @@
 
 const uint8_t MAX_TRAITS = 8;
 const uint8_t MAX_SKILLS = 16;
-const string DEF_CHAR_SKIN = "../../assets/sprites/characters/individual/1forwardwhite.png";
+const string DEF_CHAR_SKIN = "../../assets/sprites/characters/individual/testchar_sw.png";
 
 //TODO: store config location
 class Character {
@@ -76,6 +76,7 @@ public:
 		ToleranceLevel strengthLevel);
 
 protected:
+	string name;
 	//trait categories
 	Trait mentalTraits[MAX_TRAITS];
 	Trait injuryTraits[MAX_TRAITS];

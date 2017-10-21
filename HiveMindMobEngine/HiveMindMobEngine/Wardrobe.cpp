@@ -89,7 +89,7 @@ void Wardrobe::readWardrobe(bool hats, string configLocation) {
 		HatClothing* hc = new HatClothing;
 
 		//read in the details
-		hc->textureLocation = file->getNextString();
+		hc->textureLocation = file->getNextWord();
 		//TODO: hc->charClass = (CharacterClass)file->getNextInt();
 		//TODO: hc->style = (ClothingStyle)file->getNextInt();
 

@@ -48,8 +48,8 @@ void Engine::readEngineConfig(string configFileLocation) {
 	file->openStream(configFileLocation);
 
 	//config files that define hat & clothing list locations
-	setup.hatsLocation = file->getNextString();
-	setup.clothingLocation = file->getNextString();
+	setup.hatsLocation = file->getNextWord();
+	setup.clothingLocation = file->getNextWord();
 
 	file->closeStream();
 }

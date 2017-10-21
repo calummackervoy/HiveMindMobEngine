@@ -41,12 +41,22 @@ int FileHandler::getNextInt() {
 	return temp;
 }
 
-string FileHandler::getNextString() {
+string FileHandler::getNextWord() {
 	if (file == NULL) {
 		Logger::logError("FileHandler", "asked for string without opening stream.. '' returned");
 		return "";
 	}
 	string temp;
 	(*file) >> temp;
+	return temp;
+}
+
+string FileHandler::getNextLine() {
+	if (file == NULL) {
+		Logger::logError("FileHandler", "asked for string without opening stream.. '' returned");
+		return "";
+	}
+	string temp;
+	std::getline(*file, temp);
 	return temp;
 }

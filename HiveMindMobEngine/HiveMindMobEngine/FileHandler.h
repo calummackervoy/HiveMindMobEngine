@@ -27,7 +27,8 @@ public:
 
 	//functions for reading specific values
 	int getNextInt();
-	string getNextString();
+	string getNextWord();
+	string getNextLine();
 
 	//TODO: functions for writing specific values
 

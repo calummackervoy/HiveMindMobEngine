@@ -2,7 +2,7 @@
 
 Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed) {
 	this->file = file;
-    this->seed = seed;
+	this->seed = seed;
 
 	bodyTex = NULL;
 	spriteManager = NULL;
@@ -48,6 +48,8 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 
 	file->openStream(fileLocation);
 
+	name = file->getNextLine();
+
 	age = (uint8_t)file->getNextInt();
 	gender = (Gender)file->getNextInt();
 
@@ -67,19 +69,20 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 	}
 	//personality
 	count = file->getNextInt();
-	for (int i = 0; i < std::max(count, (int)MAX_TRAITS); i++) {
+	for (int i = 0; i < std::min(count, (int)MAX_TRAITS); i++) {
 		personTraits[i] = (Trait)file->getNextInt();
 	}
 	//vulnerability
 	count = file->getNextInt();
-	for (int i = 0; i < std::max(count, (int)MAX_TRAITS); i++) {
+	for (int i = 0; i < std::min(count, (int)MAX_TRAITS); i++) {
 		vulnTraits[i] = (Trait)file->getNextInt();
 	}
 
 	//TODO: copy skills, groups and cultures across
 
 	//initialise a SpriteManager from the save
-	string nextString = file->getNextString();
+	seed = 1; //TODO: remove me when you bring code below back in
+	/*string nextString = file->getNextString();
 	if (nextString != "") {
 		spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(nextString));
 		bodyTex = new string(nextString);
@@ -106,7 +109,7 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 	else clothingIndex = -1;
 
 	//finally read the seed value
-	seed = file->getNextInt();
+	seed = file->getNextInt();*/
 
 	file->closeStream();
 
