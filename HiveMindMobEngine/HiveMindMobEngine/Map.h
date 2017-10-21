@@ -28,7 +28,7 @@ public:
 	inline Tile* getTerrainAt(int x, int y) {
 		//bounds checking
 		if (x < 0 || x > size || y < 0 || y > size) return NULL;
-		return map[y * size + x];
+		return map[x][y];
 	};
 	sf::Vector2f getMapCentre() { return mapCentre; };
 
@@ -55,10 +55,12 @@ public:
 protected:
 	ResourceManager* rm;
 	//MapType mapType;
-	Tile* map[MAX_MAP_SIZE * MAX_MAP_SIZE];
+	//NOTE: stored [columns][rows]
+	Tile* map[MAX_MAP_SIZE][MAX_MAP_SIZE];
 	//track the centre position of the current view on the map
 	sf::Vector2f mapCentre;
 	suint size; //storage of the total number of tiles in the map
 	suint sizeAxis; //storage of the number of tiles on each axis
 	//bool lighting;
+	bool first; //for debugging- only print deets on first draw loop
 };

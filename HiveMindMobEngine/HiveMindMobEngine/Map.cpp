@@ -11,12 +11,14 @@ Map::Map(ResourceManager* rm, suint size) {
 	//initialise map to array of NULLs
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {
-			map[j * size + i] = NULL;
+			map[i][j] = NULL;
 		}
 	}
 
 	//mapCentre by default the middle of the map
 	mapCentre = sf::Vector2f((float)size * 0.5, (float)size* 0.5);
+
+	first = true;
 }
 
 Map::~Map() {
@@ -35,30 +37,22 @@ void Map::readMap(FileHandler* file, string mapLocation) {
 	Terrain terType;
 	TerrainGraphic graphic;
 
-	//x and y positions of tile (starting from 0)
-	float x = 0.0f;
-	float y = 0.0f;
-	int rowCount = 0;
-	int colCount = 0;
+	float x;
+	float y;
 
 	//read in each tile until map is complete
-	for (int i = 0; i < size * size; i++) {
-		terType = (Terrain)file->getNextInt();
-		graphic = (TerrainGraphic)file->getNextInt();
-		map[i] = new Tile(rm, terType, graphic);
-		
-		//set the world position of the new tile
-		colCount++;
-		if (colCount > size) {
-			colCount = 0;
-			x = 0.0f;
-			rowCount++;
-			y += (float)TILE_SIZE;
+	for (int i = 0; i < sizeAxis; i++) {
+		for (int j = 0; j < sizeAxis; j++) {
+			terType = (Terrain)file->getNextInt();
+			graphic = (TerrainGraphic)file->getNextInt();
+			map[i][j] = new Tile(rm, terType, graphic);
+
+			x = i * TILE_SIZE;
+			y = j * TILE_SIZE;
+
+			map[i][j]->setWorldPos(sf::Vector2f(x, y));
+			std::cout << "[READ MAP " << i << "]: (" << x << ", " << y << ")" << std::endl;
 		}
-		else {
-			x += (float)TILE_SIZE;
-		}
-		map[i]->setWorldPos(sf::Vector2f(x, y));
 	}
 
 	//close stream
@@ -81,7 +75,7 @@ void Map::clear() {
 		for (int j = 0; j < MAX_MAP_SIZE; j++) {
 			if (map[j * sizeAxis + i] != NULL) {
 				delete map[j * sizeAxis + i];
-				map[j * sizeAxis + i] = NULL;
+				map[i][j] = NULL;
 			}
 		}
 	}
@@ -99,8 +93,15 @@ void Map::draw(sf::RenderWindow* win) {
 	view.setCenter(centre);
 	win->setView(view);
 
+	for (int i = 0; i < sizeAxis; i++) {
+		for (int j = 0; j < sizeAxis; j++) {
+			if (map[i][j] != NULL) map[i][j]->draw(win);
+		}
+	}
+
+	//TODO: this code was an attempt to draw just the tiles that may be on screen (inefficient to draw all as above)
 	//Reverse-projecting top-left corner to world space will give top-left node
-	sf::Vector2f viewsize = view.getSize();
+	/*sf::Vector2f viewsize = view.getSize();
 	sf::Vector2f topleft = screenToWorld(sf::Vector2f(centre.x - viewsize.x * 0.5f,
 		centre.y - viewsize.y * 0.5f));
 	int sx = (int)(topleft.x / (float)TILE_SIZE);
@@ -128,7 +129,6 @@ void Map::draw(sf::RenderWindow* win) {
 	int drawnodes = numCols + 1;
 
 	int nodex = sx, nodey = sy;
-	int index; //will store the index to be drawn next
 	for (int row = 0; row < numRows; row++) {
 		if (row & 1) {
 			//Odd row
@@ -150,12 +150,18 @@ void Map::draw(sf::RenderWindow* win) {
 				&& celly >= 0 && celly < size) {
 
 				//draw the tile
-				index = celly * sizeAxis + cellx;
-				if(map[index] != NULL) map[index]->draw(win);
+				if (map[cellx][celly] != NULL) {
+					map[cellx][celly]->draw(win);
+
+					if (first) {
+						std::cout << "[DRAW MAP " << cellx << ", " << celly << "]: (" << map[cellx][celly]->getWorldPos().x << ", " << map[cellx][celly]->getWorldPos().y << ")" << std::endl;
+					}
+				}
 			}
 		}
 
 		nodex = nodex + rowincx;
 		nodey = nodey + rowincy;
 	}
+	first = false;*/
 }
