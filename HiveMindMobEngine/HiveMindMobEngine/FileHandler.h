@@ -32,6 +32,7 @@ public:
 	string getNextLine();
 
 	//functions for writing specific values
+	void write(string word);
 	void writeLine(string line);
 
 protected:

@@ -90,6 +90,7 @@ void Game::setupTester() {
 
 	//read test character from config file
 	Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
+	c->save("../../assets/config/character/testsave.txt");
 
 	//set character tile position & place sprite here
 	//TODO: set this position according to a tile position in the map

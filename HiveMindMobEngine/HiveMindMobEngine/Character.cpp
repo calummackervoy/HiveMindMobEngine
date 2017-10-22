@@ -82,7 +82,7 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 
 	//initialise a SpriteManager from the save
 	seed = 1; //TODO: remove me when you bring code below back in
-	/*string nextString = file->getNextString();
+	/*string nextString = file->getNextWord();
 	if (nextString != "") {
 		spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(nextString));
 		bodyTex = new string(nextString);
@@ -117,8 +117,51 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 	generateResolve(seed);
 }
 
-void Character::save() {
-	//TODO
+void Character::save(string location) {
+	file->openStream(location, false);
+
+	//obtain counts for trait types
+	int mentalCount = 0;
+	int injuryCount = 0;
+	int personCount = 0;
+	int vulnCount = 0;
+	for (int i = 0; i < MAX_TRAITS; i++) {
+		if (mentalTraits[i] != NULL) mentalCount++;
+		if (injuryTraits[i] != NULL) injuryCount++;
+		if (personTraits[i] != NULL) personCount++;
+		if (vulnTraits[i] != NULL) vulnCount++;
+	}
+
+	//write basic info
+	file->writeLine(name);
+	file->writeLine(std::to_string(age));
+	file->writeLine(std::to_string(gender));
+	
+	//write traits
+	file->write(std::to_string(mentalCount));
+	for (int i = 0; i < mentalCount; i++) {
+		file->write(std::to_string(mentalTraits[i]));
+	}
+
+	file->write(std::to_string(injuryCount));
+	for (int i = 0; i < injuryCount; i++) {
+		file->write(std::to_string(injuryTraits[i]));
+	}
+
+	file->write(std::to_string(personCount));
+	for (int i = 0; i < personCount; i++) {
+		file->write(std::to_string(personTraits[i]));
+	}
+
+	file->write(std::to_string(vulnCount));
+	for (int i = 0; i < vulnCount; i++) {
+		file->write(std::to_string(vulnTraits[i]));
+	}
+	
+	//TODO: write skills, cultures & groups
+	//TODO: write graphics info
+
+	file->closeStream();
 }
 
 Trait Character::getTraitAt(TraitType type, int i) {

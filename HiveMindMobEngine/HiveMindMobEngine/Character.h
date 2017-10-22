@@ -31,7 +31,7 @@ public:
 	void readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, string fileLocation);
 
 	//save a character
-	void save();
+	void save(string location);
 
 	uint getSeed() {return seed;};
 	//inline uint getHomeRegion() {return homeRegion;};

@@ -65,6 +65,14 @@ string FileHandler::getNextLine() {
 	return temp;
 }
 
+void FileHandler::write(string word) {
+	if (outfile == NULL) {
+		Logger::logError("FileHandler", "asked to write string without opening stream..");
+		return;
+	}
+	*outfile << word << " ";
+}
+
 void FileHandler::writeLine(string line) {
 	if (outfile == NULL) {
 		Logger::logError("FileHandler", "asked to write string without opening stream..");
