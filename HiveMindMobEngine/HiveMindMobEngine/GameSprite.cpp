@@ -1,9 +1,10 @@
 #include "GameSprite.h"
 
-GameSprite::GameSprite(sf::Vector2f worldPos, suint z) {
-	this->worldpos = worldpos;;
+GameSprite::GameSprite(sf::Texture* tex, suint z, sf::Vector2f worldPos) {//: sf::Sprite(*tex) {
+	this->worldpos = worldpos;
 	this->z = z;
 	this->id = MAX_ELEMS + 1; //default until ResourceManager accepts it
+	setTexture(*tex);
 }
 
 GameSprite::~GameSprite() {

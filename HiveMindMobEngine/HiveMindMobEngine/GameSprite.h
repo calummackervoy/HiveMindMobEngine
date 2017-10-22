@@ -5,7 +5,7 @@
 class GameSprite : public sf::Sprite
 {
 public:
-	GameSprite(sf::Vector2f worldPos = sf::Vector2f(0.0f, 0.0f), suint z = 0);
+	GameSprite(sf::Texture* tex, suint z = 0, sf::Vector2f worldPos = sf::Vector2f(0.0f, 0.0f));
 	~GameSprite();
 
 	void setWorldPosition(float x, float y);

@@ -51,7 +51,7 @@ void Map::readMap(FileHandler* file, string mapLocation) {
 			y = j * TILE_SIZE;
 
 			map[i][j]->setWorldPos(sf::Vector2f(x, y));
-			std::cout << "[READ MAP " << i << "]: (" << x << ", " << y << ")" << std::endl;
+			//std::cout << "[READ MAP " << i << "]: (" << x << ", " << y << ")" << std::endl;
 		}
 	}
 

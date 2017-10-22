@@ -93,10 +93,9 @@ void Game::setupTester() {
 
 	//set character tile position & place sprite here
 	//TODO: set this position according to a tile position in the map
+	GameSprite* g = new GameSprite(e->getR()->getTexture(DEF_CHAR_SKIN));
+	map->insertSprite(0,0,e->getRm(), g, SPRITETYPE_OCCUPANT);
 	//c->getSpriteManager()->setPosition(sf::Vector2f(500,500));
-
-	//add the CSM to scene
-	//e->getScene()->addSpriteManager(c->getSpriteManager());
 
 	//TODO: add a randomly generated character to the scene
 

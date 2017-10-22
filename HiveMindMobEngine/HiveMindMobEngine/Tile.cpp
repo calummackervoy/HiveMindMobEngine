@@ -24,7 +24,29 @@ void Tile::draw(sf::RenderWindow* win) {
 	drawme.setPosition(worldToScreen(worldpos));
 	win->draw(drawme);
 
-	//TODO: draw everything else
+	//draw everything else
+	for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+		if (decor[i] != NULL) {
+			drawme = *decor[i];
+			drawme.setPosition(worldToScreen(decor[i]->getWorldPosition()));
+			win->draw(drawme);
+		}
+	}
+	for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+		if (interactables[i] != NULL) {
+			drawme = *interactables[i];
+			drawme.setPosition(worldToScreen(interactables[i]->getWorldPosition()));
+			win->draw(drawme);
+		}
+	}
+	for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
+		if (occupants[i] != NULL) {
+			//drawme = *occupants[i];
+			drawme = sf::Sprite(*occupants[i]);
+			drawme.setPosition(worldToScreen(occupants[i]->getWorldPosition()));
+			win->draw(drawme);
+		}
+	}
 }
 
 void Tile::clear() {
@@ -50,4 +72,11 @@ void Tile::clear() {
 	//delete the roof tile
 	delete roof;
 	roof = NULL;
+}
+
+void Tile::tieSpriteToBottom(GameSprite* s) {
+	s->setOrigin(0.0f, s->getLocalBounds().top + s->getLocalBounds().height);
+	//NOTE: the extra on each axis is to get around an off-by-one error on which tile it is drawn to
+	//for the x axis and the y offset is to put it in the centre of the tile
+	s->setWorldPosition(worldpos.x + TILE_SIZE, worldpos.y + (TILE_SIZE * 0.5f));
 }

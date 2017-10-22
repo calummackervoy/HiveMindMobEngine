@@ -19,22 +19,27 @@ public:
 	//reading in a map
 	//files should have 1 int for size, then 2 ints per tile- one for terrain type and one for terrain graphic
 	void readMap(FileHandler* file, string mapLocation);
+	//setting a new map
+	//void setMap(string mapLocation) { map = FileHandler::readMap(mapLocation); };
 
 	void resize(suint size); //resize the map
 	void clear();
 
 	//sf::Vector2f projectMouseCoords(int mx, int my, sf::RenderWindow *win);
 
-	inline Tile* getTerrainAt(int x, int y) {
+	inline Tile* getTileAt(int x, int y) {
 		//bounds checking
 		if (x < 0 || x > size || y < 0 || y > size) return NULL;
 		return map[x][y];
 	};
+	//inserting a sprite into a tile
+	inline bool insertSprite(int x, int y, ResourceManager* rm, GameSprite* s, SpriteType type) {
+		//bounds checking
+		if (x < 0 || x > size || y < 0 || y > size) return NULL;
+		return map[x][y]->insertSprite(rm, s, type);
+	};
+
 	sf::Vector2f getMapCentre() { return mapCentre; };
-
-	//setting a new map
-	//void setMap(string mapLocation) { map = FileHandler::readMap(mapLocation); };
-
 	//moving the screen view around
 	void setMapCentre(sf::Vector2f centre) { mapCentre = centre; };
 	void moveMapCentre(float x, float y) {

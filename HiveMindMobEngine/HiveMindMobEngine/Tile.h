@@ -32,6 +32,8 @@ public:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (occupants[i] == NULL) {
 					occupants[i] = s;
+					//set the position to the bottom-centre of this tile
+					tieSpriteToBottom(occupants[i]);
 					return true;
 				}
 			}
@@ -40,6 +42,8 @@ public:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (decor[i] == NULL) {
 					decor[i] = s;
+					//set the position to match the position of this tile
+					tieSpriteToBottom(decor[i]);
 					return true;
 				}
 			}
@@ -48,6 +52,8 @@ public:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (interactables[i] == NULL) {
 					interactables[i] = s;
+					//set the position to match the position of this tile
+					tieSpriteToBottom(interactables[i]);
 					return true;
 				}
 			}
@@ -122,4 +128,7 @@ protected:
 	//terrain info
 	Terrain terrain;
 	TerrainGraphic floorTex;
+
+	//auxillary function to set the position of a sprite to the bottom of the tile
+	void tieSpriteToBottom(GameSprite* s);
 };
