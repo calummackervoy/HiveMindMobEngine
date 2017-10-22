@@ -23,7 +23,7 @@ public:
 
 	//function for drawing a tile(rendering)
 	void draw(sf::RenderWindow* win);
-	void clear();
+	void clear(bool deleteContents);
 
 	//insert/remove a sprite pointer in local pointage & get the resource manager to manage
 	inline bool insertSprite(ResourceManager* rm, GameSprite* s, SpriteType type) {
@@ -31,7 +31,9 @@ public:
 		case SPRITETYPE_OCCUPANT:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (occupants[i] == NULL) {
+					rm->addSprite(s);
 					occupants[i] = s;
+
 					//set the position to the bottom-centre of this tile
 					tieSpriteToBottom(occupants[i]);
 					return true;
@@ -41,7 +43,9 @@ public:
 		case SPRITETYPE_DECOR:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (decor[i] == NULL) {
+					rm->addSprite(s);
 					decor[i] = s;
+
 					//set the position to match the position of this tile
 					tieSpriteToBottom(decor[i]);
 					return true;
@@ -51,7 +55,9 @@ public:
 		case SPRITETYPE_INTERACTABLE:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (interactables[i] == NULL) {
+					rm->addSprite(s);
 					interactables[i] = s;
+
 					//set the position to match the position of this tile
 					tieSpriteToBottom(interactables[i]);
 					return true;
@@ -60,21 +66,34 @@ public:
 			return false;
 		}
 	};
-	inline void removeSprite(ResourceManager* rm, suint i, SpriteType type) {
+	//function for removing sprite
+	inline void removeSprite(ResourceManager* rm, suint i, SpriteType type, bool deleteSprite) {
 		switch (type) {
 		case SPRITETYPE_OCCUPANT:
 			//bounds checking
 			if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+			//delete the sprite from the game if necessary
+			if (deleteSprite) {
+				rm->removeSprite(occupants[i]->getIndex());
+			}
 			occupants[i] = NULL;
 			break;
 		case SPRITETYPE_DECOR:
 			//bounds checking
 			if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+			//delete the sprite from the game if necessary
+			if (deleteSprite) {
+				rm->removeSprite(decor[i]->getIndex());
+			}
 			decor[i] = NULL;
 			break;
 		case SPRITETYPE_INTERACTABLE:
 			//bounds checking
 			if (i < 0 || i >= MAX_TILE_OCCUPANTS) return;
+			//delete the sprite from the game if necessary
+			if (deleteSprite) {
+				rm->removeSprite(interactables[i]->getIndex());
+			}
 			interactables[i] = NULL;
 			break;
 		}

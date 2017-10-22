@@ -14,8 +14,12 @@ ResourceManager::ResourceManager() {
 
 	//init animators to NULL
 	animations = new Animator*[MAX_ANIMATORS];
-	for (int i = 0; i < MAX_ANIMATORS; ++i) {
+	for (int i = 0; i < MAX_ANIMATORS; i++) {
 		animations[i] = NULL;
+	}
+	sprites = new GameSprite*[MAX_ELEMS];
+	for (int i = 0; i < MAX_ELEMS; i++) {
+		sprites[i] = NULL;
 	}
 }
 
@@ -23,9 +27,13 @@ ResourceManager::~ResourceManager() {
 	delete[] scene;
 	delete[] hud;
 	delete[] animations;
+	delete[] sprites;
 
 	for (int i = 0; i < NUM_FONTS; i++) {
 		delete fonts[i];
+	}
+	for (int i = 0; i < MAX_ACTIVE_TERRAINS; i++) {
+		delete terrain[i];
 	}
 }
 

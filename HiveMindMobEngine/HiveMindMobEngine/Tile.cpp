@@ -15,7 +15,7 @@ Tile::Tile(ResourceManager* rm, Terrain ter, TerrainGraphic floorTex) {
 }
 
 Tile::~Tile() {
-	clear();
+	clear(true);
 }
 
 void Tile::draw(sf::RenderWindow* win) {
@@ -49,22 +49,22 @@ void Tile::draw(sf::RenderWindow* win) {
 	}
 }
 
-void Tile::clear() {
+void Tile::clear(bool deleteContents) {
 	//set all occupants etc to NULL
 	for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 		//for each bucket, check the id of the sprite to see if it's allocated in RM
 		//if it is, remove it..
 		//NOTE: resource manager will ignore removal requests for sprites not assigned to it
 		if (decor[i] != NULL) {
-			rm->removeSprite(decor[i]->getIndex());
+			if(deleteContents) rm->removeSprite(decor[i]->getIndex());
 			decor[i] = NULL;
 		}
 		if (interactables[i] != NULL) {
-			rm->removeSprite(interactables[i]->getIndex());
+			if (deleteContents) rm->removeSprite(interactables[i]->getIndex());
 			interactables[i] = NULL;
 		}
 		if (occupants[i] != NULL) {
-			rm->removeSprite(occupants[i]->getIndex());
+			if (deleteContents) rm->removeSprite(occupants[i]->getIndex());
 			occupants[i] = NULL;
 		}
 	}
