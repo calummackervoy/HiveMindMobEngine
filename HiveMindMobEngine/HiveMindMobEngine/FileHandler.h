@@ -11,6 +11,7 @@
 
 using std::cout;
 using std::ifstream;
+using std::ofstream;
 using std::ios;
 using std::map;
 
@@ -22,7 +23,7 @@ public:
 
 	//opens a stream for reading (if true) & writing if false
 	void openStream(string source, bool read = true);
-	//closes active stream
+	//closes both streams
 	void closeStream();
 
 	//functions for reading specific values
@@ -30,8 +31,10 @@ public:
 	string getNextWord();
 	string getNextLine();
 
-	//TODO: functions for writing specific values
+	//functions for writing specific values
+	void writeLine(string line);
 
 protected:
-	ifstream* file;
+	ifstream* infile;
+	ofstream* outfile;
 };
