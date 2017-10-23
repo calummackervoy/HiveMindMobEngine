@@ -20,8 +20,6 @@ void Engine::startup(string configFileLocation) {
 
 	//read in the configuration options
 	readEngineConfig(configFileLocation);
-
-	scene = new SceneManager(rm, r, file, setup.hatsLocation, setup.clothingLocation);
 }
 
 DeviceResponse Engine::run() {
@@ -34,7 +32,6 @@ void Engine::shutdown() {
 	delete p;
 	delete io;
 	delete r;
-	delete scene;
 	//delete state;
 	delete audio;
 	delete anim;

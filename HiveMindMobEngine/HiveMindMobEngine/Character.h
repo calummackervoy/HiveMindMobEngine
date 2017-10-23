@@ -1,11 +1,12 @@
 #pragma once
 #include <algorithm>
 #include "FileHandler.h"
+#include "Wardrobe.h"
+#include "CharacterGameSprite.h"
 #include "Tools.h"
 #include "rand.h"
 #include "Skill.h"
 #include "Group.h"
-#include "CharacterSpriteManager.h"
 #include "Gender.h"
 #include "Culture.h"
 #include "Emotion.h"
@@ -37,13 +38,12 @@ public:
 	//inline uint getHomeRegion() {return homeRegion;};
 	//inline uint8_t getLevel() {return level;};
 	inline uint8_t getAge() {return age;};
-	inline CharacterSpriteManager* getSpriteManager() {return spriteManager;};
 	inline Gender getGender() {return gender;};
-	inline Emotion getExpression() {return spriteManager->getExpression();};
+	inline Emotion getExpression() {return sprite->getExpression();};
 
 	//void setLevel(int val) {level = val;};
 	inline void setGender(Gender val) {gender = val;};
-	inline void setExpression(Emotion e) {spriteManager->setExpression(e);};
+	inline void setExpression(Emotion e) {sprite->setExpression(e);};
 
 	Trait getTraitAt(TraitType type, int i);
 	inline Skill getSkillAt(int i) {
@@ -92,11 +92,12 @@ protected:
 
 	//TODO
 	//string* saveLocation; //location on disk the character is to be saved in
+	//character sprite to manage expression, clothing etc
+	CharacterGameSprite* sprite;
 	//storage of body, hat & clothing textures
 	string* bodyTex;
 	int hatIndex;
 	int clothingIndex;
-	CharacterSpriteManager* spriteManager;
 	uint seed; //TODO: maintaining consistent state?
 	//uint homeRegion;
 	//uint8_t level;

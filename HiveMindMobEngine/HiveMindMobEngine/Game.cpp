@@ -89,8 +89,8 @@ void Game::setupTester() {
 	//Region* region = new Region(e->getRm(), 0);
 
 	//read test character from config file
-	Character* c = new Character(e->getR(), e->getRm(), e->getScene()->getWardrobe(), e->getFile(), "../../assets/config/character/testcharacter.txt");
-	c->save("../../assets/config/character/testsave.txt");
+	Character* c = new Character(e->getR(), e->getRm(), new Wardrobe(e->getR(), e->getFile(), e->getConfig().hatsLocation, e->getConfig().clothingLocation), e->getFile(), "../../assets/config/character/testcharacter.txt");
+	//c->save("../../assets/config/character/testsave.txt");
 
 	//set character tile position & place sprite here
 	//TODO: set this position according to a tile position in the map

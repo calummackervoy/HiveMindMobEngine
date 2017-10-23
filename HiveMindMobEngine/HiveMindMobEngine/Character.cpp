@@ -5,7 +5,7 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 	this->seed = seed;
 
 	bodyTex = NULL;
-	spriteManager = NULL;
+	sprite = NULL;
 
 	generateCharacter(r, rm, w);
 }
@@ -13,7 +13,7 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, string fileLocation) {
 	this->file = file;
 
-	spriteManager = NULL;
+	sprite = NULL;
 	bodyTex = NULL;
 
 	readCharacterSave(r, rm, w, fileLocation);
@@ -24,7 +24,7 @@ Character::~Character() {
 }
 
 void Character::clear() {
-	delete spriteManager;
+	delete sprite;
 	delete bodyTex;
 }
 
@@ -33,7 +33,7 @@ void Character::generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w)
 	clear();
 
 	//initialise sprite manager & give random clothing
-	spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(DEF_CHAR_SKIN));
+	//sprite = new CharacterSpriteManager(rm, w, r->getTexture(DEF_CHAR_SKIN));
 
 	//TODO: initialise cultures to NULL (in a general-purpose auxillary function?)
 
