@@ -5,8 +5,6 @@
 //Author: Calum Mackervoy
 //Purpose: Holds and manages a sound buffer
 
-using std::string;
-
 class AudioSource {
 public:
 	//default sets them as -1
@@ -14,7 +12,7 @@ public:
 	~AudioSource();
 
 	//load audio source from file
-	void loadFromFile(int id, string fileLocation);
+	void loadFromFile(int id, std::string fileLocation);
 	//wipe the current audio source
 	void clear();
 

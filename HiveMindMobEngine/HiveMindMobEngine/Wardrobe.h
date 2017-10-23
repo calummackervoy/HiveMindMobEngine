@@ -18,7 +18,7 @@ struct HatClothingPair {
 
 class Wardrobe {
 public:
-    Wardrobe(Renderer* r, FileHandler* file, string hatsLocation, string clothingLocation);
+    Wardrobe(Renderer* r, FileHandler* file, std::string hatsLocation, std::string clothingLocation);
     ~Wardrobe();
 
     //select a random hat/clothing from params
@@ -45,5 +45,5 @@ private:
     Element* convertToElement(HatClothing* hc);
 
 	//method for reading in a Wardrobe config file
-	void readWardrobe(bool hats, string configLocation);
+	void readWardrobe(bool hats, std::string configLocation);
 };

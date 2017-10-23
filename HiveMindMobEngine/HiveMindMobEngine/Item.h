@@ -1,9 +1,6 @@
 #pragma once
 #include "Typedef.h"
-#include <string>
 #include "Drug.h"
-
-using std::string;
 
 enum ItemType : uint8_t {
 	ITEM_NULL,
@@ -14,8 +11,8 @@ enum ItemType : uint8_t {
 };
 
 struct Item {
-	string name = "DEFAULT_ITEM_NAME";
-	string desc = "DEFAULT_ITEM_DESC";
+	std::string name = "DEFAULT_ITEM_NAME";
+	std::string desc = "DEFAULT_ITEM_DESC";
 	int val = 1;
 	sint id = -1;
 	ItemType type = ITEM_NULL;

@@ -3,7 +3,7 @@
 #include "ResourceManager.h"
 #include "Typedef.h"
 #include "Terrain.h"
-#include "GameSprite.h"
+#include "CharacterGameSprite.h"
 #include "Logger.h"
 
 const suint TILE_SIZE = 64;
@@ -32,7 +32,7 @@ public:
 			for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 				if (occupants[i] == NULL) {
 					rm->addSprite(s);
-					occupants[i] = s;
+					occupants[i] = (CharacterGameSprite*)s;
 
 					//set the position to the bottom-centre of this tile
 					tieSpriteToBottom(occupants[i]);
@@ -141,7 +141,7 @@ protected:
 	//list of interactive/item sprites/objects on the tile
 	GameSprite* interactables[MAX_TILE_OCCUPANTS];
 	//list of sprites inside of it
-	GameSprite* occupants[MAX_TILE_OCCUPANTS];
+	CharacterGameSprite* occupants[MAX_TILE_OCCUPANTS];
 	//if tile has a walkable roof
 	Tile* roof;
 	//terrain info

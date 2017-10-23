@@ -19,6 +19,13 @@ CharacterGameSprite::~CharacterGameSprite() {
 }
 
 void CharacterGameSprite::setWorldPosition(float x, float y) {
+	setWorldPosition(sf::Vector2f(x, y));
+}
+void CharacterGameSprite::setWorldPosition(const sf::Vector2f &position) {
+	worldpos = position;
+	sf::Vector2f screenpos = worldToScreen(worldpos);
+	screenpos.y -= z;
+	setPosition(screenpos);
 	/*
 	if(element != NULL && element->model != NULL) {
 	((sf::Sprite*)element->model)->setPosition(pos);
@@ -32,7 +39,4 @@ void CharacterGameSprite::setWorldPosition(float x, float y) {
 	}
 	}
 	*/
-}
-void CharacterGameSprite::setWorldPosition(const sf::Vector2f &position) {
-	//TODO
 }

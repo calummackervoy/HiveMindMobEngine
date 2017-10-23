@@ -1,7 +1,10 @@
 #include <cstdint>
+#include <string>
 
 //Author: Calum Mackervoy
 //Purpose: Defines types the game will use regularly
+
+using std::string;
 
 typedef short int sint;
 typedef short unsigned int suint;

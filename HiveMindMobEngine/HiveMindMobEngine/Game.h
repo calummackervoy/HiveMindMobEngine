@@ -49,7 +49,7 @@ protected:
 	//method for initialising a new world
 	void initWorld(GameConfig config = {});
 	//method for loading the world from a saved game
-	void loadWorld(string saveGame);
+	void loadWorld(std::string saveGame);
 
 	//NOTE: temporary testing environment before worlds are being generated
 	void setupTester();

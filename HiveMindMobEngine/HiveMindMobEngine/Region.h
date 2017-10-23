@@ -11,7 +11,7 @@ const suint MAX_COUNTRY_SIZE = 16;
 const suint MAX_REGIONAL_CULTURES = MAX_GROUPS;
 
 struct Country {
-	string name = "DEFAULT_COUNTRY";
+	std::string name = "DEFAULT_COUNTRY";
 	int numRegions = 2;
 	int regionIds[MAX_COUNTRY_SIZE];
 };

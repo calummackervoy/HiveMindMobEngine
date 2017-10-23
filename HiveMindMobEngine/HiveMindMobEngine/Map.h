@@ -3,12 +3,9 @@
 #include "RendererConfig.h"
 #include "FileHandler.h"
 #include "Tile.h"
-#include <string>
 
 //Author: Calum Mackervoy
 //Purpose: Base class for all types of map-management
-
-using std::string;
 
 //NOTE: map tiles are organised in 2D array like so: map[x][y]
 class Map {
@@ -18,7 +15,7 @@ public:
 
 	//reading in a map
 	//files should have 1 int for size, then 2 ints per tile- one for terrain type and one for terrain graphic
-	void readMap(FileHandler* file, string mapLocation);
+	void readMap(FileHandler* file, std::string mapLocation);
 	//setting a new map
 	//void setMap(string mapLocation) { map = FileHandler::readMap(mapLocation); };
 

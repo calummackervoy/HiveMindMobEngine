@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include <iostream>
 
 //Author: Calum Mackervoy
@@ -8,18 +7,17 @@
 
 using std::cout;
 using std::endl;
-using std::string;
 
 class Logger {
 public:
-	inline static void logMessage(string message) {
+	inline static void logMessage(std::string message) {
 		cout << message << endl;
 	};
-	inline static void logError(string source, string error) {
+	inline static void logError(std::string source, std::string error) {
 		cout << "[ERR-" << source << "] " << error << endl;
 	}
 	//overload passing an int to the error
-	inline static void logError(string source, string error, string key, int val) {
+	inline static void logError(std::string source, std::string error, std::string key, int val) {
 		cout << "[ERR-" << source << "] " << error << " " << key << ": " << val << endl;
 	}
 };

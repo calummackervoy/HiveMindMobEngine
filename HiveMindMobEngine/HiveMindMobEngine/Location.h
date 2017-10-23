@@ -1,9 +1,6 @@
 #pragma once
 #include "Save.h"
 #include "RendererConfig.h"
-#include <string>
-
-using std::string;
 
 class Location {
 public:
@@ -14,7 +11,7 @@ public:
 
 protected:
 	Element graphic;
-	string name;
+	std::string name;
 	uint id;
 	uint ownerGroupId;
 	LocationType type;

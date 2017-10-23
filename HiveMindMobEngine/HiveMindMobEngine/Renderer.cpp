@@ -35,7 +35,7 @@ sf::Texture* Renderer::getTexture(string filepath, bool smooth) {
 	sf::Texture* texture = new sf::Texture();
 	if (!texture->loadFromFile(filepath)) {
 		std::cout << "Failed to load texture" << std::endl;
-		//texture = sf::Texture(); //default
+		texture->loadFromFile(DEF_CHAR_SKIN); //resort to default
 	}
 	if (smooth) {
 		texture->setSmooth(true); //makes boundaries less visible

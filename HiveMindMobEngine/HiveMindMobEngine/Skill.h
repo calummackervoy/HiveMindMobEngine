@@ -1,8 +1,5 @@
 #pragma once
-#include <string>
 #include "TypeDef.h"
-
-using std::string;
 
 enum SkillType : uint8_t {
 	MISC_SKILL = 0,
@@ -34,8 +31,8 @@ enum KnowledgeType : uint8_t {
 };
 
 struct Skill {
-	string name = "";
-	string desc = "";
+	std::string name = "";
+	std::string desc = "";
 	suint level = 1;
 	suint id;
 	SkillType type = MISC_SKILL;

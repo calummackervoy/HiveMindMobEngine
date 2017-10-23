@@ -1,6 +1,6 @@
 #include "Wardrobe.h"
 
-Wardrobe::Wardrobe(Renderer* r, FileHandler* file, string hatsLocation, string clothingLocation) {
+Wardrobe::Wardrobe(Renderer* r, FileHandler* file, std::string hatsLocation, std::string clothingLocation) {
     this->r = r;
 	this->file = file;
 	hats = new HatClothing*[MAX_CLOTHING];
@@ -73,13 +73,13 @@ Element* Wardrobe::convertToElement(HatClothing* hc) {
     return e;
 }
 
-void Wardrobe::readWardrobe(bool hats, string configLocation) {
+void Wardrobe::readWardrobe(bool hats, std::string configLocation) {
 	file->openStream(configLocation);
 
 	//obtain how many hats/clothes there are to read (& bounds check)
 	int count = std::min(file->getNextInt(), (int)MAX_CLOTHING);
 
-	string textureLocation = "";
+	std::string textureLocation = "";
 	suint id = 0; //TODO: this is as-yet unused
 	CharacterClass charClass = MALE_AVERAGE;
 	ClothingStyle style = CLOTHING_EVERYDAY;

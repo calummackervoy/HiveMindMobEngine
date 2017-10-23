@@ -37,5 +37,5 @@ protected:
 	map<DeviceKeyBinding, int> bindings;
 
 	//method for reading in the bindings
-	virtual void readBindings(string configLocation);
+	virtual void readBindings(std::string configLocation);
 };

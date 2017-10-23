@@ -1,6 +1,6 @@
 #include "Engine.h"
 
-Engine::Engine(string configFileLocation) {
+Engine::Engine(std::string configFileLocation) {
 	//run startup operations
 	startup(configFileLocation);
 }
@@ -9,7 +9,7 @@ Engine::~Engine() {
 	shutdown();
 }
 
-void Engine::startup(string configFileLocation) {
+void Engine::startup(std::string configFileLocation) {
 	rm = new ResourceManager();
 	file = new FileHandler();
 	anim = new Animation(rm);
@@ -39,7 +39,7 @@ void Engine::shutdown() {
 	delete this;
 }
 
-void Engine::readEngineConfig(string configFileLocation) {
+void Engine::readEngineConfig(std::string configFileLocation) {
 	setup = {};
 
 	file->openStream(configFileLocation);

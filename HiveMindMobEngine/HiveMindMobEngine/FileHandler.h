@@ -18,22 +18,22 @@ using std::map;
 class FileHandler {
 public:
 	//read defaults to true and source to empty
-	FileHandler(string source = "", bool read = true);
+	FileHandler(std::string source = "", bool read = true);
 	~FileHandler();
 
 	//opens a stream for reading (if true) & writing if false
-	void openStream(string source, bool read = true);
+	void openStream(std::string source, bool read = true);
 	//closes both streams
 	void closeStream();
 
 	//functions for reading specific values
 	int getNextInt();
-	string getNextWord();
-	string getNextLine();
+	std::string getNextWord();
+	std::string getNextLine();
 
 	//functions for writing specific values
-	void write(string word);
-	void writeLine(string line);
+	void write(std::string word);
+	void writeLine(std::string line);
 
 protected:
 	ifstream* infile;

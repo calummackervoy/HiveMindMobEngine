@@ -1,11 +1,8 @@
 #pragma once
-#include <string>
 #include "Typedef.h"
 
 //Author: Calum Mackervoy
 //Purpose: Define clothing-related structs to be used in FileHandler & Wardrobe
-
-using std::string;
 
 //enum to represent the different sizes & shapes of sprite
 //NOTE: clothing only applies to one of these classes
@@ -27,7 +24,7 @@ enum ClothingStyle : uint8_t {
 };
 
 struct HatClothing {
-    string textureLocation = "";
+    std::string textureLocation = "";
     suint id = 0; //TODO: this is as-yet unused
     CharacterClass charClass = MALE_AVERAGE;
     ClothingStyle style = CLOTHING_EVERYDAY;

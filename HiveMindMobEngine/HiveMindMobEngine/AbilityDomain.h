@@ -2,7 +2,7 @@
 #include <string>
 #include "TypeDef.h"
 
-using std::string;
+
 
 enum DroneTypes : uint8_t {
 	COPTER_RECON,

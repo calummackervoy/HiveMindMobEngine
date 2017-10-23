@@ -3,6 +3,7 @@
 
 //TODO: support for different sized windows
 
+const std::string DEF_CHAR_SKIN = "../../assets/sprites/characters/individual/testchar_sw.png";
 const int MAX_ELEMS = 128; //max graphical elements in a scene
 const int WIN_HEIGHT = 1000;
 const int WIN_WIDTH = 1800;

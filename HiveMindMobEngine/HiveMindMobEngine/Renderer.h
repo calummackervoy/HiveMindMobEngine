@@ -7,7 +7,6 @@
 //Author: Calum Mackervoy
 //Purpose: Renderer subsystem, manages graphics
 
-using std::string;
 using sf::CircleShape;
 
 class Renderer {
@@ -16,13 +15,13 @@ public:
 	~Renderer();
 
 	//method for generating a sprite
-	Element* getSprite(string filepath, sf::Vector2f pos, bool smooth = false);
+	Element* getSprite(std::string filepath, sf::Vector2f pos, bool smooth = false);
 
 	//method for retreiving a texture from file
-	sf::Texture* getTexture(string filepath, bool smooth = true);
+	sf::Texture* getTexture(std::string filepath, bool smooth = true);
 
 	//method for constructing an SFML text object
-	sf::Text* getText(string message, sf::Font* font,
+	sf::Text* getText(std::string message, sf::Font* font,
 		int size = 24, sf::Color colour = sf::Color::Black);
 
 	//method for generating a triangle-fan shape

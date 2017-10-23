@@ -24,7 +24,7 @@ Map::Map(ResourceManager* rm, suint size) {
 Map::~Map() {
 	delete[] map;
 }
-void Map::readMap(FileHandler* file, string mapLocation) {
+void Map::readMap(FileHandler* file, std::string mapLocation) {
 	//open stream
 	file->openStream(mapLocation, true);
 

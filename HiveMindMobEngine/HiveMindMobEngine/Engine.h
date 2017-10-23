@@ -1,5 +1,4 @@
 #pragma once
-#include <string>
 #include "Renderer.h"
 #include "Physics.h"
 #include "InputHandler.h"
@@ -8,14 +7,12 @@
 #include "Config.h"
 #include "Audio.h"
 
-using std::string;
-
 //Author: Calum Mackervoy
 //Purpose: Central class for managing the core-engine (renderer, physics etc)
 
 class Engine {
 public:
-	Engine(string configFileLocation);
+	Engine(std::string configFileLocation);
 	~Engine();
 
 	//accessing components externally
@@ -46,8 +43,8 @@ private:
 	EngineConfig setup;
 
 	//startup routine
-	void startup(string configFileLocation);
+	void startup(std::string configFileLocation);
 
 	//reading engine config options
-	void readEngineConfig(string configFileLocation);
+	void readEngineConfig(std::string configFileLocation);
 };

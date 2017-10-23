@@ -1,6 +1,6 @@
 #include <string>
 
-using std::string;
+
 
 //Author: Calum Mackervoy
 //Purpose: Models a generated or random event

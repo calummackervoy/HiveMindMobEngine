@@ -53,8 +53,8 @@ struct Religion {
 };
 
 struct Culture {
-	string name = "DEFAULT_CULTURE";
-	string desc = "DEFAULT_CULTURE_DESC";
+	std::string name = "DEFAULT_CULTURE";
+	std::string desc = "DEFAULT_CULTURE_DESC";
 	Culture* parent = NULL;
 	Religion religion;
 	SpeciesType species = NO_EXCLUSIVITY;

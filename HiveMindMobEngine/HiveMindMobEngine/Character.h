@@ -15,7 +15,6 @@
 
 const uint8_t MAX_TRAITS = 8;
 const uint8_t MAX_SKILLS = 16;
-const string DEF_CHAR_SKIN = "../../assets/sprites/characters/individual/testchar_sw.png";
 
 //TODO: store config location
 class Character {
@@ -23,16 +22,16 @@ public:
 	//procedurally generate a character
 	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed = -1);
 	//load a saved character
-	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, string fileLocation);
+	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, std::string fileLocation);
 	~Character();
 
 	//TODO: reset a character (or initialise) by a generated seed
 	void generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w);
 	//reset a character (or initialise) according to a saved one
-	void readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, string fileLocation);
+	void readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, std::string fileLocation);
 
 	//save a character
-	void save(string location);
+	void save(std::string location);
 
 	uint getSeed() {return seed;};
 	//inline uint getHomeRegion() {return homeRegion;};
@@ -40,6 +39,7 @@ public:
 	inline uint8_t getAge() {return age;};
 	inline Gender getGender() {return gender;};
 	inline Emotion getExpression() {return sprite->getExpression();};
+	inline CharacterGameSprite* getSprite() { return sprite; };
 
 	//void setLevel(int val) {level = val;};
 	inline void setGender(Gender val) {gender = val;};
@@ -76,7 +76,7 @@ public:
 		ToleranceLevel strengthLevel);
 
 protected:
-	string name;
+	std::string name;
 	//trait categories
 	Trait mentalTraits[MAX_TRAITS];
 	Trait injuryTraits[MAX_TRAITS];
@@ -95,7 +95,7 @@ protected:
 	//character sprite to manage expression, clothing etc
 	CharacterGameSprite* sprite;
 	//storage of body, hat & clothing textures
-	string* bodyTex;
+	std::string* bodyTex;
 	int hatIndex;
 	int clothingIndex;
 	uint seed; //TODO: maintaining consistent state?

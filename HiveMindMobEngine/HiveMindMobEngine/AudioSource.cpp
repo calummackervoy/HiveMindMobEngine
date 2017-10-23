@@ -5,7 +5,7 @@ AudioSource::AudioSource() {
 	clip = new sf::SoundBuffer;
 }
 
-void AudioSource::loadFromFile(int id, string fileLocation) {
+void AudioSource::loadFromFile(int id, std::string fileLocation) {
 	this->id = id;
 
 	if (!clip->loadFromFile(fileLocation)) {

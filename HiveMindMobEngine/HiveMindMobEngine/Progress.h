@@ -1,12 +1,9 @@
 #pragma once
 #include "Typedef.h"
 #include "ToleranceLevel.h"
-#include <string>
 
 //Author: Calum Mackervoy
 //Purpose: To keep track of different progress-related mechanisms
-
-using std::string;
 
 const suint MAX_PROGRESS = 128;
 const suint PROGRESS_MAX_PRE_REQS = 4;
@@ -23,8 +20,8 @@ enum TechType : uint8_t {
 };
 
 struct Progress {
-	string name = "DEFAULT_NAME";
-	string desc = "DEFAULT_DESC";
+	std::string name = "DEFAULT_NAME";
+	std::string desc = "DEFAULT_DESC";
 	sint prereqs[4] = { -1,-1,-1,-1 };
 	sint id = -1; //flags null progress
 	uint8_t type = 0;

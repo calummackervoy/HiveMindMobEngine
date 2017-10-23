@@ -6,15 +6,13 @@
 #include <map>
 #include <SFML\Graphics.hpp>
 
-using std::string;
-
 //the maximum size of each axis (always square maps)
 const uint MAX_MAP_SIZE = 20;
 
 //parameters for the engine
 struct EngineConfig {
-	string hatsLocation;
-	string clothingLocation;
+	std::string hatsLocation;
+	std::string clothingLocation;
 };
 
 enum WealthGrowth : uint8_t {
@@ -40,8 +38,8 @@ struct MapConfig {
 
 struct WorldParams {
 	MapConfig mapGen = {};
-	string techConfig = "";
-	string map = "";
+	std::string techConfig = "";
+	std::string map = "";
 	suint numRegions = 32;
 	GenerationMode worldPower = STABLE_POWER;
 	WealthGrowth growth = OSCILLATING_GROWTH;

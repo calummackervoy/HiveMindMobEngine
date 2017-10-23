@@ -114,7 +114,7 @@ public:
 		}
 		return sources[i];
 	}
-	int addAudioSource(string fileLocation);
+	int addAudioSource(std::string fileLocation);
 	void removeAudioSource(int id);
 
 	//accessing/adding/removing animators from animation's storage

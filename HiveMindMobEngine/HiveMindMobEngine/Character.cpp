@@ -10,7 +10,7 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 	generateCharacter(r, rm, w);
 }
 
-Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, string fileLocation) {
+Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, std::string fileLocation) {
 	this->file = file;
 
 	sprite = NULL;
@@ -42,7 +42,7 @@ void Character::generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w)
 	//TODO: FINISH ME
 }
 
-void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, string fileLocation) {
+void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, std::string fileLocation) {
 	//make sure no memory will be leaked
 	clear();
 
@@ -81,19 +81,19 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 	//TODO: copy skills, groups and cultures across
 
 	//initialise a SpriteManager from the save
-	seed = 1; //TODO: remove me when you bring code below back in
-	/*string nextString = file->getNextWord();
+	std::string nextString = file->getNextWord();
 	if (nextString != "") {
-		spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(nextString));
-		bodyTex = new string(nextString);
+		sprite = new CharacterGameSprite(r->getTexture(nextString));
+		bodyTex = new std::string(nextString);
 	}
 	else {
-		spriteManager = new CharacterSpriteManager(rm, w, r->getTexture(DEF_CHAR_SKIN));
+		sprite = new CharacterGameSprite(r->getTexture(DEF_CHAR_SKIN));
 		bodyTex = NULL;
 	}
 
 	//initialise a hat too if instructed
-	count = file->getNextInt();
+	seed = 1; //TODO: remove me when you bring code below back in
+	/*count = file->getNextInt();
 	if (count >= 0) {
 		spriteManager->setHat(w->getHatAt(count));
 		hatIndex = count;
@@ -117,7 +117,7 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 	generateResolve(seed);
 }
 
-void Character::save(string location) {
+void Character::save(std::string location) {
 	file->openStream(location, false);
 
 	//obtain counts for trait types
@@ -159,7 +159,11 @@ void Character::save(string location) {
 	}
 	
 	//TODO: write skills, cultures & groups
-	//TODO: write graphics info
+	
+	//write texture location
+	file->writeLine("");
+	if(bodyTex != NULL) file->writeLine(*bodyTex);
+	else file->writeLine(DEF_CHAR_SKIN);
 
 	file->closeStream();
 }

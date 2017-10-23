@@ -26,8 +26,8 @@ enum LocationType : uint8_t {
 };
 
 struct LocationSave {
-	string name = "DEFAULT_NAME";
-	string textureLocation;
+	std::string name = "DEFAULT_NAME";
+	std::string textureLocation;
 	uint ownerGroupId;
 	LocationType type = MISC_LOCATION;
 	bool destroyed = false;
