@@ -41,10 +41,7 @@ void Tile::draw(sf::RenderWindow* win) {
 	}
 	for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {
 		if (occupants[i] != NULL) {
-			//drawme = *occupants[i];
-			drawme = sf::Sprite(*occupants[i]);
-			drawme.setPosition(worldToScreen(occupants[i]->getWorldPosition()));
-			win->draw(drawme);
+			occupants[i]->draw(win);
 		}
 	}
 }

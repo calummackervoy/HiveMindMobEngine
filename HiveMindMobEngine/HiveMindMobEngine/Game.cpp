@@ -94,7 +94,9 @@ void Game::setupTester() {
 
 	//set character tile position & place sprite here
 	//TODO: set this position according to a tile position in the map
-	GameSprite* g = new GameSprite(e->getR()->getTexture(DEF_CHAR_SKIN));
+	c->getSprite()->setClothing(new GameSprite(e->getR()->getTexture("../../assets/sprites/characters/clothing/testhat.png")),
+		new GameSprite(e->getR()->getTexture("../../assets/sprites/characters/clothing/testshirt.png")),
+		new GameSprite(e->getR()->getTexture("../../assets/sprites/characters/clothing/testtroosers.png")));
 	map->insertSprite(0,0,e->getRm(), c->getSprite(), SPRITETYPE_OCCUPANT);
 	//c->getSpriteManager()->setPosition(sf::Vector2f(500,500));
 

@@ -4,7 +4,9 @@ CharacterGameSprite::CharacterGameSprite(sf::Texture* tex, suint z,
 	sf::Vector2f worldPos) : GameSprite(tex, z, worldPos, GAMESPRITE_CHARACTER) {
 	expression = EMOTION_NEUTRAL;
 
-	//bodyCentre half of the model size
+	hat = NULL;
+	top = NULL;
+	bottom = NULL;
 
 	//select random hat/clothing
 	//TODO: replace with more meaningful generation & don't just use default params
@@ -15,7 +17,9 @@ CharacterGameSprite::CharacterGameSprite(sf::Texture* tex, suint z,
 }
 
 CharacterGameSprite::~CharacterGameSprite() {
-
+	delete hat;
+	delete top;
+	delete bottom;
 }
 
 void CharacterGameSprite::setWorldPosition(float x, float y) {
@@ -26,17 +30,30 @@ void CharacterGameSprite::setWorldPosition(const sf::Vector2f &position) {
 	sf::Vector2f screenpos = worldToScreen(worldpos);
 	screenpos.y -= z;
 	setPosition(screenpos);
-	/*
-	if(element != NULL && element->model != NULL) {
-	((sf::Sprite*)element->model)->setPosition(pos);
+}
 
-	if(clothing != NULL && clothing->model != NULL) {
-	((sf::Sprite*)clothing->model)->setPosition(pos + bodyCentre);
+void CharacterGameSprite::draw(sf::RenderWindow* win) {
+	//set position of me
+	sf::Vector2f pos = worldToScreen(worldpos);
+	setPosition(pos);
+	//set position of my clothes, ensure they're drawn in the same way as me..
+	if (hat != NULL) {
+		hat->setOrigin(this->getOrigin());
+		hat->setPosition(pos);
+	}
+	if (top != NULL) {
+		top->setOrigin(this->getOrigin());
+		top->setPosition(pos);
+	}
+	if (bottom != NULL) {
+		bottom->setOrigin(this->getOrigin());
+		bottom->setPosition(pos);
 	}
 
-	if(hat != NULL && hat->model != NULL) {
-	((sf::Sprite*)hat->model)->setPosition(pos + headCentre);
-	}
-	}
-	*/
+	//draw me
+	win->draw(*this);
+	//draw my clothes
+	if (hat != NULL) win->draw(*hat);
+	if (top != NULL) win->draw(*top);
+	if (bottom != NULL) win->draw(*bottom);
 }

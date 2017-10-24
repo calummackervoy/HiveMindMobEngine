@@ -21,10 +21,30 @@ public:
 	void setWorldPosition(float x, float y) override;
 	void setWorldPosition(const sf::Vector2f &position) override;
 
+	//function to draw a character & it's clothing attachments
+	void draw(sf::RenderWindow* win);
+
+	//clothing getters and setters TODO: make inline?
+	GameSprite* getHat() { return hat; };
+	GameSprite* getTop() { return top; };
+	GameSprite* getBottom() { return bottom; };
+	void setClothing(GameSprite* hat, GameSprite* top, GameSprite* bottom) {
+		this->hat = hat;
+		this->top = top;
+		this->bottom = bottom;
+	};
+	void setHat(GameSprite* val) { hat = val; };
+	void setTop(GameSprite* val) { top = val; };
+	void setBottom(GameSprite* val) { bottom = val; };
+
 	inline Emotion getExpression() { return expression; };
 	inline void setExpression(Emotion val) { expression = val; };
 
 protected:
-	//TODO: clothing etc
+	//clothing sprites
+	GameSprite* hat;
+	GameSprite* top;
+	GameSprite* bottom;
+
 	Emotion expression;
 };
