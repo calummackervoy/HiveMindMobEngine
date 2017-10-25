@@ -4,7 +4,10 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 	this->file = file;
 	this->seed = seed;
 
-	bodyTex = NULL;
+	bodyTex = "";
+	hatOptions = "";
+	topOptions = "";
+	bottomOptions = "";
 	sprite = NULL;
 
 	generateCharacter(r, rm, w);
@@ -14,7 +17,10 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 	this->file = file;
 
 	sprite = NULL;
-	bodyTex = NULL;
+	bodyTex = "";
+	hatOptions = "";
+	topOptions = "";
+	bottomOptions = "";
 
 	readCharacterSave(r, rm, w, fileLocation);
 }
@@ -25,7 +31,6 @@ Character::~Character() {
 
 void Character::clear() {
 	delete sprite;
-	delete bodyTex;
 }
 
 void Character::generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w) {
@@ -82,36 +87,55 @@ void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w,
 
 	//initialise a SpriteManager from the save
 	std::string nextString = file->getNextWord();
-	if (nextString != "") {
+	if (nextString.length() > 1) {
 		sprite = new CharacterGameSprite(r->getTexture(nextString));
-		bodyTex = new std::string(nextString);
+		bodyTex = nextString;
 	}
 	else {
 		sprite = new CharacterGameSprite(r->getTexture(DEF_CHAR_SKIN));
-		bodyTex = NULL;
+		bodyTex = "";
+	}
+	//repeat for the locations of the model's hats, tops and bottoms
+	int hatIndex;
+	nextString = file->getNextWord();
+	if (nextString.length() > 1) {
+		hatOptions = nextString;
+		hatIndex = file->getNextInt();
+	}
+	else {
+		hatOptions = "";
+		hatIndex = -1; //flag that no hat should be worn
 	}
 
-	//initialise a hat too if instructed
-	seed = 1; //TODO: remove me when you bring code below back in
-	/*count = file->getNextInt();
-	if (count >= 0) {
-		spriteManager->setHat(w->getHatAt(count));
-		hatIndex = count;
+	int topIndex;
+	nextString = file->getNextWord();
+	if (nextString.length() > 1) {
+		topOptions = nextString;
+		topIndex = file->getNextInt();
 	}
-	else hatIndex = -1;
+	else {
+		topOptions = "";
+		topIndex = -1; //flag that no top should be worn
+	}
 
-	//..and clothing
-	count = file->getNextInt();
-	if (count >= 0) {
-		spriteManager->setClothing(w->getClothingAt(count));
-		clothingIndex = count;
+	int bottomIndex;
+	nextString = file->getNextWord();
+	if (nextString.length() > 1) {
+		bottomOptions = nextString;
+		bottomIndex = file->getNextInt();
 	}
-	else clothingIndex = -1;
+	else {
+		bottomOptions = "";
+		bottomIndex = -1; //flag that no bottom should be worn
+	}
 
 	//finally read the seed value
-	seed = file->getNextInt();*/
+	seed = file->getNextInt();
 
 	file->closeStream();
+
+	//now that the stream has been closed dress the character based on read in options
+	dress(r, hatIndex, topIndex, bottomIndex);
 
 	//generate resolve
 	generateResolve(seed);
@@ -162,7 +186,7 @@ void Character::save(std::string location) {
 	
 	//write texture location
 	file->writeLine("");
-	if(bodyTex != NULL) file->writeLine(*bodyTex);
+	if(bodyTex != "") file->writeLine(bodyTex);
 	else file->writeLine(DEF_CHAR_SKIN);
 
 	file->closeStream();
@@ -344,4 +368,75 @@ void Character::generateResolve(int seed) {
 
 	//set this as the resolve
 	resolve = r;
+}
+
+void Character::dress(Renderer* r, int hatIndex, int topIndex, int bottomIndex) {
+	int count = 0;
+
+	//hat
+	sf::Texture* hat = NULL;
+	//check if a hat is to be worn
+	if (hatIndex >= 0) {
+		file->openStream(hatOptions);
+
+		count = file->getNextInt();
+
+		//read until you either run out of lines or you reach the item you're looking for
+		int i = 0;
+		while (i < count) {
+			if (i != hatIndex) file->getNextLine(); //skip the line
+			else {
+				hat = r->getTexture(file->getNextWord());
+				break;
+			}
+			i++;
+		}
+
+		file->closeStream();
+	}
+
+	//top
+	sf::Texture* top = NULL;
+	if (topIndex >= 0) {
+		file->openStream(topOptions);
+
+		count = file->getNextInt();
+
+		//read until you either run out of lines or you reach the item you're looking for
+		int i = 0;
+		while (i < count) {
+			if (i != topIndex) file->getNextLine(); //skip the line
+			else {
+				top = r->getTexture(file->getNextWord());
+				break;
+			}
+			i++;
+		}
+
+		file->closeStream();
+	}
+
+	//bottoms
+	sf::Texture* bottom = NULL;
+	if (bottomIndex >= 0) {
+		file->openStream(bottomOptions);
+
+		count = file->getNextInt();
+
+		//read until you either run out of lines or you reach the item you're looking for
+		int i = 0;
+		while (i < count) {
+			if (i != bottomIndex) file->getNextLine(); //skip the line
+			else {
+				bottom = r->getTexture(file->getNextWord());
+				break;
+			}
+			i++;
+		}
+
+		file->closeStream();
+	}
+
+	//dress the character sprite accordingly
+	sprite->setClothing(new GameSprite(hat), new GameSprite(top), new GameSprite(bottom));
 }

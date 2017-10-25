@@ -5,6 +5,7 @@ Rudolf Rocker
 1 7
 1 9
 ../../assets/sprites/characters/individual/testchar_sw.png
--1
-0
+../../assets/config/clothing/hats1.txt 0
+../../assets/config/clothing/tops1.txt 0
+../../assets/config/clothing/bottoms1.txt 0
 1

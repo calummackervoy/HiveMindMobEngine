@@ -92,12 +92,15 @@ protected:
 
 	//TODO
 	//string* saveLocation; //location on disk the character is to be saved in
+
 	//character sprite to manage expression, clothing etc
 	CharacterGameSprite* sprite;
 	//storage of body, hat & clothing textures
-	std::string* bodyTex;
-	int hatIndex;
-	int clothingIndex;
+	std::string bodyTex;
+	std::string hatOptions;
+	std::string topOptions;
+	std::string bottomOptions;
+
 	uint seed; //TODO: maintaining consistent state?
 	//uint homeRegion;
 	//uint8_t level;
@@ -106,4 +109,7 @@ protected:
 
 	//utility function to clear a character's memory
 	void clear();
+
+	//function to dress character based on index & config provided
+	void dress(Renderer* r, int hatIndex, int topIndex, int bottomIndex);
 };

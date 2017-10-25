@@ -1,0 +1,2 @@
+1
+../../assets/sprites/characters/clothing/testtroosers.png

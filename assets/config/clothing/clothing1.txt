@@ -1,4 +1,0 @@
-1
-../../assets/sprites/characters/clothing/1forwardedjumper.png
-0
-0
