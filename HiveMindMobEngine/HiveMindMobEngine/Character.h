@@ -112,4 +112,5 @@ protected:
 
 	//function to dress character based on index & config provided
 	void dress(Renderer* r, int hatIndex, int topIndex, int bottomIndex);
+	void dress(Renderer* r); //overload to randomly select
 };

@@ -3,6 +3,7 @@
 Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed) {
 	this->file = file;
 	this->seed = seed;
+	seedRand(seed);
 
 	bodyTex = "";
 	hatOptions = "";
@@ -15,6 +16,7 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 
 Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, std::string fileLocation) {
 	this->file = file;
+	seedRand(time(NULL));
 
 	sprite = NULL;
 	bodyTex = "";
@@ -350,19 +352,19 @@ void Character::generateResolve(int seed) {
 	//factor in traits which affect this
 	//brave/coward
 	if (hasTrait(TRAIT_PERSON_BRAVE, TRAIT_TYPE_PERSONALITY)) {
-		r += randSuint(50, 150, seed);
+		r += randSuint(50, 150);
 	}
 	else if (hasTrait(TRAIT_PERSON_COWARD, TRAIT_TYPE_PERSONALITY)) {
-		r -= randSuint(50, 150, seed);
+		r -= randSuint(50, 150);
 	}
 
 	//generate random number for remaining courage for normal range
 	else {
-		switch (randInt(0, 1, seed)) {
+		switch (randInt(0, 1)) {
 		case 0:
-			r -= randSuint(1, 50, seed);
+			r -= randSuint(1, 50);
 		case 1:
-			r += randSuint(1, 50, seed);
+			r += randSuint(1, 50);
 		}
 	}
 
@@ -438,5 +440,46 @@ void Character::dress(Renderer* r, int hatIndex, int topIndex, int bottomIndex) 
 	}
 
 	//dress the character sprite accordingly
-	sprite->setClothing(new GameSprite(hat), new GameSprite(top), new GameSprite(bottom));
+	GameSprite* h = NULL;
+	if (hat != NULL) h = new GameSprite(hat);
+
+	GameSprite* t = NULL;
+	if (top != NULL) t = new GameSprite(top);
+
+	GameSprite* b = NULL;
+	if (bottom != NULL) b = new GameSprite(bottom);
+	sprite->setClothing(h, t, b);
+}
+
+void Character::dress(Renderer* r) {
+	int count = 0;
+
+	//hat
+	//find out how many hats there are
+	file->openStream(hatOptions);
+	count = file->getNextInt();
+	file->closeStream();
+	//randomly select one (-1 for no hat)
+	int hatIndex = randInt(0, count);
+	if (hatIndex == count) hatIndex = -1; //none if out of bounds
+
+	//top
+	//find out how many tops there are
+	file->openStream(topOptions);
+	count = file->getNextInt();
+	file->closeStream();
+	//randomly select one (-1 for no top)
+	int topIndex = randInt(0, count);
+	if (topIndex == count) topIndex = -1; //none if out of bounds
+
+	//bottom
+	//find out how many tops there are
+	file->openStream(bottomOptions);
+	count = file->getNextInt();
+	file->closeStream();
+	//randomly select one (-1 for no bottom)
+	int bottomIndex = randInt(0, count);
+	if (bottomIndex == count) bottomIndex = -1; //none if out of bounds
+
+	dress(r, hatIndex, topIndex, bottomIndex);
 }
