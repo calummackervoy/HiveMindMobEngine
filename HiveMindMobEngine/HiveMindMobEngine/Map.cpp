@@ -1,6 +1,6 @@
 #include "Map.h"
 
-Map::Map(ResourceManager* rm, suint size) {
+Map::Map(Renderer* r, ResourceManager* rm, suint size) {
 	//mapType = MAP_WORLD;
 	this->rm = rm;
 	//enforce maximum map size
@@ -16,13 +16,23 @@ Map::Map(ResourceManager* rm, suint size) {
 	}
 
 	//mapCentre by default the middle of the map
-	mapCentre = sf::Vector2f((float)size * 0.5, (float)size* 0.5);
+	mapCentre = sf::Vector2i(size * 0.5, size* 0.5);
+	viewCentre = mapCentre;
+	//mapCentre = screenToWorld(r->getWindow()->getView().getCenter());
+	highlight = sf::Vector2i(0, 0);
+
+	//initialise the static sprites for highlighting declared in Tile.h
+	spriteHighlightHover = new GameSprite(r->getTexture("../../assets/sprites/ui/tile_highlight_yellow.png"));
 
 	first = true;
 }
 
 Map::~Map() {
 	delete[] map;
+
+	//delete the static sprites declared in Tile.h
+	delete spriteHighlightHover;
+	spriteHighlightHover = NULL;
 }
 void Map::readMap(FileHandler* file, std::string mapLocation) {
 	//open stream
@@ -47,8 +57,8 @@ void Map::readMap(FileHandler* file, std::string mapLocation) {
 			graphic = (TerrainGraphic)file->getNextInt();
 			map[i][j] = new Tile(rm, terType, graphic);
 
-			x = i * TILE_SIZE;
-			y = j * TILE_SIZE;
+			x = (i * TILE_SIZE) + TILE_SIZE * 0.5f;
+			y = (j * TILE_SIZE) + TILE_SIZE * 0.5f;
 
 			map[i][j]->setWorldPos(sf::Vector2f(x, y));
 			//std::cout << "[READ MAP " << i << "]: (" << x << ", " << y << ")" << std::endl;
@@ -67,7 +77,8 @@ void Map::resize(suint size) {
 	this->size = size * size;
 	
 	//update mapCentre to middle of the new map
-	mapCentre = sf::Vector2f((float)size * 0.5, (float)size* 0.5);
+	mapCentre = sf::Vector2i(size * 0.5, size* 0.5);
+	viewCentre = mapCentre;
 }
 
 void Map::clear() {
@@ -81,21 +92,43 @@ void Map::clear() {
 	}
 }
 
-sf::Vector2i Map::convertToTile(const sf::Vector2f pos) {
-	return sf::Vector2i(pos.x / TILE_SIZE, pos.y / TILE_SIZE);
+sf::Vector2i Map::convertScreenToTile(const sf::RenderWindow* win, sf::Vector2i screenpos) {
+	//convert mouse position to world
+	screenpos = (sf::Vector2i)screenToWorld((sf::Vector2f)screenpos);
+
+	//get it relative to the map's centrepoint
+	sf::Vector2i temp = (sf::Vector2i)map[mapCentre.x][mapCentre.y]->getWorldPos();
+	//off by half a tile error workaround
+	screenpos = (temp - screenpos) + sf::Vector2i(TILE_SIZE * 0.5f, TILE_SIZE * 0.5f);
+
+	//calculate how many tiles from centre you are
+	sf::Vector2i tilesFromCentre = sf::Vector2i((screenpos.x / TILE_SIZE), (screenpos.y / TILE_SIZE));
+
+	//fetch this tile using the centre
+	sf::Vector2i result = mapCentre - tilesFromCentre;
+
+	//off-by-one errors for negative values
+	if (screenpos.x > 0) result.x -= 1;
+	if (screenpos.y < 0) result.y += 1;
+
+	return result;
 }
 
 void Map::draw(sf::RenderWindow* win) {
 	//set view
 	sf::View view = win->getView();
 	//reverse project center
-	sf::Vector2f centre = worldToScreen(mapCentre);
+	sf::Vector2f centre = worldToScreen(map[viewCentre.x][viewCentre.y]->getWorldPos());
 	view.setCenter(centre);
 	win->setView(view);
 
 	for (int i = 0; i < sizeAxis; i++) {
 		for (int j = 0; j < sizeAxis; j++) {
-			if (map[i][j] != NULL) map[i][j]->draw(win);
+			if (map[i][j] != NULL) {
+				//draw with a highlight or not
+				if(i == highlight.x && j == highlight.y) map[i][j]->draw(win, spriteHighlightHover);
+				else map[i][j]->draw(win, NULL);
+			}
 		}
 	}
 
@@ -164,4 +197,8 @@ void Map::draw(sf::RenderWindow* win) {
 		nodey = nodey + rowincy;
 	}
 	first = false;*/
+}
+
+void Map::highlightHover(sf::RenderWindow* win, sf::Vector2i mousepos) {
+	highlight = convertScreenToTile(win, mousepos);
 }

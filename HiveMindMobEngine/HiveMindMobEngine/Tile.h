@@ -6,14 +6,21 @@
 #include "CharacterGameSprite.h"
 #include "Logger.h"
 
-const suint TILE_SIZE = 64;
 const suint MAX_TILE_OCCUPANTS = 4;
 
-enum SpriteType {
+enum SpriteType : uint8_t {
 	SPRITETYPE_OCCUPANT,
 	SPRITETYPE_DECOR,
 	SPRITETYPE_INTERACTABLE
 };
+
+/*enum HighlightSetting : uint8_t {
+	HIGHLIGHT_NONE,
+	HIGHLIGHT_HOVER,
+	HIGHLIGHT_SElECTED,
+	HIGHLIGHT_ROUTE,
+	HIGHLIGHT_IMPASSABLE
+};*/
 
 class Tile
 {
@@ -22,7 +29,7 @@ public:
 	~Tile();
 
 	//function for drawing a tile(rendering)
-	void draw(sf::RenderWindow* win);
+	void draw(sf::RenderWindow* win, GameSprite* highlight);
 	void clear(bool deleteContents);
 
 	//insert/remove a sprite pointer in local pointage & get the resource manager to manage
@@ -126,11 +133,13 @@ public:
 	inline Tile* getRoof() { return roof; };
 	inline Terrain getTerrain() { return terrain; };
 	inline TerrainGraphic getFloorTex() { return floorTex; };
+	//inline HighlightSetting getHighlight() { return highlight; };
 	//setters
 	inline void setWorldPos(sf::Vector2f val) { worldpos = val; };
 	inline void setRoof(Tile* val) { delete roof; roof = val; };
 	inline void setTerrain(Terrain val) { terrain = val; };
 	inline void setFloorTex(TerrainGraphic val) { floorTex = val; };
+	//inline void setHighlight(HighlightSetting val) { highlight = val; };
 
 protected:
 	//position in the world
@@ -147,6 +156,8 @@ protected:
 	//terrain info
 	Terrain terrain;
 	TerrainGraphic floorTex;
+	//tells the draw function whether to add a highlight to the tile
+	//HighlightSetting highlight;
 
 	//auxillary function to set the position of a sprite to the bottom of the tile
 	void tieSpriteToBottom(GameSprite* s);

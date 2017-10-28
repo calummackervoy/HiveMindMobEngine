@@ -3,6 +3,7 @@
 Game::Game(Engine* e, GameConfig config) {
     this->e = e;
     mode = MENU;
+	timer = Timer();
 
 	//display the main menu screen
 	MenuSetup setup;
@@ -27,6 +28,9 @@ void Game::run() {
         DeviceResponse r = e->run();
 
 		if (mode == WORLD && map != NULL) {
+			//highlight tile being hovered over
+			if (!r.click) map->highlightHover(e->getR()->getWindow(), r.clickPos);
+
 			//draw map, then objects
 			map->draw(e->getR()->getWindow());
 		}
@@ -45,7 +49,7 @@ void Game::run() {
 					break;
 				case MENU_WORLD_NEW:
 					//TODO: navigate to the world setup screen instead
-					cout << "new world being generated.." << std::endl;
+					//cout << "new world being generated.." << std::endl;
 					e->getR()->clearAll();
 					mode = WORLD;
 					setupTester();
@@ -62,20 +66,36 @@ void Game::run() {
 		case DEVICE_PAUSE:
 			break;
 		case DEVICE_CAMERA_UP:
-			//subtract on the X axis to head north-west
-			map->moveMapCentre(-CAMERA_SPEED, 0.0f);
+			//ensure camera does not move too fast
+			if (timer.hasPassed(CAMERA_SPEED)) {
+				//subtract on the X axis to head north-west
+				map->moveViewCentre(-1, 0);
+				timer.stop();
+			}
 			break;
 		case DEVICE_CAMERA_DOWN:
-			//add on the X axis to head south-east
-			map->moveMapCentre(CAMERA_SPEED, 0.0f);
+			//ensure camera does not move too fast
+			if (timer.hasPassed(CAMERA_SPEED)) {
+				//add on the X axis to head south-east
+				map->moveViewCentre(1, 0);
+				timer.stop();
+			}
 			break;
 		case DEVICE_CAMERA_LEFT:
-			//add on the Y axis to head south-west
-			map->moveMapCentre(0.0f, CAMERA_SPEED);
+			//ensure camera does not move too fast
+			if (timer.hasPassed(CAMERA_SPEED)) {
+				//add on the Y axis to head south-west
+				map->moveViewCentre(0, 1);
+				timer.stop();
+			}
 			break;
 		case DEVICE_CAMERA_RIGHT:
-			//subtract on the Y axis to head north-east
-			map->moveMapCentre(0.0f, -CAMERA_SPEED);
+			//ensure camera does not move too fast
+			if (timer.hasPassed(CAMERA_SPEED)) {
+				//subtract on the Y axis to head north-east
+				map->moveViewCentre(0, -1);
+				timer.stop();
+			}
 			break;
         }
     }
@@ -83,7 +103,7 @@ void Game::run() {
 
 void Game::setupTester() {
 	//setup the map
-	map = new Map(e->getRm(), 20);
+	map = new Map(e->getR(), e->getRm(), 20);
 	//TODO: read from a config or setup menu
 	map->readMap(e->getFile(), "../../assets/config/map1.txt");
 	//Region* region = new Region(e->getRm(), 0);

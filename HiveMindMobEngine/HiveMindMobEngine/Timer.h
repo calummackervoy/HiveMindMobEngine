@@ -22,8 +22,8 @@ public:
 	};
 
 	//function to tell if a time has passed
-	inline bool hasPassed(double time) {
-		if (getElapsed() < time) return true;
+	inline bool hasPassed(double seconds) {
+		if (getElapsed() > seconds) return true;
 		else return false;
 	};
 

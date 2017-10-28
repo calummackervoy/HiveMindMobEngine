@@ -1,7 +1,8 @@
 #include "MouseKeyboard.h"
 
-MouseKeyboard::MouseKeyboard(FileHandler* f) : Device(f) {
+MouseKeyboard::MouseKeyboard(sf::RenderWindow* win, FileHandler* f) : Device(f) {
 	type = MOUSE_KEYBOARD;
+	this->win = win;
 
 	//read the key bindings from config file
 	//TODO: pass the below via the main config file
@@ -20,8 +21,11 @@ DeviceResponse MouseKeyboard::respond(sf::Event event) {
 
 	//click pos if necessary
 	if (key == CLICK_LEFT || key == CLICK_RIGHT) {
+		res.click = true;
 		res.clickPos = sf::Vector2i{ event.mouseButton.x, event.mouseButton.y };
 	}
+	else res.clickPos = (sf::Vector2i)win->mapPixelToCoords(sf::Mouse::getPosition(*win));
+	//else res.clickPos = sf::Vector2i(event.mouseMove.x, event.mouseMove.y); 
 	
 	//lookup keypress in mapping to actions
 	DeviceResponseCode code = DEVICE_RESPONSE_NONE;

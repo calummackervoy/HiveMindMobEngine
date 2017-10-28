@@ -3,11 +3,12 @@
 #include "Menu.h"
 #include "World.h"
 #include "Character.h"
+#include "Timer.h"
 
 //Author: Calum Mackervoy
 //Purpose: Manages the game as it runs
 
-const float CAMERA_SPEED = 3.0f;
+const double CAMERA_SPEED = 0.1;
 
 enum GameMode : uint8_t {
     MENU,
@@ -40,6 +41,7 @@ public:
     void switchToRegion();
 
 protected:
+	Timer timer;
     Engine* e;
     World* world;
 	Menu* activeMenu;

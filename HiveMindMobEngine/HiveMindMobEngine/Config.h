@@ -81,4 +81,5 @@ enum DeviceResponseCode {
 struct DeviceResponse {
 	DeviceResponseCode responseCode = DEVICE_RESPONSE_NONE;
 	sf::Vector2i clickPos;
+	bool click = false; //switching between clicking and highlighting responses
 };

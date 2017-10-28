@@ -6,7 +6,7 @@
 
 class MouseKeyboard : public Device {
 public:
-	MouseKeyboard(FileHandler* f);
+	MouseKeyboard(sf::RenderWindow* win,FileHandler* f);
 	~MouseKeyboard();
 
 	DeviceResponse respond(sf::Event event) override;
@@ -16,5 +16,6 @@ public:
 	MouseKeyboardKeys translateEvent(sf::Event &event);
 
 private:
+	sf::RenderWindow* win;
 	DeviceKeyBinding* keys;
 };

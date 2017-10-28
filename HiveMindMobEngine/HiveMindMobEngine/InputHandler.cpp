@@ -5,7 +5,7 @@ InputHandler::InputHandler(Renderer* r, FileHandler* f, DeviceType type) {
 
 	switch (type) {
 	case MOUSE_KEYBOARD:
-		device = new MouseKeyboard(f);
+		device = new MouseKeyboard(r->getWindow(), f);
 		break;
 	}
 }

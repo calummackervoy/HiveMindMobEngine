@@ -18,11 +18,19 @@ Tile::~Tile() {
 	clear(true);
 }
 
-void Tile::draw(sf::RenderWindow* win) {
+void Tile::draw(sf::RenderWindow* win, GameSprite* highlight) {
 	//draw the terrain graphic
+	sf::Vector2f screenpos = worldToScreen(worldpos);
 	sf::Sprite drawme = sf::Sprite(*rm->terrain[floorTex]);
-	drawme.setPosition(worldToScreen(worldpos));
+	drawme.setPosition(screenpos);
 	win->draw(drawme);
+
+	//draw highlight if necessary
+	if (highlight != NULL) {
+		drawme = *highlight;
+		drawme.setPosition(screenpos);
+		win->draw(drawme);
+	}
 
 	//draw everything else
 	for (int i = 0; i < MAX_TILE_OCCUPANTS; i++) {

@@ -10,7 +10,7 @@
 //NOTE: map tiles are organised in 2D array like so: map[x][y]
 class Map {
 public:
-	Map(ResourceManager* rm, suint size = 2);
+	Map(Renderer* r, ResourceManager* rm, suint size = 2);
 	~Map();
 
 	//reading in a map
@@ -36,27 +36,52 @@ public:
 		return map[x][y]->insertSprite(rm, s, type);
 	};
 
-	sf::Vector2f getMapCentre() { return mapCentre; };
+	sf::Vector2i getViewCentre() { return viewCentre; };
 	//moving the screen view around
-	void setMapCentre(sf::Vector2f centre) { mapCentre = centre; };
-	void moveMapCentre(float x, float y) {
-		mapCentre.x += x;
-		mapCentre.y += y;
+	void setViewCentre(sf::Vector2i centre) { viewCentre = centre; };
+	void moveViewCentre(int x, int y) {
+		if (x > 0) {
+			if (viewCentre.x < sizeAxis - 1) {
+				viewCentre.x += x;
+			}
+		}
+		else {
+			if (viewCentre.x > 0) {
+				viewCentre.x += x;
+			}
+		}
+		if (y > 0) {
+			if (viewCentre.y < sizeAxis - 1) {
+				viewCentre.y += y;
+			}
+		}
+		else {
+			if (viewCentre.y > 0) {
+				viewCentre.y += y;
+			}
+		}
 	};
 
-	//method to get which tile a given x,y co-ordinate is in
-	sf::Vector2i convertToTile(const sf::Vector2f pos);
+	//method to get which tile a given x,y screen co-ordinate is in
+	sf::Vector2i convertScreenToTile(const sf::RenderWindow* win, sf::Vector2i screenpos);
 
 	//function to draw the map and it's contents
 	void draw(sf::RenderWindow* win);
+	//function to highlight a tile being hovered over
+	void highlightHover(sf::RenderWindow* win, sf::Vector2i mousepos);
 
 protected:
 	ResourceManager* rm;
+	GameSprite* spriteHighlightHover;
 	//MapType mapType;
 	//NOTE: stored [columns][rows]
 	Tile* map[MAX_MAP_SIZE][MAX_MAP_SIZE];
 	//track the centre position of the current view on the map
-	sf::Vector2f mapCentre;
+	sf::Vector2i viewCentre;
+	//track the centre position of the map as a whole
+	sf::Vector2i mapCentre;
+	//track which tile is to be highlighted
+	sf::Vector2i highlight;
 	suint size; //storage of the total number of tiles in the map
 	suint sizeAxis; //storage of the number of tiles on each axis
 	//bool lighting;
