@@ -1,4 +1,5 @@
 #pragma once
+#include "Typedef.h"
 #include <SFML\Graphics.hpp>
 
 //TODO: support for different sized windows
@@ -7,6 +8,10 @@ const std::string DEF_CHAR_SKIN = "../../assets/sprites/characters/individual/te
 const int MAX_ELEMS = 128; //max graphical elements in a scene
 const int WIN_HEIGHT = 1000;
 const int WIN_WIDTH = 1800;
+const suint TILE_SIZE = 64;
+//const suint TILE_HEIGHT = TILE_SIZE * 2;
+//const suint TILE_WIDTH = TILE_SIZE * 4;
+const float TOLERATE = 0.1;
 
 enum ElementType : uint8_t {
 	SPRITE,
@@ -32,5 +37,16 @@ static sf::Vector2f worldToScreen(sf::Vector2f v) {
 // WorldX = (ScreenX + 2*ScreenY)/4
 // WorldY = (2*ScreenY - ScreenX)/4
 static sf::Vector2f screenToWorld(sf::Vector2f v) {
-	return sf::Vector2f((v.x + 2.0f*v.y) / 4.0f, (2.0f*v.y - v.x) / 4.0f);
+	return sf::Vector2f((v.x + 2.0f*v.y) * 0.25f, (2.0f*v.y - v.x) * 0.25f);
+}
+
+//function to evaluate if two float values are close enough to equal
+static bool tolerate(float a, float b) {
+	if (a - b < TOLERATE) return true;
+	else return false;
+}
+//function to evaluate if two co-ords are close enough to equal
+static bool tolerate(sf::Vector2f a, sf::Vector2f b) {
+	if (tolerate(a.x, b.x) && tolerate(a.y, b.y)) return true;
+	else return false;
 }
