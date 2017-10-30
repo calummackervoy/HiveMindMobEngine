@@ -1,8 +1,9 @@
 #include "Menu.h"
 
-Menu::Menu(Renderer* r, ResourceManager* rm, MenuSetup setup) {
+Menu::Menu(Renderer* r, ResourceManager* rm, MenuSetup setup, MenuDisplayMode mode) {
 	this->r = r;
 	this->rm = rm;
+	this->mode = mode;
 	menu = setup;
 	startIndex = -1;
 	endIndex = -1;
@@ -18,8 +19,20 @@ Menu::~Menu() {
 	}
 }
 
-//better colours in below
 void Menu::display() {
+	switch (mode) {
+	case MENU_MAIN:
+		return displayLarge();
+	case MENU_MOUSE:
+		return displayMouse();
+	default:
+		Logger::logError("Menu display",
+			"display() call with unrecognised display mode","Mode", (int)mode);
+	}
+}
+
+//better colours in below
+void Menu::displayLarge() {
 	//box background
 	int left = WIN_WIDTH * 0.1;
 	int width = WIN_WIDTH - left;
@@ -67,6 +80,10 @@ void Menu::display() {
 	}
 	//plus 2 for the background and title
 	endIndex = startIndex + 2 + i;
+}
+
+void Menu::displayMouse() {
+	std::cout << "display mouse called" << std::endl;
 }
 
 //TODO: optimisations in knowing whether it's top or bottom half (from window size)

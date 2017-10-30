@@ -38,7 +38,7 @@ void Game::run() {
 		//draw HUD over the top
 		e->getR()->drawHud();
 
-		switch(r.responseCode) {
+		switch (r.responseCode) {
 		case DEVICE_RESPONSE_NONE:
 			break;
 		case DEVICE_SELECT:
@@ -60,9 +60,23 @@ void Game::run() {
 				}
 			}
 			break;
-		case DEVICE_ACT:
-			
+		case DEVICE_ACT: {
+			//TODO: check if a character has been selected!
+
+			//create a mouse-level menu with available options
+			MenuSetup commands;
+			commands.optionLabels[0] = "Move here";
+			commands.optionLabels[1] = "Example one";
+			commands.optionLabels[2] = "Example two";
+			commands.optionActions[0] = MENU_COMMAND_MOVE;
+			commands.optionActions[1] = MENU_COMMAND_EXAMPLE_ONE;
+			commands.optionActions[2] = MENU_COMMAND_EXAMPLE_TWO;
+			commands.numOptions = 3;
+
+			Menu* mouseLevel = new Menu(e->getR(), e->getRm(), commands, MENU_MOUSE);
+			delete mouseLevel;
 			break;
+		}
 		case DEVICE_PAUSE:
 			break;
 		case DEVICE_CAMERA_UP:
