@@ -40,10 +40,7 @@ public:
 	//checks if an option has been selected and returns the selected action
 	MenuAction pollInput(sf::Vector2i clickpos);
 	//displays it in the preconfigured way
-	void display();
-	inline void setScreenPos(sf::Vector2f screenpos) {
-		
-	};
+	void display(sf::Vector2f mousepos = sf::Vector2f(0.0f,0.0f));
 
 protected:
 	Renderer* r;
@@ -56,5 +53,5 @@ protected:
 	//displays menu in large mode (main menus)
 	void displayLarge();
 	//displays menu in mouse mode (action options)
-	void displayMouse();
+	void displayMouse(sf::Vector2f mousepos);
 };

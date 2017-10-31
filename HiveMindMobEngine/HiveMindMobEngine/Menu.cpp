@@ -22,12 +22,12 @@ Menu::~Menu() {
 	}
 }
 
-void Menu::display() {
+void Menu::display(sf::Vector2f mousepos) {
 	switch (mode) {
 	case MENU_MAIN:
 		return displayLarge();
 	case MENU_MOUSE:
-		return displayMouse();
+		return displayMouse(mousepos);
 	default:
 		Logger::logError("Menu display",
 			"display() call with unrecognised display mode","Mode", (int)mode);
@@ -79,8 +79,46 @@ void Menu::displayLarge() {
 	}
 }
 
-void Menu::displayMouse() {
-	std::cout << "display mouse called" << std::endl;
+void Menu::displayMouse(sf::Vector2f mousepos) {
+	int widestWidth = -1;
+
+	const int TEXT_SIZE = 14;
+
+	//work out height of background as text height * number of options
+	int height = (TEXT_SIZE * menu.numOptions) + 5;
+	//std::cout << "height: " << height << std::endl;
+
+	//draw the background of the menu
+	sf::RectangleShape* bg = new sf::RectangleShape(sf::Vector2f(100, height));
+	bg->setFillColor(sf::Color::White);
+	rm->addHudElem(bg);
+
+	//set position to mouse position
+	bg->setPosition(mousepos);
+
+	//set up text for each option
+	for (int i = 0; i < menu.numOptions; i++) {
+		sf::Text* text = r->getText(menu.optionLabels[i], rm->fonts[FONT_ABEL_REGULAR],
+			TEXT_SIZE, sf::Color::Black);
+		
+		//move down the menu to the slot option
+		sf::Vector2f pos;
+		pos.x = mousepos.x;
+		pos.y = mousepos.y + (i * TEXT_SIZE);
+
+		text->setPosition(pos);
+		
+		int temp = rm->addHudElem(text);
+		if (temp == -1) {
+			//failed menu display not enough resources
+			return;
+		}
+		else {
+			//am I the first iteration?
+			if (startIndex == -1) startIndex = temp;
+			endIndex = temp;
+		}
+	}
 }
 
 //TODO: optimisations in knowing whether it's top or bottom half (from window size)
@@ -91,6 +129,7 @@ MenuAction Menu::pollInput(sf::Vector2i clickpos) {
 	//what is in the clickposition?
 	//loop from start index (+2 to avoid background & title) to end index
 	int count = 0;
+
 	for (int i = startIndex + 2; i < endIndex; i++) {
 		//check the position of this option vs position of click
 		sf::Text* temp = (sf::Text*)rm->getHudElem(i);

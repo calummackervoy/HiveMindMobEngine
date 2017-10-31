@@ -45,6 +45,7 @@ protected:
     Engine* e;
     World* world;
 	Menu* activeMenu;
+	Menu* activeMouseMenu;
 	Map* map;
     GameMode mode;
 
