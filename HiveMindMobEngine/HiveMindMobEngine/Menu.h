@@ -41,6 +41,9 @@ public:
 	MenuAction pollInput(sf::Vector2i clickpos);
 	//displays it in the preconfigured way
 	void display();
+	inline void setScreenPos(sf::Vector2f screenpos) {
+		
+	};
 
 protected:
 	Renderer* r;

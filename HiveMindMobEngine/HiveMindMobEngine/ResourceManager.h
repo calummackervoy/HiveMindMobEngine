@@ -22,16 +22,15 @@ public:
 	ResourceManager();
 	~ResourceManager();
 
-	inline Element* getSceneElem(int i) {
+	inline sf::Drawable* getSceneElem(int i) {
 		//bounds checking
 		if (i < 0 || i > MAX_ELEMS) throw std::exception("Index out of bounds");
 		return scene[i];
 	};
-	inline int addSceneElem(Element* e) {
+	inline int addSceneElem(sf::Drawable* e) {
 		for (int i = 0; i < MAX_ELEMS; i++) {
 			if (scene[i] == NULL) {
 				scene[i] = e;
-				e->index = i;
 				return i;
 			}
 		}
@@ -40,26 +39,19 @@ public:
 	inline void removeSceneElem(int i) {
 		//bounds checking
 		if (i < 0 || i >= MAX_ELEMS) return;
-		if (!scene[i]) return;
-
-		delete scene[i]->model;
-		scene[i]->model = NULL;
-		delete scene[i]->texture;
-		scene[i]->texture = NULL;
 		delete scene[i];
 		scene[i] = NULL;
 	};
 
-	inline Element* getHudElem(int i) {
+	inline sf::Drawable* getHudElem(int i) {
 		//bounds checking
 		if (i < 0 || i > MAX_ELEMS) throw std::exception("Index out of bounds");
 		return hud[i];
 	}
-	inline int addHudElem(Element* e) {
+	inline int addHudElem(sf::Drawable* e) {
 		for (int i = 0; i < MAX_ELEMS; i++) {
 			if (hud[i] == NULL) {
 				hud[i] = e;
-				e->index = i;
 				return i;
 			}
 		}
@@ -67,13 +59,8 @@ public:
 	};
 	inline void removeHudElem(int i) {
 		//bounds checking
-		if (i < 0 || i > MAX_ELEMS) return;
-		if (hud == NULL || hud[i] == NULL) return;
-
-		delete hud[i]->model;
-		hud[i]->model = NULL;
-		delete hud[i]->texture;
-		hud[i]->texture = NULL;
+		if (i < 0 || i > MAX_ELEMS
+				|| hud[i] == NULL) return;
 		delete hud[i];
 		hud[i] = NULL;
 	};
@@ -136,9 +123,9 @@ private:
 	void loadTerrain();
 
 	//renderer's array of scene entities
-	Element** scene;
+	sf::Drawable** scene;
 	//renderer's array of HUD entities (the overlay)
-	Element** hud;
+	sf::Drawable** hud;
 
 	GameSprite** sprites;
 

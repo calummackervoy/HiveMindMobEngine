@@ -5,8 +5,8 @@ ResourceManager::ResourceManager() {
 	loadTerrain();
 
 	//initialise renderer's shiznaz to NULL to indicate free space
-	scene = new Element*[MAX_ELEMS];
-	hud = new Element*[MAX_ELEMS];
+	scene = new sf::Drawable*[MAX_ELEMS];
+	hud = new sf::Drawable*[MAX_ELEMS];
 	for (int i = 0; i < MAX_ELEMS; i++) {
 		scene[i] = NULL;
 		hud[i] = NULL;
@@ -45,13 +45,6 @@ void ResourceManager::clearAll() {
 
 void ResourceManager::clearScene() {
 	for (int i = 0; i < MAX_ELEMS; i++) {
-		if (!scene[i]) continue;
-		delete scene[i]->model;
-		scene[i]->model = NULL;
-		//if (!scene[i]->skipTexDelete) {
-			delete scene[i]->texture;
-		//}
-		scene[i]->texture = NULL;
 		delete scene[i];
 		scene[i] = NULL;
 	}
@@ -59,13 +52,6 @@ void ResourceManager::clearScene() {
 
 void ResourceManager::clearHud() {
 	for (int i = 0; i < MAX_ELEMS; i++) {
-		if (!hud[i]) continue;
-		delete hud[i]->model;
-		hud[i]->model = NULL;
-		//if (!scene[i]->skipTexDelete) {
-		delete hud[i]->texture;
-		//}
-		hud[i]->texture = NULL;
 		delete hud[i];
 		hud[i] = NULL;
 	}

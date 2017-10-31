@@ -19,14 +19,12 @@ Renderer::~Renderer() {
 	delete window;
 }
 
-Element* Renderer::getSprite(string filepath, sf::Vector2f pos, bool smooth) {
-	Element* e = new Element;
-	e->texture = getTexture(filepath, smooth);
-	e->model = new sf::Sprite(*(e->texture));
-	e->elemType = SPRITE;
+sf::Sprite* Renderer::getSprite(string filepath, sf::Vector2f pos, bool smooth) {
+	sf::Sprite* e = new sf::Sprite;
+	e->setTexture(*getTexture(filepath, smooth));
 
 	//TODO: setOrigin
-	((sf::Sprite*)e->model)->setPosition(pos);
+	e->setPosition(pos);
 	return e;
 }
 
@@ -99,10 +97,10 @@ void Renderer::changeFanColour(int numPoints, sf::Color colour, sf::VertexArray*
 	}
 }
 
-void Renderer::drawBasicScene(Element* e) {
+void Renderer::drawBasicScene(sf::Drawable* e) {
 	window->clear(sf::Color::Black);
-	if (e == NULL || e->model == NULL) return;
-	window->draw(*e->model);
+	if (e == NULL) return;
+	window->draw(*e);
 	window->display();
 }
 
@@ -110,11 +108,11 @@ void Renderer::drawScene() {
 	window->clear(sf::Color::Black);
 
 	for (int i = 0; i < MAX_ELEMS; i++) {
-		Element* temp = rm->getSceneElem(i);
-		if (temp == NULL || temp->model == NULL) continue;
+		sf::Drawable* temp = rm->getSceneElem(i);
+		if (temp == NULL) continue;
 
 		//draw em
-		window->draw(*temp->model);
+		window->draw(*temp);
 	}
 }
 
@@ -140,10 +138,10 @@ void Renderer::drawHud() {
 
 	//draw the hud over the top of everything else
 	for (int i = 0; i < MAX_ELEMS; i++) {
-		Element* temp = rm->getHudElem(i);
-		if (temp == NULL || temp->model == NULL) continue;
+		sf::Drawable* temp = rm->getHudElem(i);
+		if (temp == NULL) continue;
 
-		window->draw(*(temp->model));
+		window->draw(*temp);
 	}
 
 	window->display();

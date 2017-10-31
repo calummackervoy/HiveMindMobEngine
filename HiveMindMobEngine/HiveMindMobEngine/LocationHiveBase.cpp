@@ -1,4 +1,4 @@
-#include "LocationHiveBase.h"
+/*#include "LocationHiveBase.h"
 
 LocationHiveBase::LocationHiveBase(int id, LocationHiveBaseSave params)
 	: Location(id, params) {
@@ -10,8 +10,8 @@ LocationHiveBase::LocationHiveBase(int id, LocationHiveBaseSave params)
     this->isExclusive = params.isExclusive;
 }
 
-/*LocationHiveBase::LocationHiveBase(int seed) {
-}*/
+//LocationHiveBase::LocationHiveBase(int seed) {
+//}
 
 LocationHiveBase::~LocationHiveBase() {
 
@@ -36,4 +36,4 @@ int LocationHiveBase::addItem(Item it) {
 void LocationHiveBase::removeItem(int i){
     if(i < 0 || i >= MAX_STORAGE) return;
     inventory[i].id = -1;
-}
+}*/

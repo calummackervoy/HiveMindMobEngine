@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "Location.h"
 #include "TypeDef.h"
 #include "Item.h"
@@ -14,4 +14,4 @@ public:
 
 protected:
 	Item inventory[MAX_STORAGE];
-};
+};*/

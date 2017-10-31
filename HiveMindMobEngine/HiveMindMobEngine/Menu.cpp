@@ -13,8 +13,11 @@ Menu::Menu(Renderer* r, ResourceManager* rm, MenuSetup setup, MenuDisplayMode mo
 }
 
 Menu::~Menu() {
+	//handle special cases
+	//start of menu was unsuccessful
 	if (startIndex == -1 || endIndex == -1) return;
-	for (int i = startIndex; i < endIndex; i++) {
+
+	for (int i = startIndex; i <= endIndex; i++) {
 		rm->removeHudElem(i);
 	}
 }
@@ -38,48 +41,42 @@ void Menu::displayLarge() {
 	int width = WIN_WIDTH - left;
 	int top = WIN_HEIGHT * 0.1;
 	int height = std::min((WIN_HEIGHT - top), (menu.numOptions + 1) * 75);
+	int halfWidth = width * 0.5;
 
-	Element* bg = new Element;
-	bg->elemType = SQUARE_SHAPE;
-	bg->model = new sf::RectangleShape(sf::Vector2f(width, height));
-
-	sf::RectangleShape* mod = (sf::RectangleShape*)(bg->model);
-	mod->setFillColor(sf::Color::White);
-	mod->setPosition(left, top);
-	rm->addHudElem(bg);
-	//failed menu display not enough resources
-	if (bg->index == -1) {
+	sf::RectangleShape* bg = new sf::RectangleShape(sf::Vector2f(width, height));
+	bg->setFillColor(sf::Color::White);
+	bg->setPosition(left, top);
+	
+	startIndex = rm->addHudElem(bg);
+	if (startIndex == -1) {
+		//failed menu display not enough resources
 		return;
 	}
-	else startIndex = bg->index;
+	endIndex = startIndex + 1;
 
 	//title
-	Element* title = new Element;
-	sf::Text* titleText = r->getText(menu.title, rm->fonts[FONT_ABEL_REGULAR],
+	sf::Text* title = r->getText(menu.title, rm->fonts[FONT_ABEL_REGULAR],
 		42, sf::Color::Black);
-	titleText->setPosition((left + width * 0.5), top + 30);
-	title->elemType = TEXT;
-	title->model = titleText;
-	rm->addHudElem(title);
+	title->setPosition((left + halfWidth), top + 30);
+
 	//failed menu display not enough resources
-	if (title->index == -1) return;
+	if (rm->addHudElem(title) == -1) {
+		return;
+	}
+	endIndex++;
 
 	//each option
 	int i = 0;
 	while (i < menu.numOptions) {
-		Element* opt = new Element;
 		sf::Text* text = r->getText(menu.optionLabels[i], rm->fonts[FONT_ABEL_REGULAR],
 			24, sf::Color::Black);
-		text->setPosition((left + width * 0.5), top + (30 * (i + 3)));
-		opt->elemType = TEXT;
-		opt->model = text;
-		rm->addHudElem(opt);
+		text->setPosition((left + halfWidth), top + (30 * (i + 3)));
+
 		//failed menu display not enough resources
-		if (opt->index == -1) return;
+		if (rm->addHudElem(text) == -1) return;
+		endIndex++;
 		i++;
 	}
-	//plus 2 for the background and title
-	endIndex = startIndex + 2 + i;
 }
 
 void Menu::displayMouse() {
@@ -96,24 +93,21 @@ MenuAction Menu::pollInput(sf::Vector2i clickpos) {
 	int count = 0;
 	for (int i = startIndex + 2; i < endIndex; i++) {
 		//check the position of this option vs position of click
-		Element* temp = rm->getHudElem(i);
-		
-		if (temp->elemType = TEXT) {
-			sf::Text* t = (sf::Text*)temp->model;
+		sf::Text* temp = (sf::Text*)rm->getHudElem(i);
 
-			//create a bounding box physics can use
-			sf::FloatRect r = t->getGlobalBounds();
-			BoundingBox me;
-			me.height = r.height;
-			me.width = r.width;
-			me.x = r.left;
-			me.y = r.top - r.height;
+		//create a bounding box physics can use
+		sf::FloatRect r = temp->getGlobalBounds();
+		BoundingBox me;
+		me.height = r.height;
+		me.width = r.width;
+		me.x = r.left;
+		me.y = r.top - r.height;
 
-			if (Physics::interfaceBoundingBox(clickpos, me)) {
-				std::cout << count << " selected!" << std::endl;
-				return menu.optionActions[count];
-			}
+		if (Physics::interfaceBoundingBox(clickpos, me)) {
+			//std::cout << count << " selected!" << std::endl;
+			return menu.optionActions[count];
 		}
+
 		count++;
 	}
 

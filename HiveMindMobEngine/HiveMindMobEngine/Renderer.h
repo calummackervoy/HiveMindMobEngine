@@ -15,7 +15,7 @@ public:
 	~Renderer();
 
 	//method for generating a sprite
-	Element* getSprite(std::string filepath, sf::Vector2f pos, bool smooth = false);
+	sf::Sprite* getSprite(std::string filepath, sf::Vector2f pos, bool smooth = false);
 
 	//method for retreiving a texture from file
 	sf::Texture* getTexture(std::string filepath, bool smooth = true);
@@ -37,7 +37,7 @@ public:
 	};
 
 	//function for drawing a very simple temporary scene with single element e.g. intro or game over animation
-	void drawBasicScene(Element* e);
+	void drawBasicScene(sf::Drawable* e);
 	//main scene drawing
 	//TODO: this call may be unecessary and may need to be redesigned
 	void drawScene();
@@ -55,6 +55,6 @@ private:
 	int selected; //index of selected element
 	bool overlayActive; //whether a grid overlay is to be drawn or not
 
-	inline Element* getSceneElem(int i) { return rm->getSceneElem(i); };
-	inline Element* getHudElem(int i) { return rm->getHudElem(i); };
+	inline sf::Drawable* getSceneElem(int i) { return rm->getSceneElem(i); };
+	inline sf::Drawable* getHudElem(int i) { return rm->getHudElem(i); };
 };

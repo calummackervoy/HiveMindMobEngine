@@ -1,4 +1,4 @@
-#include "Wardrobe.h"
+/*#include "Wardrobe.h"
 
 Wardrobe::Wardrobe(Renderer* r, FileHandler* file, std::string hatsLocation, std::string clothingLocation) {
     this->r = r;
@@ -98,4 +98,4 @@ void Wardrobe::readWardrobe(bool hats, std::string configLocation) {
 	}
 
 	file->closeStream();
-}
+}*/

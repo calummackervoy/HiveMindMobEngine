@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include <algorithm>
 #include "Renderer.h"
 #include "FileHandler.h"
@@ -46,4 +46,4 @@ private:
 
 	//method for reading in a Wardrobe config file
 	void readWardrobe(bool hats, std::string configLocation);
-};
+};*/

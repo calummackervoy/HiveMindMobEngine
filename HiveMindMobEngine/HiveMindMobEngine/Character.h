@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
 #include "FileHandler.h"
-#include "Wardrobe.h"
+#include "Renderer.h"
 #include "CharacterGameSprite.h"
 #include "Tools.h"
 #include "rand.h"
@@ -20,15 +20,15 @@ const uint8_t MAX_SKILLS = 16;
 class Character {
 public:
 	//procedurally generate a character
-	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed = -1);
+	Character(Renderer* r, ResourceManager* rm, FileHandler* file, int seed = -1);
 	//load a saved character
-	Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, std::string fileLocation);
+	Character(Renderer* r, ResourceManager* rm, FileHandler* file, std::string fileLocation);
 	~Character();
 
 	//TODO: reset a character (or initialise) by a generated seed
-	void generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w);
+	void generateCharacter(Renderer* r, ResourceManager* rm);
 	//reset a character (or initialise) according to a saved one
-	void readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, std::string fileLocation);
+	void readCharacterSave(Renderer* r, ResourceManager* rm, std::string fileLocation);
 
 	//save a character
 	void save(std::string location);

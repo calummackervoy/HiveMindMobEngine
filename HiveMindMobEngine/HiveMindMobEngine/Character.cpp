@@ -1,6 +1,6 @@
 #include "Character.h"
 
-Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, int seed) {
+Character::Character(Renderer* r, ResourceManager* rm, FileHandler* file, int seed) {
 	this->file = file;
 	this->seed = seed;
 	seedRand(seed);
@@ -11,10 +11,10 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 	bottomOptions = "";
 	sprite = NULL;
 
-	generateCharacter(r, rm, w);
+	generateCharacter(r, rm);
 }
 
-Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler* file, std::string fileLocation) {
+Character::Character(Renderer* r, ResourceManager* rm, FileHandler* file, std::string fileLocation) {
 	this->file = file;
 	seedRand(time(NULL));
 
@@ -24,7 +24,7 @@ Character::Character(Renderer* r, ResourceManager* rm, Wardrobe* w, FileHandler*
 	topOptions = "";
 	bottomOptions = "";
 
-	readCharacterSave(r, rm, w, fileLocation);
+	readCharacterSave(r, rm, fileLocation);
 }
 
 Character::~Character() {
@@ -35,7 +35,7 @@ void Character::clear() {
 	delete sprite;
 }
 
-void Character::generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w) {
+void Character::generateCharacter(Renderer* r, ResourceManager* rm) {
 	//make sure no memory will be leaked
 	clear();
 
@@ -49,7 +49,7 @@ void Character::generateCharacter(Renderer* r, ResourceManager* rm, Wardrobe* w)
 	//TODO: FINISH ME
 }
 
-void Character::readCharacterSave(Renderer* r, ResourceManager* rm, Wardrobe* w, std::string fileLocation) {
+void Character::readCharacterSave(Renderer* r, ResourceManager* rm, std::string fileLocation) {
 	//make sure no memory will be leaked
 	clear();
 

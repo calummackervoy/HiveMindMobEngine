@@ -13,20 +13,6 @@ const suint TILE_SIZE = 64;
 //const suint TILE_WIDTH = TILE_SIZE * 4;
 const float TOLERATE = 0.1;
 
-enum ElementType : uint8_t {
-	SPRITE,
-	CIRCLE_SHAPE,
-	SQUARE_SHAPE,
-	TEXT
-};
-
-struct Element {
-	int index; //index in the scene
-	sf::Drawable* model = NULL;
-	sf::Texture* texture = NULL;
-	ElementType elemType = SPRITE;
-};
-
 //functions for converting between world space co-ords and view space co-ords
 // ScreenX = 2*WorldX - 2*WorldY
 // ScreenY = WorldX + WorldY

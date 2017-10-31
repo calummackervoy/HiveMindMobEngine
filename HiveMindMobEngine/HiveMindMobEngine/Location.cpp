@@ -1,4 +1,4 @@
-#include "Location.h"
+/*#include "Location.h"
 
 Location::Location(int id, LocationSave params) {
     this->id = id;
@@ -9,9 +9,9 @@ Location::Location(int id, LocationSave params) {
     this->isExclusive = params.isExclusive;
 }
 
-/*Location::Location(int seed) {
-}*/
+//Location::Location(int seed) {
+//}
 
 Location::~Location() {
 
-}
+}*/

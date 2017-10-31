@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "Save.h"
 #include "RendererConfig.h"
 
@@ -17,4 +17,4 @@ protected:
 	LocationType type;
 	bool destroyed;
 	bool isExclusive;
-};
+};*/
