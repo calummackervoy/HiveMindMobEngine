@@ -102,12 +102,19 @@ a:hover{
 }
 
 .subsection {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .subsection p {
-  padding-left: 10%;
+  padding-left: 11%;
+}
+
+.extra-indent {
+  padding-left: 13%;
+}
+
+.extra-indent ul{
+  padding-left: 20%;
 }
 
 /*Projects.html only*/
@@ -124,9 +131,11 @@ a:hover{
 h2 {
   font-size: 36px;
   padding-left: 10%;
+  margin-top: 30px;
 }
 
 h3 {
   font-size: 24px;
-  padding-left: 10%;
+  padding-left: 12%;
+  margin-top: 10px;
 }

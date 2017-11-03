@@ -53,85 +53,101 @@
     <div id="art-essentials">
       <h2>Essentials</h2>
       <h3>Perspective</h3>
-      <p>
-        All graphics are 2D or "2.5D", meaning that the rotation of the camera is fixed (but the zoom is not)
-        in an <b>isometric</b> perspective. The purpose of this is to give a 3D appearance to 2D art assets using
-        all the techniques known to every artist- without the expensive techniques of 3D.
-      </p>
-      <p>
-        In isometric perspective the tiles which make up the ground of the world are square, rotated at 30
-        degrees to create a diamond shape, where the width of the tile is exactly twice the size of the height.
-      </p>
-      <p>
-        Drawing in this perspective is simple: my preferred method is to first draw a horizontal line for the centre
-        of the tile, 2cm in length, and then draw another horizontally at 4cm in length, then join the points:
-      </p>
-      <img src="" alt="Tile in isometric perspective"/>
+      <div class= "subsection extra-indent">
+        <p>
+          All graphics are 2D or "2.5D", meaning that the rotation of the camera is fixed (but the zoom is not)
+          in an <b>isometric</b> perspective. The purpose of this is to give a 3D appearance to 2D art assets using
+          all the techniques known to every artist- without the expensive techniques of 3D.
+        </p>
+        <p>
+          In isometric perspective the tiles which make up the ground of the world are square, rotated at 30
+          degrees to create a diamond shape, where the width of the tile is exactly twice the size of the height.
+        </p>
+        <p>
+          Drawing in this perspective is simple: my preferred method is to first draw a horizontal line for the centre
+          of the tile, 2cm in length, and then draw another horizontally at 4cm in length, then join the points:
+        </p>
+        <img src="" alt="Tile in isometric perspective"/>
+      </div>
     </div>
     <div id="art-character">
       <h2>Characters</h2>
       <h3>Body</h3>
-      <p>
-        The scale of the character will vary character-to-character, but in the current version of the game all
-        characters must occupy one and only one tile. Characters should be drawn so that the head, torso and leg
-        components are all one-third of the total height, for the characters I've drawn all components are 3cm tall.
-      </p>
-      <p>
-        Bodies should be drawn naked (clothes are added over the top) and without a head (also drawn over the top) as shown below:
-      </p>
-      <img src="" alt="Example character body"/>
-      <p>
-        All character <b>sprites</b> (for all animations) must be drawn in two positions: one facing south-west (or south-east) and one
-        facing north-east (or north-west).. the other two directions of travel are covered in code by simply inverting the sprite.
-      </p>
+      <div class="subsection extra-indent">
+        <p>
+          The scale of the character will vary character-to-character, but in the current version of the game all
+          characters must occupy one and only one tile. Characters should be drawn so that the head, torso and leg
+          components are all one-third of the total height, for the characters I've drawn all components are 3cm tall.
+        </p>
+        <p>
+          Bodies should be drawn naked (clothes are added over the top) and without a head (also drawn over the top) as shown below:
+        </p>
+        <img src="" alt="Example character body"/>
+        <p>
+          All character <b>sprites</b> (for all animations) must be drawn in two positions: one facing south-west (or south-east) and one
+          facing north-east (or north-west).. the other two directions of travel are covered in code by simply inverting the sprite.
+        </p>
+      </div>
       <h3>Body Animation</h3>
-      <p>
-        There is a limited variety of animations in the game currently, and all need to have sprites provided for
-        a character to work. Currently animations (a series of sprites) need to be provided for:
-        <ul>
-          <li>Walking empty-handed</li>
-          <li>Running empty-handed</li>
-        </ul>
-        In future versions more animations will be added, and so the graphics will need to be updated.
-      </p>
+      <div class="subsection extra-indent">
+        <p>
+          There is a limited variety of animations in the game currently, and all need to have sprites provided for
+          a character to work. Currently animations (a series of sprites) need to be provided for:
+        </p>
+          <ul>
+            <li>Walking empty-handed</li>
+            <li>Running empty-handed</li>
+          </ul>
+        <p>
+          In future versions more animations will be added, and so the graphics will need to be updated.
+        </p>
+      </div>
       <h3>Emotions</h3>
-      <p>
-        One head sprite should be provided viewing the back of the head, and another should be provided facing
-        forwards for each of the following emotions:
-        <ul>
-          <li>Neutral</li>
-          <li>Friendly</li>
-          <li>Love</li>
-          <li>Anxious</li>
-          <li>Suspicious</li>
-          <li>Terrified</li>
-          <li>Irate</li>
-          <li>Hostile</li>
-          <li>Beserk (Murderous rage)</li>
-        </ul>
-        In future versions more emotions will be added (e.g. laughing), and so the graphics will need to be updated.
-      </p>
-      <img src="" alt="Example emotion sprites"/>
-      <h3>Clothes</h3>
-      <p>
-        Clothing sprites for tops and bottoms should be provided separately, and each item of clothing should have one sprite
-        for every body sprite it is fitted for.
-      </p>
-      <img src="" alt="Example body clothes sprites"/>
+      <div class="subsection extra-indent">
+        <p>
+          One head sprite should be provided viewing the back of the head, and another should be provided facing
+          forwards for each of the following emotions:
+        </p>
+          <ul>
+            <li>Neutral</li>
+            <li>Friendly</li>
+            <li>Love</li>
+            <li>Anxious</li>
+            <li>Suspicious</li>
+            <li>Terrified</li>
+            <li>Irate</li>
+            <li>Hostile</li>
+            <li>Beserk (Murderous rage)</li>
+          </ul>
+        <p>
+          In future versions more emotions will be added (e.g. laughing), and so the graphics will need to be updated.
+        </p>
+        <img src="" alt="Example emotion sprites"/>
+        <h3>Clothes</h3>
+        <p>
+          Clothing sprites for tops and bottoms should be provided separately, and each item of clothing should have one sprite
+          for every body sprite it is fitted for.
+        </p>
+        <img src="" alt="Example body clothes sprites"/>
+      </div>
       <h3>Hair &amp; Hats</h3>
-      <p>
-        Head variations should have one sprite for every emotion.
-      </p>
-      <img src="" alt="Example head variations sprites"/>
+      <div class="subsection extra-indent">
+        <p>
+          Head variations should have one sprite for every emotion.
+        </p>
+        <img src="" alt="Example head variations sprites"/>
+      </div>
     </div>
     <div id="art-building">
       <h2>Buildings &amp; Large Props</h2>
-      <p>
-        All buildings in the environment, and props larger than 1 tile in size, can be drawn as a whole if this
-        is your preference, but must be split into tile-sized assets for use in the game. This is to get a greater
-        variety with less memory: buildings and props can be built out of multiple tile-sized components to make the
-        whole, rather than storing large and slightly-different versions of the same style of building.
-      </p>
+      <div class="subsection">
+        <p>
+          All buildings in the environment, and props larger than 1 tile in size, can be drawn as a whole if this
+          is your preference, but must be split into tile-sized assets for use in the game. This is to get a greater
+          variety with less memory: buildings and props can be built out of multiple tile-sized components to make the
+          whole, rather than storing large and slightly-different versions of the same style of building.
+        </p>
+      </div>
     </div>
    </div>
  </body>
